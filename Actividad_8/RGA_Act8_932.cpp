@@ -46,11 +46,6 @@ void menu()
             break;
         case 2:
             vect_2(vect2, 1, 20);
-            for ( i = 0; i < 10; i++)
-            {
-                printf("%d\n",vect2[i]);
-            }
-            system("PAUSE");
             break;
         default:
             break;
@@ -60,54 +55,52 @@ void menu()
 }
 void vect_1(int vect1[], int lim_in, int lim_sup)
 {
-    int i;
+    char val[2];
+    int i,valid;
     system("CLS");
     printf("LLENA EL VECTOR\n");
     printf("SOLO NUMEROS DEL %d al %d\n", lim_in, lim_sup);
+
+    system("CLS");
+    printf("vect[%d]=", i + 1);
+    gets(val);
     for (i = 0; i < 10; i++)
     {
-        do
-        {
-            system("CLS");
-            printf("vect[%d]=", i + 1);
-            scanf("%d", &vect1[i]);
-            if (vect1[i] < lim_in)
-            {
-                printf("NUMERO MENOR NO VALIDO. INTENTE DENUEVO:\n");
-            }
-            if (vect1[i] > lim_sup)
-            {
-                printf("NUMERO MAYOR NO VALIDO. INTENTE DENUEVO:\n");
-            }
+        valid=atoi(val);
+    }
 
-        } while (vect1[i] < lim_in && vect1[i] > lim_sup);
+    if (vect1[i] < lim_in)
+    {
+        printf("NUMERO MENOR NO VALIDO. INTENTE DENUEVO:\n");
+    }
+    if (vect1[i] > lim_sup)
+    {
+        printf("NUMERO MAYOR NO VALIDO. INTENTE DENUEVO:\n");
     }
 }
 
 void vect_2(int vect2[], int lim_in, int lim_sup)
 {
-    int i, x,band, j,ran;
+    int i, x, band, j, ran;
     x = (lim_sup - lim_in) + 1;
 
     for (i = 0; i < 10; i++)
     {
         do
         {
-            band=0;
+            band = 0;
             ran = (rand() % x) + lim_in;
 
-            for (j = 0; j<i; j++)
+            for (j = 0; j < i; j++)
             {
-                if (vect2[j]==ran)
+                if (vect2[j] == ran)
                 {
-                    band=1;
+                    band = 1;
                 }
-                
             }
-        
-        } while (band!=0);
-        
-        vect2[i]=ran; 
+
+        } while (band != 0);
+
+        vect2[i] = ran;
     }
 }
-
