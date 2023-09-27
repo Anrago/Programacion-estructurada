@@ -86,26 +86,28 @@ void vect_1(int vect1[], int lim_in, int lim_sup)
 
 void vect_2(int vect2[], int lim_in, int lim_sup)
 {
-    int i, x,ran ,ig, j;
+    int i, x,band, j,ran;
     x = (lim_sup - lim_in) + 1;
 
     for (i = 0; i < 10; i++)
     {
         do
         {
-            ig=0;
-            vect2[i] = (rand() % x) + lim_in;
-            for (j = 0; j<i; i++)
+            band=0;
+            ran = (rand() % x) + lim_in;
+
+            for (j = 0; j<i; j++)
             {
-                if (vect2[i]==vect2[j])
+                if (vect2[j]==ran)
                 {
-                    ig++;
+                    band=1;
                 }
                 
             }
         
-        } while (ig!=0);
+        } while (band!=0);
         
-            
+        vect2[i]=ran; 
     }
 }
+
