@@ -12,8 +12,10 @@ void menu();
 int validar(const char msg[], int li_in, int li_sup);
 void vect_1(int vect1[], int m);
 void vect_2(int vect2[], int lim_in, int lim_sup);
-void vect_3(int vect1[],int vect2[],int vect3[] ,int m);
-void imprimir_vetores(int vect1[],int vect2[],int vect3[] ,int m,int n);
+void vect_3(int vect1[], int vect2[], int vect3[], int m);
+void imprimir_vetores(int vect1[], int vect2[], int vect3[], int m, int n);
+void matriz(int vect1[], int vect2[], int mtz[][4], int m, int v);
+void imprimir_matriz(int mtz[][4],int m);
 
 int main()
 {
@@ -31,6 +33,9 @@ int msg()
     printf("2.- LLENA VECTOR 2(ALEATORIAMENTE)\n");
     printf("3.- LLENA VECTOR 3(VECTOR 1 Y VECTOR 2)\n");
     printf("4.- IMPRIMIR VECTOES\n");
+    printf("5.- LLENA MATRIZ(VECTOR 1 Y VECTOR 2)\n");
+    printf("6.- IMPRIMIR MATRIZ\n");
+    printf("0.- SALIR");
     printf("ESCOGE UNA OPCION: ");
     scanf("%hd", &opc);
     return opc;
@@ -38,7 +43,8 @@ int msg()
 
 void menu()
 {
-    int vect1[10], vect2[10],vect3[20];
+    int vect1[10], vect2[10], vect3[20];
+    int mtz[4][4];
     short int opc;
     do
     {
@@ -47,16 +53,22 @@ void menu()
         {
         case 1:
             vect_1(vect1, 10);
-            
+
             break;
         case 2:
             vect_2(vect2, 1, 20);
             break;
         case 3:
-            vect_3(vect1,vect2,vect3,20);
+            vect_3(vect1, vect2, vect3, 20);
             break;
         case 4:
-            imprimir_vetores(vect1,vect2,vect3,10,20);
+            imprimir_vetores(vect1, vect2, vect3, 10, 20);
+            break;
+        case 5:
+            matriz(vect1, vect2, mtz, 4, 10);
+            break;
+        case 6:
+            imprimir_matriz(mtz,4);
         default:
             break;
         }
@@ -68,26 +80,26 @@ int validar(const char msg[], int li_in, int li_sup)
 {
     char cad[3];
     int num;
-    
+
     do
     {
         printf("%s", msg);
         fflush(stdin);
         gets(cad);
-        num=atoi(cad);
+        num = atoi(cad);
 
-        if(num<li_in || li_sup)
+        if (num < li_in || li_sup)
         {
             system("CLS");
             printf("SOLO NUMEROS DEL 30 AL 70\n");
         }
-    }while(num<li_in || num>li_sup);
+    } while (num < li_in || num > li_sup);
     return num;
 }
 
 void vect_1(int vect1[], int m)
 {
-    int i,val;
+    int i, val;
     system("CLS");
     printf("LLENA EL VECTOR\n");
     printf("SOLO NUMEROS DEL 30 al 70\n");
@@ -95,9 +107,9 @@ void vect_1(int vect1[], int m)
     for (i = 0; i < m; i++)
     {
         system("CLS");
-        printf("Vec[%d]",i+1);
-        val=validar(" =  ",30,70);
-        vect1[i]=val;
+        printf("Vec[%d]", i + 1);
+        val = validar(" =  ", 30, 70);
+        vect1[i] = val;
     }
     system("CLS");
     printf("**************************\n");
@@ -137,51 +149,94 @@ void vect_2(int vect2[], int lim_in, int lim_sup)
     system("PAUSE");
 }
 
-void vect_3(int vect1[],int vect2[], int vect3[],int m)
+void vect_3(int vect1[], int vect2[], int vect3[], int m)
 {
-    int i,j;
+    int i, j;
     system("CLS");
-    for (i=0,j=10; i<m/2;i++,j++)
+    for (i = 0, j = 10; i < m / 2; i++, j++)
     {
-        vect3[i]=vect1[i];
-        vect3[j]=vect2[i];
+        vect3[i] = vect1[i];
+        vect3[j] = vect2[i];
     }
-    
+
     printf("**************************\n");
     printf("El vector ha sido llenado\n");
     printf("**************************\n");
     system("PAUSE");
-
 }
 
-void imprimir_vetores(int vect1[],int vect2[],int vect3[] ,int m,int n)
+void imprimir_vetores(int vect1[], int vect2[], int vect3[], int m, int n)
 {
     int i;
     system("CLS");
     printf("ARREGLO 1\n");
     printf("---------------------\n");
-    for(i=0;i<m;i++)
+    for (i = 0; i < m; i++)
     {
-        printf("VECT[%d]=\t%d\n",i,vect1[i]);
+        printf("VECT[%d]=\t%d\n", i, vect1[i]);
     }
     printf("---------------------");
     printf("\nARREGLO 2\n");
     printf("---------------------\n");
 
-    for(i=0;i<m;i++)
+    for (i = 0; i < m; i++)
     {
-        printf("VECT[%d]=\t%d\n",i,vect2[i]);
+        printf("VECT[%d]=\t%d\n", i, vect2[i]);
     }
     printf("---------------------");
     printf("\nARREGLO 3\n");
     printf("---------------------\n");
-    for(i=0;i<n;i++)
+    for (i = 0; i < n; i++)
     {
-        printf("VECT[%d]=\t%d\n",i,vect3[i]);
+        printf("VECT[%d]=\t%d\n", i, vect3[i]);
     }
     system("PAUSE");
 }
 
+void matriz(int vect1[], int vect2[], int mtz[][4], int m, int v)
+{
+    system("CLS");
+    int fil, colum,j=0, i = 0;
+    for (fil = 0; fil < m; fil++)
+    {
+
+        for (colum = 0; colum < 4; colum++)
+        {
+            if (i<v)
+            {
+                mtz[fil][colum]=vect1[i];
+                i++;
+            }
+            else
+            {
+                mtz[fil][colum]=vect2[j];
+                j++;
+            }
+            
+        }
+    }
+     printf("**************************\n");
+    printf("La matriz ha sido llenado\n");
+    printf("**************************\n");
+    system("PAUSE");
+}
+
+void imprimir_matriz(int mtz[][4],int m)
+{
+    int fil,colum;
+    system("CLS");
+    printf("\tMATRIZ 4x4\n");
+    for ( fil = 0; fil < m; fil++)
+    {
+        for ( colum = 0; colum < 4; colum++)
+        {
+            printf("\t%d",mtz[fil][colum]);
+        }
+        printf("\n");
+    }
+    system("PAUSE");
+    
+}
 
 
 
