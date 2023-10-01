@@ -155,7 +155,7 @@ void vect_2(int vect2[], int lim_in, int lim_sup)
     system("PAUSE");
 }
 
-//llena un vector con los vectores 1 y 2
+//llenar vector 3 con los vectores 1 y 2
 //RGA_Act8_03_932
 void vect_3(int vect1[], int vect2[], int vect3[], int m)
 {
@@ -228,7 +228,7 @@ void matriz(int vect1[], int vect2[], int mtz[][4], int m, int v)
         }
     }
      printf("**************************\n");
-    printf("La matriz ha sido llenado\n");
+    printf("La matriz ha sido llenada\n");
     printf("**************************\n");
     system("PAUSE");
 }
