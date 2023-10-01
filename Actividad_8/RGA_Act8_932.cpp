@@ -1,6 +1,6 @@
 // Antonio Ramos Gonzalez Mt: 372576
 // 9/12/2023 || 9/24/2023
-// Arreglos
+// Funciones e Introduccion a Arreglos en C
 // RGA_Act8_932
 #include <stdio.h>
 #include <time.h>
@@ -35,7 +35,7 @@ int msg()
     printf("4.- IMPRIMIR VECTOES\n");
     printf("5.- LLENA MATRIZ(VECTOR 1 Y VECTOR 2)\n");
     printf("6.- IMPRIMIR MATRIZ\n");
-    printf("0.- SALIR");
+    printf("0.- SALIR\n");
     printf("ESCOGE UNA OPCION: ");
     scanf("%hd", &opc);//lee la decicion del usuario
     return opc;//retorna opc
