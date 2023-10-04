@@ -96,9 +96,5 @@ void OrderVect(int vect[],int m)
         }
         
     }
-    system("CLS");
-    printf("**************************\n");
-    printf("El vector ha sido ordenadp\n");
-    printf("**************************\n");
-    system("PAUSE");
+    
 }
