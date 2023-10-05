@@ -1,4 +1,4 @@
-#include "bibliotecas.h"
+#include "Babilonia.h"
 void MatRand(int mtz[][4], int m, int n, int lim_in, int lim_sup);
 void PrintMat(int mtz[][4],int m, int n);
 
@@ -21,6 +21,8 @@ int msg()
     printf("3.-imprimir vector\n");
     printf("4.-imprimir matriz\n");
     printf("5.-ordenar vector\n");
+    printf("6.-buscar en vector\n");
+    printf("0.-salir\n");
     printf("Elije una opcion");
     return valid("Escoje una opcion: ", 0, 6);
 }
@@ -30,7 +32,8 @@ void menu()
     system("CLS");
     int vect[15];
     int mtz[4][4];
-    int opc;
+    int opc,bus,num;
+    
     do
     {
         opc = msg();
@@ -50,6 +53,21 @@ void menu()
             break;
         case 5:
             OrderVect(vect,15);
+            break;
+        case 6:
+            system("CLS");
+            bus=valid("Que numero deseas buscar: ",100,200);
+            num=SearchVect(vect,15,bus);
+            system("CLS");
+            if (num!=-1)
+            {
+                printf("Numero encontrado en el indice: %d\n",num);
+            }
+            else
+            {
+                printf("Numero no encontrado\n");
+            }
+            system("PAUSE");
             break;
         default:
             break;

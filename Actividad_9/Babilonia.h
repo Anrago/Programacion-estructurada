@@ -7,7 +7,7 @@ int valid (const char msg[],int lim_inf,int lim_sup);
 void vectRand(int vect[],int m,int lim_inf,int lim_sup);
 void PrintVect(int vect[],int m);
 void OrderVect(int vect[],int m);
-
+int SearchVect(int vect[],int m, int num);
 
 //Genera numero aleatorios no repetidos en un vector
 void vectRand(int vect[],int m, int lim_in, int lim_sup)
@@ -78,7 +78,7 @@ int valid(const char msg[], int lim_in, int lim_sup)
     return opc;
 }
 
-
+//ordena un vector
 void OrderVect(int vect[],int m)
 {
     int i,j;
@@ -98,3 +98,33 @@ void OrderVect(int vect[],int m)
     }
     
 }
+
+int SearchVect(int vect[],int m,int num)
+{
+    int i;
+    for ( i = 0; i < m; i++)
+    {
+        if(vect[i]==num)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
