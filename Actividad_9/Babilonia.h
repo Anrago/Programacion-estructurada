@@ -34,11 +34,6 @@ void vectRand(int vect[],int m, int lim_in, int lim_sup)
 
         vect[i] = ran;//se asigna el valor random al vecotor
     }
-    system("CLS");
-    printf("**************************\n");
-    printf("El vector ha sido llenado\n");
-    printf("**************************\n");
-    system("PAUSE");
 }
 
 //Imprime vector
@@ -99,6 +94,7 @@ void OrderVect(int vect[],int m)
     
 }
 
+//Busca en el vector
 int SearchVect(int vect[],int m,int num)
 {
     int i;
