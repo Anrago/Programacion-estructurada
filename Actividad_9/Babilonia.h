@@ -1,3 +1,7 @@
+// Antonio Ramos Gonzalez Mt: 372576
+// 3/10/2023 || 10/5/2023
+// Esta biblioteca contiene las funciones que usare durante proximas practicas
+// Babilonia
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
@@ -77,16 +81,16 @@ int valid(const char msg[], int lim_in, int lim_sup)
 void OrderVect(int vect[],int m)
 {
     int i,j;
-    int temp;
-    for ( i = 0; i < m-1; i++)
+    int temp;//guarda valor de manera temporal
+    for ( i = 0; i < m-1; i++)//Busqueda secuencial
     {
         for ( j = i+1; j < m; j++)
         {
             if(vect[j]<vect[i])
             {
-                temp=vect[i];
-                vect[i]=vect[j];
-                vect[j]=temp;
+                temp=vect[i];//Guarda el valor de vect[i] en temp
+                vect[i]=vect[j];//Guarda el valor de vect[j] en vect[i]
+                vect[j]=temp;//Guarda el valor de temp en vect[j]
             }
         }
         
@@ -97,15 +101,15 @@ void OrderVect(int vect[],int m)
 //Busca en el vector
 int SearchVect(int vect[],int m,int num)
 {
-    int i;
-    for ( i = 0; i < m; i++)
+    int i;// define contador
+    for ( i = 0; i < m; i++)//
     {
-        if(vect[i]==num)
+        if(vect[i]==num)//Busca en el vector el numero buscado
         {
-            return i;
+            return i; //si encuentra el valor, retorna el valor del indice
         }
     }
-    return -1;
+    return -1; //si no encuentra el valor, retorna -1 
 }
 
 

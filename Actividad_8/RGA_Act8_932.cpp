@@ -1,7 +1,7 @@
 // Antonio Ramos Gonzalez Mt: 372576
-// 9/27/2023 || 10/01/2023
-// Funciones e Introduccion a Arreglos en C
-// RGA_Act8_932
+// 3/10/2023 || 10/5/2023
+// Menu de eleciones para el llenado de matrices y vectores
+// RGA_Act9_932
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
