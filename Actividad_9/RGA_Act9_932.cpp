@@ -1,3 +1,8 @@
+// Antonio Ramos Gonzalez Mt: 372576
+// 3/10/2023 || 10/5/2023
+// Menu de eleciones para el llenado de matrices y vectores
+// RGA_Act9_932
+
 // Mandamos a llamra nuestra libreria
 #include "Babilonia.h"
 void MatRand(int mtz[][4], int m, int n, int lim_in, int lim_sup);
