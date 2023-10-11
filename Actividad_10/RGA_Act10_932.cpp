@@ -20,6 +20,10 @@ void nombAl(char nombre[], int sex);
 void apellidoAl(char apellido[]);
 void menu();
 
+void printReg(Talum alumn[],int n);
+
+void order_reg(Talum alumn[],int n);
+
 int sear(Talum alumn[], int n, int mt);
 
 Talum genAl();
@@ -74,7 +78,7 @@ void menu()
 
         case 3:
             el=valid("Que registro desea eliminar?",0,i);
-            reg[el]=eliminar(reg[el]);
+            reg[el].status=0;
             break;
         case 4:
             bus=sear(reg,5,372576);
@@ -88,14 +92,11 @@ void menu()
             }
             system("PAUSE");
             break;
-
-
-
-
-
-
-
-
+        case 5:
+            break;
+        case 6:
+            printReg(reg,i);
+            break;
         default:
             break;
         }
@@ -148,15 +149,15 @@ void apellidoAl(char apellido[])
     int fil;
     char ap[10][15] =
         {
-            "García",
-            "Rodríguez",
-            "Pérez",
-            "López",
-            "Martínez",
-            "González",
-            "Sánchez",
+            "Garcia",
+            "Rodriguez",
+            "Perez",
+            "Lopez",
+            "Martinez",
+            "Gonzalez",
+            "Sanchez",
             "Romero",
-            "Fernández",
+            "Fernandez",
             "Torres"};
 
     fil = rand() % 10;
@@ -203,18 +204,6 @@ Talum llenarManual()
     return alumn;
 }
 
-Talum eliminar(Talum alumn)
-{
-    strcpy(alumn.name,"");
-    strcpy(alumn.lasP,"");
-    strcpy(alumn.lasM,"");
-    
-    alumn.mt=0;
-    alumn.age=0;
-    alumn.sex=0;
-    alumn.status=0;
-}
-
 int sear(Talum alumn[], int n, int mt)
 {
     int i;// define contador
@@ -228,9 +217,40 @@ int sear(Talum alumn[], int n, int mt)
     return -1; //si no encuentra el valor, retorna -1
 }
 
+void order_reg(Talum alumn[],int n)
+{
+    int i,j;
+    Talum temp;//guarda valor de manera temporal
+    for ( i = 0; i < n-1; i++)//Busqueda secuencial
+    {
+        for ( j = i+1; j < n; j++)
+        {
+            if(alumn[j].mt<alumn[i].mt)
+            {
+                temp=alumn[i];//Guarda el valor de vect[i] en temp
+                alumn[i]=alumn[j];//Guarda el valor de vect[j] en vect[i]
+                alumn[j]=temp;//Guarda el valor de temp en vect[j]
+            }
+        }
+        
+    }
+}
 
-
-
+void printReg(Talum alumn[],int n) 
+{
+    int i;
+    system("CLS");
+     printf("%-10s %-10s %-10s %-10s %-4s %-5s %-8s\n",
+           "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo", "Estatus");
+    for ( i = 0; i <n; i++)
+    {
+        printf("%-10d %-10s %-10s %-10s %-4d %-5d %-8d\n",
+        alumn[i].mt,alumn[i].name,alumn[i].lasP,
+        alumn[i].lasM,alumn[i].age,alumn[i].sex,
+        alumn[i].status);
+    }
+    system("PAUSE");
+}
 
 
 
