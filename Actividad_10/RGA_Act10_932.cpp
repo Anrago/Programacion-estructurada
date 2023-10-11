@@ -4,6 +4,8 @@
 // RGA_Act10_Pt1_932
 #include "Babilonia.h"
 
+#define TRUE 1
+#define FALSE 0
 typedef struct _alumn
 {
     char name[30];
@@ -20,11 +22,11 @@ void nombAl(char nombre[], int sex);
 void apellidoAl(char apellido[]);
 void menu();
 
-void printReg(Talum alumn[],int n);
+void printReg(Talum alumn[], int n);
 
-void order_reg(Talum alumn[],int n);
+void order_reg(Talum alumn[], int n,int band);
 
-int sear(Talum alumn[], int n, int mt);
+int searchSec(Talum alumn[], int n, int mt);
 
 Talum genAl();
 
@@ -56,8 +58,8 @@ int msg()
 void menu()
 {
     Talum reg[500];
-    int opc,el, i=0,j;
-    int bus;
+    int opc, el, i = 0, j;
+    int mt, band;
     do
     {
         opc = msg();
@@ -66,37 +68,54 @@ void menu()
         case 1:
             for (j = 0; j < 10; j++)
             {
-                reg[i++]=genAl();   
+                reg[i++] = genAl();
             }
+            band = TRUE;
             break;
 
         case 2:
-            reg[i++]=llenarManual();
-            printf("%s",reg[0].name);
-            
+            reg[i++] = llenarManual();
+            printf("%s", reg[0].name);
+            band = TRUE;
             break;
 
         case 3:
-            el=valid("Que registro desea eliminar?",0,i);
-            reg[el].status=0;
+            el = valid("Que registro desea eliminar?", 0, i);
+            reg[el].status = 0;
             break;
+
         case 4:
-            bus=sear(reg,5,372576);
-            if(bus!=-1)
-            {
-                printf("El aulmno se encuentra en el registro %d",bus);
+            mt=valid("Ingresa Matricula: ",300000,399999);
+            if(!band)
+            {   
+                printf("Busqueda secuencial");
+                searchSec(reg,i,mt);
             }
             else
             {
-                printf("El aulmno no encontrado ");   
+                //Busqueda binaria cuando esta desordenada
+            }
+            system("PAUSE");
+            
+            break;
+            
+        case 5:
+            if (band)
+            {   
+                //Cambiar if a la funcion order
+                order_reg(reg, i,band);
+                
+            }
+            else
+            {
+                printf("ordenadp");
             }
             system("PAUSE");
             break;
-        case 5:
-            break;
         case 6:
-            printReg(reg,i);
+            printReg(reg, i);
             break;
+
         default:
             break;
         }
@@ -168,7 +187,7 @@ Talum genAl()
 {
     Talum alumn;
     char nombre[10], apellido[15];
-    
+
     alumn.sex = rand() % 2 + 1;
 
     nombAl(nombre, alumn.sex);
@@ -184,7 +203,7 @@ Talum genAl()
 
     alumn.status = rand() % 2;
 
-    alumn.mt=rand()%100000+300000;
+    alumn.mt = rand() % 100000 + 300000;
     return alumn;
 }
 
@@ -195,127 +214,61 @@ Talum llenarManual()
     gets(alumn.name);
     gets(alumn.lasP);
     gets(alumn.lasM);
-    
-    scanf("%d",&alumn.mt);
-    scanf("%d",&alumn.age);
-    scanf("%d",&alumn.sex);
-    scanf("%d",&alumn.status);
+
+    scanf("%d", &alumn.mt);
+    scanf("%d", &alumn.age);
+    scanf("%d", &alumn.sex);
+    scanf("%d", &alumn.status);
 
     return alumn;
 }
 
-int sear(Talum alumn[], int n, int mt)
+int searchSec(Talum alumn[], int n, int mt)
 {
-    int i;// define contador
-    for ( i = 0; i < n; i++)//
+    Talum mat;
+    mat.mt = mt;
+    int i;                  // define contador
+    for (i = 0; i < n; i++) //
     {
-        if(alumn[i].mt==mt)//Busca en el vector el numero buscado
+        if (alumn[i].mt == mat.mt) // Busca en el vector el numero buscado
         {
-            return i; //si encuentra el valor, retorna el valor del indice
+            return i; // si encuentra el valor, retorna el valor del indice
         }
     }
-    return -1; //si no encuentra el valor, retorna -1
+    return -1; // si no encuentra el valor, retorna -1
 }
 
-void order_reg(Talum alumn[],int n)
+void order_reg(Talum alumn[], int n,int band)
 {
-    int i,j;
-    Talum temp;//guarda valor de manera temporal
-    for ( i = 0; i < n-1; i++)//Busqueda secuencial
+    int i, j;
+    Talum temp;                 // guarda valor de manera temporal
+    for (i = 0; i < n - 1; i++) // Busqueda secuencial
     {
-        for ( j = i+1; j < n; j++)
+        for (j = i + 1; j < n; j++)
         {
-            if(alumn[j].mt<alumn[i].mt)
+            if (alumn[j].mt < alumn[i].mt)
             {
-                temp=alumn[i];//Guarda el valor de vect[i] en temp
-                alumn[i]=alumn[j];//Guarda el valor de vect[j] en vect[i]
-                alumn[j]=temp;//Guarda el valor de temp en vect[j]
+                temp = alumn[i];     // Guarda el valor de vect[i] en temp
+                alumn[i] = alumn[j]; // Guarda el valor de vect[j] en vect[i]
+                alumn[j] = temp;     // Guarda el valor de temp en vect[j]
             }
         }
-        
     }
+    band=0;
 }
 
-void printReg(Talum alumn[],int n) 
+void printReg(Talum alumn[], int n)
 {
     int i;
     system("CLS");
-     printf("%-10s %-10s %-10s %-10s %-4s %-5s %-8s\n",
+    printf("%-10s %-10s %-10s %-10s %-4s %-5s %-8s\n",
            "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo", "Estatus");
-    for ( i = 0; i <n; i++)
+    for (i = 0; i < n; i++)
     {
         printf("%-10d %-10s %-10s %-10s %-4d %-5d %-8d\n",
-        alumn[i].mt,alumn[i].name,alumn[i].lasP,
-        alumn[i].lasM,alumn[i].age,alumn[i].sex,
-        alumn[i].status);
+               alumn[i].mt, alumn[i].name, alumn[i].lasP,
+               alumn[i].lasM, alumn[i].age, alumn[i].sex,
+               alumn[i].status);
     }
     system("PAUSE");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
