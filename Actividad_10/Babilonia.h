@@ -190,16 +190,7 @@ void validCad(char cad[])
     } while (val != 0);
 }
 
-typedef struct _alumn
-{
-    char name[30];
-    char lasP[30]; // apellido paterno
-    char lasM[30]; // apellido materno
-    int mt;        // matricula
-    int age;       // edad
-    int sex;       // sexo
-    int status;    // dado de baja o no
-} Talum;
+
 
 
 
