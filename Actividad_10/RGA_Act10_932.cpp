@@ -11,7 +11,7 @@ typedef struct _alumn
     char lasM[30]; // apellido materno
     int mt;        // matricula
     int age;       // edad
-    int sex;       // sexo
+    char sex [10];       // sexo
     int status;    // dado de baja o no
 } Talum;
 
@@ -75,8 +75,14 @@ void menu()
             break;
 
         case 3:
-            el = valid("Que registro desea eliminar?", 0, i);
-            reg[el].status = 0;
+            el = valid("Que registro desea eliminar?", 300000, 399999);
+            for(j=0;j<=i;j++)
+            {
+                if(reg[j].mt==el)
+                {
+                    reg[j].mt=0;
+                }
+            }
             break;
 
         case 4:
@@ -84,12 +90,13 @@ void menu()
 
             if (band == 1)
             {
-                printf("Busqueda secuencial\n");
+                printf("S\n");
                 bus = searchSec(reg, i, mt);
             }
             else
             {
-                bus=searchBin(reg,0,i,mt);
+                printf("B\n");
+                bus = searchBin(reg, 0, i, mt);
             }
 
             busq(bus);
@@ -120,29 +127,29 @@ void nombAl(char nombre[], int sex)
     int fil;
     char nombM[10][10] =
         {
-            "Ana",
-            "Julieta",
-            "Josefina",
-            "Dianna",
-            "Carmen",
-            "Sofia",
-            "Laura",
-            "Andrea",
-            "Elena",
-            "Isabel"};
+            "ANA",
+            "JULIETA",
+            "JOSEFINA",
+            "DANIELA",
+            "CARMEN",
+            "SOFIA",
+            "LAURA",
+            "ANDREA",
+            "ELENA",
+            "ISABEl"};
 
     char nombH[10][10] =
         {
-            "Juan",
-            "Carlos",
-            "Roberto",
-            "Damian",
-            "Andres",
-            "David",
-            "Alejandro",
-            "Miguel",
-            "Pedro",
-            "Fernando"};
+            "JUAN",
+            "CARLOS",
+            "ROBERTO",
+            "DAMIAN",
+            "ANDRES",
+            "DAVID",
+            "ALEJANDR",
+            "MIGUEL",
+            "PEDRO",
+            "FERNANDO"};
 
     if (sex == 1)
     {
@@ -161,16 +168,16 @@ void apellidoAl(char apellido[])
     int fil;
     char ap[10][15] =
         {
-            "Garcia",
-            "Rodriguez",
-            "Perez",
-            "Lopez",
-            "Martinez",
-            "Gonzalez",
-            "Sanchez",
-            "Romero",
-            "Fernandez",
-            "Torres"};
+            "GARCIA",
+            "RODRIGUEZ",
+            "PEREZ",
+            "LOPEZ",
+            "MARTINEZ",
+            "GONZALEZ",
+            "SANCHEZ",
+            "ROMERO",
+            "FRENANDEZ",
+            "TORRES"};
 
     fil = rand() % 10;
     strcpy(apellido, ap[fil]);
@@ -179,11 +186,12 @@ void apellidoAl(char apellido[])
 Talum genAl()
 {
     Talum alumn;
+    int sex;
     char nombre[10], apellido[15];
 
-    alumn.sex = rand() % 2 + 1;
+    sex= rand() % 2 + 1;
 
-    nombAl(nombre, alumn.sex);
+    nombAl(nombre,sex);
     strcpy(alumn.name, nombre);
 
     apellidoAl(apellido);
@@ -197,21 +205,45 @@ Talum genAl()
     alumn.status = rand() % 2;
 
     alumn.mt = rand() % 100000 + 300000;
+
+    if(sex==1)
+    {
+        strcpy(alumn.sex,"H");
+    }
+    else
+    {
+        strcpy(alumn.sex,"M");
+    }
+    
     return alumn;
 }
 
 Talum llenarManual()
 {
+    int sex;
     Talum alumn;
+    system("CLS");
     fflush(stdin);
-    gets(alumn.name);
-    gets(alumn.lasP);
-    gets(alumn.lasM);
 
-    scanf("%d", &alumn.mt);
-    scanf("%d", &alumn.age);
-    scanf("%d", &alumn.sex);
-    scanf("%d", &alumn.status);
+
+    alumn.mt=valid("Ingrese matricula: ",300000,399999);
+    
+    validCad("Ingrese nombre: ",alumn.name);
+    validCad("Ingrese apellido paterno: ",alumn.lasP);
+    validCad("Ingrese apellido materno: ",alumn.lasM);
+
+    system("CLS");
+    alumn.age=valid("Ingrese Edad: ",18,30);
+    sex=valid("Ingresa el sexo(1.-H,2.-M): ",1,2);
+    if(sex==1)
+    {
+        strcpy(alumn.sex,"H");
+    }
+    else
+    {
+        strcpy(alumn.sex,"M");
+    }
+    alumn.status=valid("Ingrese estatus: ",0,1);
 
     return alumn;
 }
@@ -257,10 +289,13 @@ void printReg(Talum alumn[], int n)
            "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo", "Estatus");
     for (i = 0; i < n; i++)
     {
-        printf("%-10d %-10s %-10s %-10s %-4d %-5d %-8d\n",
-               alumn[i].mt, alumn[i].name, alumn[i].lasP,
-               alumn[i].lasM, alumn[i].age, alumn[i].sex,
-               alumn[i].status);
+        if (alumn[i].status == 1)
+        {
+            printf("%-10d %-10s %-10s %-10s %-4d %-5s %-8d\n",
+                   alumn[i].mt, alumn[i].name, alumn[i].lasP,
+                   alumn[i].lasM, alumn[i].age, alumn[i].sex,
+                   alumn[i].status);
+        }
     }
     system("PAUSE");
 }
@@ -281,22 +316,24 @@ void busq(int ind)
 int searchBin(Talum alumn[], int inf, int sup, int mt)
 {
     int med;
-    med=(inf+sup)/2;
-    
+    while (inf <= sup)
+    {
+        med = (inf + sup) / 2;
+        if (alumn[med].mt == mt)
+        {
+            return med;
+        }
+        else
+        {
+            if (mt < alumn[med].mt)
+            {
+                sup = med--;
+            }
+            else
+            {
+                inf = med++;
+            }
+        }
+    }
+    return -1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
