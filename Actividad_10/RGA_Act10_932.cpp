@@ -11,7 +11,7 @@ typedef struct _alumn
     char lasM[30]; // apellido materno
     int mt;        // matricula
     int age;       // edad
-    char sex [10];       // sexo
+    char sex[10];  // sexo
     int status;    // dado de baja o no
 } Talum;
 
@@ -23,10 +23,11 @@ void printReg(Talum alumn[], int n);
 int order_reg(Talum alumn[], int n, int band);
 int searchSec(Talum alumn[], int n, int mt);
 int searchBin(Talum alumn[], int inf, int sup, int mt);
-Talum genAl();
-Talum llenarManual();
+Talum genAl(Talum alumn[], int i);
+Talum llenarManual(Talum alumn[], int i);
 Talum eliminar(Talum alumn);
 void busq(int ind);
+int verMt(Talum alumn[], int n, int mt);
 
 int main()
 {
@@ -39,9 +40,9 @@ int msg()
 {
     system("CLS");
     printf("MENU\n");
-    printf("1.-Agalumnar(AUTOM 10 alumnISTROS)\n");
-    printf("2.-Agalumnar manual\n");
-    printf("3.-Eliminar alumnistro(logico)\n");
+    printf("1.-Agrega alumnar(AUTOM 10 alumnos)\n");
+    printf("2.-Agrega alumno manual\n");
+    printf("3.-Eliminar alumno(logico)\n");
     printf("4.-Buscar\n");
     printf("5.-Ordenar\n");
     printf("6.-Imprimir\n");
@@ -62,25 +63,43 @@ void menu()
         switch (opc)
         {
         case 1:
-            for (j = 0; j < 10; j++)
+            if (i < 500)
             {
-                reg[i++] = genAl();
+                for (j = 0; j < 100; j++)
+                {
+                    reg[i] = genAl(reg, i);
+                    i++;
+                }
+                band = 1;
             }
-            band = 1;
+            else
+            {
+                printf("BASE DE DATOS LLENA\n");
+                system("PAUSE");
+            }
             break;
 
         case 2:
-            reg[i++] = llenarManual();
-            band = 1;
+            if (i < 500)
+            {
+                reg[i] = llenarManual(reg, i);
+                i++;
+                band = 1;
+            }
+            else
+            {
+                printf("BASE DE DATOS LLENA\n");
+                system("PAUSE");
+            }
             break;
 
         case 3:
             el = valid("Que registro desea eliminar?", 300000, 399999);
-            for(j=0;j<=i;j++)
+            for (j = 0; j <= i; j++)
             {
-                if(reg[j].mt==el)
+                if (reg[j].mt == el)
                 {
-                    reg[j].mt=0;
+                    reg[j].mt = 0;
                 }
             }
             break;
@@ -183,69 +202,107 @@ void apellidoAl(char apellido[])
     strcpy(apellido, ap[fil]);
 }
 
-Talum genAl()
+int verMt(Talum alumn[], int n, int mt)
 {
-    Talum alumn;
-    int sex;
-    char nombre[10], apellido[15];
-
-    sex= rand() % 2 + 1;
-
-    nombAl(nombre,sex);
-    strcpy(alumn.name, nombre);
-
-    apellidoAl(apellido);
-    strcpy(alumn.lasP, apellido);
-
-    apellidoAl(apellido);
-    strcpy(alumn.lasM, apellido);
-
-    alumn.age = rand() % 13 + 18;
-
-    alumn.status = rand() % 2;
-
-    alumn.mt = rand() % 100000 + 300000;
-
-    if(sex==1)
+    int i, j, cont;
+    for (i = 0; i < n; i++)
     {
-        strcpy(alumn.sex,"H");
+
+        cont = 0;
+        for (j = 0; j < i; j++)
+        {
+            if (alumn[j].mt == mt)
+            {
+                cont = 1;
+            }
+        }
+    }
+    if (cont == 1)
+    {
+        return 1;
     }
     else
     {
-        strcpy(alumn.sex,"M");
+        return 0;
     }
-    
-    return alumn;
 }
 
-Talum llenarManual()
+Talum genAl(Talum alumn[], int i)
 {
-    int sex;
-    Talum alumn;
-    system("CLS");
-    fflush(stdin);
 
+    int sex, val;
+    char nombre[10], apellido[15];
 
-    alumn.mt=valid("Ingrese matricula: ",300000,399999);
-    
-    validCad("Ingrese nombre: ",alumn.name);
-    validCad("Ingrese apellido paterno: ",alumn.lasP);
-    validCad("Ingrese apellido materno: ",alumn.lasM);
+    sex = rand() % 2 + 1;
 
-    system("CLS");
-    alumn.age=valid("Ingrese Edad: ",18,30);
-    sex=valid("Ingresa el sexo(1.-H,2.-M): ",1,2);
-    if(sex==1)
+    nombAl(nombre, sex);
+    strcpy(alumn[i].name, nombre);
+
+    apellidoAl(apellido);
+    strcpy(alumn[i].lasP, apellido);
+
+    apellidoAl(apellido);
+    strcpy(alumn[i].lasM, apellido);
+
+    alumn[i].age = rand() % 13 + 18;
+
+    alumn[i].status = rand() % 2;
+
+    do
     {
-        strcpy(alumn.sex,"H");
+        val = 0;
+        alumn[i].mt = rand() % 100000 + 300000;
+        val = verMt(alumn, i, alumn[i].mt);
+
+    } while (val != 0);
+
+    if (sex == 1)
+    {
+        strcpy(alumn[i].sex, "H");
     }
     else
     {
-        strcpy(alumn.sex,"M");
+        strcpy(alumn[i].sex, "M");
     }
-    alumn.status=valid("Ingrese estatus: ",0,1);
 
-    return alumn;
+    return alumn[i];
+}
+
+Talum llenarManual(Talum alumn[], int i)
+{
+    int sex, val;
+    system("CLS");
+    fflush(stdin);
+    do
+    {
+        val = 0;
+        alumn[i].mt = valid("Ingrese matricula: ", 300000, 399999);
+        val = verMt(alumn, i, alumn[i].mt);
+        if (val != 0)
+        {
+            printf("Matricula ya existente\n");
+        }
+
+    } while (val != 0);
+
+    validCad("Ingrese nombre: ", alumn[i].name);
+    validCad("Ingrese apellido paterno: ", alumn[i].lasP);
+    validCad("Ingrese apellido materno: ", alumn[i].lasM);
+
+    system("CLS");
+    alumn[i].age = valid("Ingrese Edad: ", 18, 30);
+    sex = valid("Ingresa el sexo(1.-H,2.-M): ", 1, 2);
+    if (sex == 1)
+    {
+        strcpy(alumn[i].sex, "H");
+    }
+    else
+    {
+        strcpy(alumn[i].sex, "M");
+    }
+    alumn[i].status = valid("Ingrese estatus: ", 0, 1);
+
+    return alumn[i];
 }
 
 int searchSec(Talum alumn[], int n, int mt)
