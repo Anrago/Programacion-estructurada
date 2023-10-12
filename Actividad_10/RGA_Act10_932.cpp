@@ -102,7 +102,7 @@ void menu()
         case 5:
             if (band)
             {   
-                //Cambiar if a la funcion ordernar
+                //Cambiar if a la funcion ordernara
                 order_reg(reg, i,band);
                 
             }
