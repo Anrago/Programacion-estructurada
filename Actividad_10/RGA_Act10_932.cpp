@@ -4,8 +4,6 @@
 // RGA_Act10_Pt1_932
 #include "Babilonia.h"
 
-#define TRUE 1
-#define FALSE 0
 typedef struct _alumn
 {
     char name[30];
@@ -21,18 +19,14 @@ int msg();
 void nombAl(char nombre[], int sex);
 void apellidoAl(char apellido[]);
 void menu();
-
 void printReg(Talum alumn[], int n);
-
-void order_reg(Talum alumn[], int n,int band);
-
+int order_reg(Talum alumn[], int n, int band);
 int searchSec(Talum alumn[], int n, int mt);
-
+int searchBin(Talum alumn[], int inf, int sup, int mt);
 Talum genAl();
-
 Talum llenarManual();
-
 Talum eliminar(Talum alumn);
+void busq(int ind);
 
 int main()
 {
@@ -59,7 +53,9 @@ void menu()
 {
     Talum reg[500];
     int opc, el, i = 0, j;
-    int mt, band;
+    int mt, bus;
+    bool band;
+
     do
     {
         opc = msg();
@@ -70,13 +66,12 @@ void menu()
             {
                 reg[i++] = genAl();
             }
-            band = TRUE;
+            band = 1;
             break;
 
         case 2:
             reg[i++] = llenarManual();
-            printf("%s", reg[0].name);
-            band = TRUE;
+            band = 1;
             break;
 
         case 3:
@@ -85,33 +80,31 @@ void menu()
             break;
 
         case 4:
-            mt=valid("Ingresa Matricula: ",300000,399999);
-            if(!band)
-            {   
-                printf("Busqueda secuencial");
-                searchSec(reg,i,mt);
+            mt = valid("Ingresa Matricula: ", 300000, 399999);
+
+            if (band == 1)
+            {
+                printf("Busqueda secuencial\n");
+                bus = searchSec(reg, i, mt);
             }
             else
             {
-                //Busqueda binaria cuando esta desordenada
+                bus=searchBin(reg,0,i,mt);
             }
-            system("PAUSE");
-            
+
+            busq(bus);
+
             break;
-            
+
         case 5:
-            if (band)
-            {   
-                //Cambiar if a la funcion ordernara
-                order_reg(reg, i,band);
-                
-            }
-            else
+
+            if (band == 1)
             {
-                printf("ordenadp");
+                band = order_reg(reg, i, band);
             }
-            system("PAUSE");
+
             break;
+
         case 6:
             printReg(reg, i);
             break;
@@ -225,23 +218,22 @@ Talum llenarManual()
 
 int searchSec(Talum alumn[], int n, int mt)
 {
-    Talum mat;
-    mat.mt = mt;
-    int i;                  // define contador
-    for (i = 0; i < n; i++) //
+    int i;                   // define contador
+    for (i = 0; i <= n; i++) //
     {
-        if (alumn[i].mt == mat.mt) // Busca en el vector el numero buscado
+        if (alumn[i].mt == mt) // Busca en el vector el numero buscado
         {
             return i; // si encuentra el valor, retorna el valor del indice
         }
     }
-    return -1; // si no encuentra el valor, retorna -1
+    return 1; // si no encuentra el valor, retorna -1
 }
 
-void order_reg(Talum alumn[], int n,int band)
+int order_reg(Talum alumn[], int n, int band)
 {
     int i, j;
-    Talum temp;                 // guarda valor de manera temporal
+    Talum temp; // guarda valor de manera temporal
+
     for (i = 0; i < n - 1; i++) // Busqueda secuencial
     {
         for (j = i + 1; j < n; j++)
@@ -254,7 +246,7 @@ void order_reg(Talum alumn[], int n,int band)
             }
         }
     }
-    band=0;
+    return band = 0;
 }
 
 void printReg(Talum alumn[], int n)
@@ -272,3 +264,39 @@ void printReg(Talum alumn[], int n)
     }
     system("PAUSE");
 }
+
+void busq(int ind)
+{
+    if (ind != -1)
+    {
+        printf("Alumno encontrado en el indice: %d", ind);
+    }
+    else
+    {
+        printf("Alumno no encontrado");
+    }
+    scanf("PAUSE");
+}
+
+int searchBin(Talum alumn[], int inf, int sup, int mt)
+{
+    int med;
+    med=(inf+sup)/2;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -62,7 +62,7 @@ void PrintVect(int vect[],int m)
 //valida las opciones
 int valid(const char msg[], int lim_in, int lim_sup)
 {
-    char cad[1];//cadena que leera un numero
+    char cad[10];//cadena que leera un numero
     int opc;//guardara un numer
 
     do
