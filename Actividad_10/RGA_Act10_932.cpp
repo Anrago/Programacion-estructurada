@@ -1,8 +1,9 @@
 // Antonio Ramos Gonzalez Mt: 372576
-// 9/12/2023 || 9/24/2023
-// Cadenas parte 1
+// 10/9/2023 || 10/12/2023
+// En esta Practica se definira un tipo de variable como un struct, para ingresar datos de distintos alumnos con un menu
 // RGA_Act10_Pt1_932
-#include "Babilonia.h"
+#include "Babilonia.h" //llamar mi biblioteca
+
 
 typedef struct _alumn
 {
@@ -13,7 +14,7 @@ typedef struct _alumn
     int age;       // edad
     char sex[10];  // sexo
     int status;    // dado de baja o no
-} Talum;
+} Talum;    //defino mi tipo de bariable de tipo struct
 
 int msg();
 void nombAl(char nombre[], int sex);
@@ -36,6 +37,7 @@ int main()
     return 0;
 }
 
+//Muestra mensaje
 int msg()
 {
     system("CLS");
@@ -50,27 +52,28 @@ int msg()
     return valid("Elije una opcion: ", 0, 6);
 }
 
+//Meno de elecciones
 void menu()
 {
-    Talum reg[500];
+    Talum reg[500];//genera vector del tipo Talum
     int opc, el, i = 0, j;
     int mt, bus;
     bool band;
 
     do
     {
-        opc = msg();
+        opc = msg();//lee el valor recivido de msg
         switch (opc)
         {
         case 1:
-            if (i < 500)
+            if (i < 500)//valida que no se supere el limite maximo
             {
-                for (j = 0; j < 100; j++)
+                for (j = 0; j < 10; j++)
                 {
                     reg[i] = genAl(reg, i);
                     i++;
                 }
-                band = 1;
+                band = 1;//se usa para los tipos de busqueda
             }
             else
             {
@@ -141,6 +144,7 @@ void menu()
     } while (opc != 0);
 }
 
+//Funcion para nombres
 void nombAl(char nombre[], int sex)
 {
     int fil;
@@ -155,7 +159,7 @@ void nombAl(char nombre[], int sex)
             "LAURA",
             "ANDREA",
             "ELENA",
-            "ISABEl"};
+            "ISABEl"};//Nombres de mujeres
 
     char nombH[10][10] =
         {
@@ -168,20 +172,21 @@ void nombAl(char nombre[], int sex)
             "ALEJANDR",
             "MIGUEL",
             "PEDRO",
-            "FERNANDO"};
+            "FERNANDO"};//Nombres de hombre
 
-    if (sex == 1)
+    if (sex == 1) //Se encarga de leer el sexo para decidir si el nombre sera de hombre
     {
-        fil = rand() % 10;
-        strcpy(nombre, nombH[fil]);
+        fil = rand() % 10;//elige un nombre de manera aleatoria
+        strcpy(nombre, nombH[fil]);//copia el valor del nombre el la variable
     }
-    if (sex == 2)
+    if (sex == 2)//Se encarga de leer el sexo para decidir si el nombre sera de mujer
     {
-        fil = rand() % 10;
-        strcpy(nombre, nombM[fil]);
+        fil = rand() % 10;//elige un nombre de manera aleatoria
+        strcpy(nombre, nombM[fil]);//copia el valor del nombre el la variable
     }
 }
 
+//Funcio para apellidos
 void apellidoAl(char apellido[])
 {
     int fil;
@@ -196,103 +201,108 @@ void apellidoAl(char apellido[])
             "SANCHEZ",
             "ROMERO",
             "FRENANDEZ",
-            "TORRES"};
+            "TORRES"};//Apellidos generales
 
-    fil = rand() % 10;
-    strcpy(apellido, ap[fil]);
+    fil = rand() % 10;//elige un apellido de manera aleatoria
+    strcpy(apellido, ap[fil]);//copia el valor del apellido en la variable
 }
 
+//Funcion que verifica que no se repitan matriculas
 int verMt(Talum alumn[], int n, int mt)
 {
-    int i, j, cont;
-    for (i = 0; i < n; i++)
+    int i, j, cont;//variables locales
+    cont=0;
+    for (i = 0; i < n; i++)//ciclo que aumenta el valor de i
     {
-
-        cont = 0;
-        for (j = 0; j < i; j++)
+        for (j = 0; j < i; j++)//ciclo que aumenta el valor de j
         {
-            if (alumn[j].mt == mt)
+            if (alumn[j].mt == mt)// valida que no existan 
             {
                 cont = 1;
             }
         }
     }
-    if (cont == 1)
+    if (cont == 1)//verifica el valor de cont
     {
-        return 1;
+        return 1;//si se repiten matriculas retorna un 1
     }
     else
     {
-        return 0;
+        return 0;// si no se repiten retorna un 0
     }
 }
 
+//Funcion que genera datos de alumnos aleatorios
 Talum genAl(Talum alumn[], int i)
 {
 
-    int sex, val;
-    char nombre[10], apellido[15];
+    int sex, val;//variables locales
+    char nombre[10], apellido[15];//variables que guardaran nombres y apellidos
 
-    sex = rand() % 2 + 1;
+    sex = rand() % 2 + 1;//genera un sexo aleatorio
 
-    nombAl(nombre, sex);
-    strcpy(alumn[i].name, nombre);
+    nombAl(nombre, sex);//ingresa a la funcion para decidir un nombre
+    strcpy(alumn[i].name, nombre);//copia nombre en el struct
 
-    apellidoAl(apellido);
-    strcpy(alumn[i].lasP, apellido);
+    apellidoAl(apellido);//ingresa a la funcion para decidir un apellido
+    strcpy(alumn[i].lasP, apellido);//copia apellido en el struct
 
-    apellidoAl(apellido);
-    strcpy(alumn[i].lasM, apellido);
+    apellidoAl(apellido);//ingresa a la funcion para decidir un apellido
+    strcpy(alumn[i].lasM, apellido);//copia apellido en el struct
 
-    alumn[i].age = rand() % 13 + 18;
+    alumn[i].age = rand() % 13 + 18;//genera una edad aleatoria entre 18 y 30
 
-    alumn[i].status = rand() % 2;
+    alumn[i].status = rand() % 2;//aplica un estatus al alumno
 
     do
     {
         val = 0;
-        alumn[i].mt = rand() % 100000 + 300000;
-        val = verMt(alumn, i, alumn[i].mt);
+        alumn[i].mt = rand() % 100000 + 300000;//genera una matricula entre 300k y 399k
+        val = verMt(alumn, i, alumn[i].mt);//ingresa a la funcion para validar
 
-    } while (val != 0);
+    } while (val != 0); //ciclo que se repite si 2 matriculas son iguales
 
-    if (sex == 1)
+    if (sex == 1)//valida el sexo del usuario
     {
-        strcpy(alumn[i].sex, "H");
+        strcpy(alumn[i].sex, "H");//si sex es 1 entonces sera hombre
     }
     else
     {
-        strcpy(alumn[i].sex, "M");
+        strcpy(alumn[i].sex, "M");//si no sera mujer
     }
 
-    return alumn[i];
+    return alumn[i];//retorna alumn
 }
 
+//Funcion para ingresar a un alumno de manera manual
 Talum llenarManual(Talum alumn[], int i)
 {
-    int sex, val;
+    int sex, val;//variables locales
     system("CLS");
     fflush(stdin);
     do
     {
         val = 0;
-        alumn[i].mt = valid("Ingrese matricula: ", 300000, 399999);
-        val = verMt(alumn, i, alumn[i].mt);
-        if (val != 0)
+        alumn[i].mt = valid("Ingrese matricula: ", 300000, 399999);//lee una matricula
+        val = verMt(alumn, i, alumn[i].mt);//rntra a la funcion de validar
+
+        if (val != 0)//si se repiten imprime mensaje
         {
             printf("Matricula ya existente\n");
         }
 
-    } while (val != 0);
+    } while (val != 0);//ciclo que se repite si 2 matriculas son iguales
 
-    validCad("Ingrese nombre: ", alumn[i].name);
-    validCad("Ingrese apellido paterno: ", alumn[i].lasP);
-    validCad("Ingrese apellido materno: ", alumn[i].lasM);
+    validCad("Ingrese nombre: ", alumn[i].name);//ingresa y valida nombre
+    validCad("Ingrese apellido paterno: ", alumn[i].lasP);//ingresa y valida apellido paterno
+    validCad("Ingrese apellido materno: ", alumn[i].lasM);//ingresa y valida apellido materno
 
     system("CLS");
-    alumn[i].age = valid("Ingrese Edad: ", 18, 30);
-    sex = valid("Ingresa el sexo(1.-H,2.-M): ", 1, 2);
-    if (sex == 1)
+    alumn[i].age = valid("Ingrese Edad: ", 18, 30);//ingresa y valida edad
+
+    sex = valid("Ingresa el sexo(1.-H,2.-M): ", 1, 2);//ingresa y valida sexo
+
+    if (sex == 1)//decide si es hombre o mujer
     {
         strcpy(alumn[i].sex, "H");
     }
@@ -300,24 +310,27 @@ Talum llenarManual(Talum alumn[], int i)
     {
         strcpy(alumn[i].sex, "M");
     }
-    alumn[i].status = valid("Ingrese estatus: ", 0, 1);
+    alumn[i].status = valid("Ingrese estatus: ", 0, 1);//ingresa y valida estatus
 
     return alumn[i];
 }
 
+//Funcion de busqueda secuencial
 int searchSec(Talum alumn[], int n, int mt)
 {
-    int i;                   // define contador
-    for (i = 0; i <= n; i++) //
+    int i; // define contador
+    i=0;
+    for (i = 0; i <= n; i++) 
     {
         if (alumn[i].mt == mt) // Busca en el vector el numero buscado
         {
             return i; // si encuentra el valor, retorna el valor del indice
         }
     }
-    return 1; // si no encuentra el valor, retorna -1
+    return -1; // si no encuentra el valor, retorna -1
 }
 
+//Funcion que ordena el vector
 int order_reg(Talum alumn[], int n, int band)
 {
     int i, j;
@@ -329,27 +342,28 @@ int order_reg(Talum alumn[], int n, int band)
         {
             if (alumn[j].mt < alumn[i].mt)
             {
-                temp = alumn[i];     // Guarda el valor de vect[i] en temp
-                alumn[i] = alumn[j]; // Guarda el valor de vect[j] en vect[i]
-                alumn[j] = temp;     // Guarda el valor de temp en vect[j]
+                temp = alumn[i];     // Guarda el valor de alumn[i] en temp
+                alumn[i] = alumn[j]; // Guarda el valor de alumn[j] en alumn[i]
+                alumn[j] = temp;     // Guarda el valor de temp en alumn[j]
             }
         }
     }
     return band = 0;
 }
 
+//Funcion para imprimir el vector
 void printReg(Talum alumn[], int n)
 {
     int i;
     system("CLS");
     printf("%-10s %-10s %-10s %-10s %-4s %-5s %-8s\n",
-           "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo", "Estatus");
-    for (i = 0; i < n; i++)
+           "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo", "Estatus");//imrpirme las columnas, como datos
+    for (i = 0; i < n; i++)//ciclo que aumenta el valor del vector
     {
-        if (alumn[i].status == 1)
+        if (alumn[i].status == 1)//verifica que el estatus sea 1
         {
             printf("%-10d %-10s %-10s %-10s %-4d %-5s %-8d\n",
-                   alumn[i].mt, alumn[i].name, alumn[i].lasP,
+                   alumn[i].mt, alumn[i].name, alumn[i].lasP, // imprime el vector
                    alumn[i].lasM, alumn[i].age, alumn[i].sex,
                    alumn[i].status);
         }
@@ -357,6 +371,7 @@ void printReg(Talum alumn[], int n)
     system("PAUSE");
 }
 
+//Funcion que imprime el alumno buscado
 void busq(int ind)
 {
     if (ind != -1)
@@ -370,27 +385,28 @@ void busq(int ind)
     scanf("PAUSE");
 }
 
+//Funcion de busqueda binaria
 int searchBin(Talum alumn[], int inf, int sup, int mt)
 {
-    int med;
+    int med;//variable local
     while (inf <= sup)
     {
-        med = (inf + sup) / 2;
-        if (alumn[med].mt == mt)
+        med = (inf + sup) / 2;//definir la mitad del vector
+        if (alumn[med].mt == mt)//verifica si el valor buscado se encuentra en la actual pocicion de med
         {
-            return med;
+            return med;//retorna el valor de med
         }
         else
         {
-            if (mt < alumn[med].mt)
+            if (mt < alumn[med].mt) //verifica que el valor buscado sea menor al valor en med
             {
-                sup = med--;
+                sup = med--;//resta 1 a med y lo asigna al valor sup para que disminuya asi el valor central
             }
             else
             {
-                inf = med++;
+                inf = med++;//suma 1 a med y lo asigna al valor inf para que disminuya asi el valor central
             }
         }
     }
-    return -1;
+    return -1;//si no encuentra coincidencia retorna -1
 }

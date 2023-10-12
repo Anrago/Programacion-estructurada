@@ -1,5 +1,5 @@
 // Antonio Ramos Gonzalez Mt: 372576
-// 3/10/2023 || 10/5/2023
+// 10/3/2023 || 10/12/2023
 // Esta biblioteca contiene las funciones que usare durante proximas practicas
 // Babilonia
 #include <stdio.h>
