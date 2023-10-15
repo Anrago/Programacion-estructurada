@@ -67,7 +67,7 @@ void menu()
         case 1:
             if (i < N) // valida que no se supere el limite maximo
             {
-                for (j = 0; j < 10; j++)
+                for (j = 0; j < 50; j++)
                 {
                     if (i < N)
                     {
