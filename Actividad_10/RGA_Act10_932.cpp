@@ -355,16 +355,15 @@ void printReg(Talum alumn[], int n)
 {
     int i;
     system("CLS");
-    printf("%-10s %-10s %-10s %-10s %-4s %-5s %-8s\n",
-           "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo", "Estatus"); // imrpirme las columnas, como datos
+    printf("%-10s %-10s %-10s %-10s %-4s %-5s\n",
+           "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo"); // imrpirme las columnas, como datos
     for (i = 0; i < n; i++)                                                 // ciclo que aumenta el valor del vector
     {
         if (alumn[i].status == 1) // verifica que el estatus sea 1
         {
-            printf("%-10d %-10s %-10s %-10s %-4d %-5s %-8d\n",
+            printf("%-10d %-10s %-10s %-10s %-4d %-5s\n",
                    alumn[i].mt, alumn[i].name, alumn[i].lasP, // imprime el vector
-                   alumn[i].lasM, alumn[i].age, alumn[i].sex,
-                   alumn[i].status);
+                   alumn[i].lasM, alumn[i].age, alumn[i].sex);
         }
     }
     system("PAUSE");
@@ -375,13 +374,13 @@ void busq(int ind)
 {
     if (ind != -1)
     {
-        printf("Alumno encontrado en el indice: %d", ind+1);
+        printf("Alumno encontrado en el indice: %d\n", ind+1);
     }
     else
     {
-        printf("Alumno no encontrado");
+        printf("Alumno no encontrado\n");
     }
-    scanf("PAUSE");
+    system("PAUSE");
 }
 
 // Funcion de busqueda binaria
