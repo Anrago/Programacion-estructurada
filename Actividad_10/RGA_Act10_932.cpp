@@ -1,9 +1,9 @@
 // Antonio Ramos Gonzalez Mt: 372576
-// 10/9/2023 || 10/12/2023
+// 10/9/2023 || 10/13/2023
 // En esta Practica se definira un tipo de variable como un struct, para ingresar datos de distintos alumnos con un menu
 // RGA_Act10_Pt1_932
 #include "Babilonia.h" //llamar mi biblioteca
-
+#define N 500 
 typedef struct _alumn
 {
     char name[30];
@@ -54,7 +54,7 @@ int msg()
 // Meno de elecciones
 void menu()
 {
-    Talum reg[500]; // genera vector del tipo Talum
+    Talum reg[N]; // genera vector del tipo Talum
     int opc, el, i = 0, j;
     int mt, bus;
     bool band;
@@ -65,11 +65,11 @@ void menu()
         switch (opc)
         {
         case 1:
-            if (i < 500) // valida que no se supere el limite maximo
+            if (i < N) // valida que no se supere el limite maximo
             {
                 for (j = 0; j < 10; j++)
                 {
-                    if (i < 500)
+                    if (i < N)
                     {
                         reg[i] = genAl(reg, i);
                         i++;
@@ -85,7 +85,7 @@ void menu()
             break;
 
         case 2:
-            if (i < 500) // valida que no se supere el limite maximo
+            if (i < N) // valida que no se supere el limite maximo
             {
                 reg[i] = llenarManual(reg, i);
                 i++; // aumenta el indice del vector
@@ -99,14 +99,14 @@ void menu()
             break;
 
         case 3:
-            el = valid("Que registro desea eliminar?", 300000, 399999);
+            el = valid("Ingrese matricula: ", 300000, 399999);
             if (band == 1) // verifica si el vectro ya fue ordenado
             {
-                bus = searchSec(reg, i, mt);
+                bus = searchSec(reg, i, el);
             }
             else
             {
-                bus = searchBin(reg, 0, i, mt);
+                bus = searchBin(reg, 0, i, el);
             }
             reg[bus].status=0;
             break;
@@ -251,7 +251,7 @@ Talum genAl(Talum alumn[], int i)
 
     alumn[i].age = rand() % 13 + 18; // genera una edad aleatoria entre 18 y 30
 
-    alumn[i].status = rand() % 2; // aplica un estatus al alumno
+    alumn[i].status = 1; // aplica un estatus al alumno
 
     do
     {
@@ -309,7 +309,7 @@ Talum llenarManual(Talum alumn[], int i)
     {
         strcpy(alumn[i].sex, "M");
     }
-    alumn[i].status = valid("Ingrese estatus: ", 0, 1); // ingresa y valida estatus
+    alumn[i].status = 1; // ingresa y valida estatus
 
     return alumn[i];
 }
@@ -375,7 +375,7 @@ void busq(int ind)
 {
     if (ind != -1)
     {
-        printf("Alumno encontrado en el indice: %d", ind);
+        printf("Alumno encontrado en el indice: %d", ind+1);
     }
     else
     {
