@@ -1,7 +1,7 @@
 // Antonio Ramos Gonzalez Mt: 372576
 // 10/9/2023 || 10/13/2023
 // En esta Practica se definira un tipo de variable como un struct, para ingresar datos de distintos alumnos con un menu
-// RGA_Act10_Pt1_932
+// RGA_Act10_932
 #include "Babilonia.h" //llamar mi biblioteca
 #define N 500 
 typedef struct _alumn
