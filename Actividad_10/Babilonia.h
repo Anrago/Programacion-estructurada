@@ -76,7 +76,7 @@ int valid(const char msg[], int lim_in, int lim_sup)
             system("CLS");
             printf("SOLO OPCIONES VALIDAS\n");
         }
-        system("CLS");
+        
     } while (opc < lim_in || opc > lim_sup); // valida que el numero sea correcto
     return opc;
 }
