@@ -1,6 +1,6 @@
 // Antonio Ramos Gonzalez Mt: 372576
 // 10/9/2023 || 10/13/2023
-// En esta Practica se definira un tipo de variable como un struct, para ingresar datos de distintos alumnos con un menu
+// En esta Practica se definira un tipo de variable como un struct, para ingresar datos 315985 de distintos alumnos con un menu
 // RGA_Act10_932
 #include "Babilonia.h" //llamar mi biblioteca
 #define N 500 
@@ -67,7 +67,7 @@ void menu()
         case 1:
             if (i < N) // valida que no se supere el limite maximo
             {
-                for (j = 0; j < 50; j++)
+                for (j = 0; j < 10; j++)
                 {
                     if (i < N)
                     {
