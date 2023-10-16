@@ -7,8 +7,6 @@
 
 int msg();
 void menu();
-void agregarACurp(char agreg[]);
-void nomb();
 void apP();
 void apM();
 void curp();
@@ -44,136 +42,65 @@ void menu()
     } while (opc != 0);
 }
 
-
-
 void curp()
 {
-//     char curp[18], nom[15], apP[15], apM[15];
-//     char anio[4], mes[2], dia[2],est[2];
-    apP();
-//     int i, j, k, ani, me, di,sex;
+    char curp[18], nom[15], apP[15], apM[15];
+    char anio[4], mes[2], dia[2], est[2], sex[2],lon[2];
+    int ani, me, di,lar;
 
-//     validCad("Ingrese nombre: ", nom);
-//     validCad("Ingrese apellido paterno: ", apP);
-//     validCad("Ingrese apellido materno: ", apM);
+    validCad("Ingrese nombre: ", nom);
+    validCad("Ingrese apellido paterno: ", apP);
+    validCad("Ingrese apellido materno: ", apM);
 
-//     for (i = 0; i < 2; i++)
-//     {
-//         curp[i] = apP[i];
-//     }
-//     for (j = i; j < 4; i++, j++)
-//     {
-//         if (i == 2)
-//         {
-//             curp[i] = apM[0];
-//         }
+    strncpy(curp, apP, 2);
+    curp[2] = '\0';
+    strncat(curp, apM, 1);
+    curp[3] = '\0';
+    strncat(curp, nom, 1);
+    curp[4] = '\0';
+    system("CLS");
+    ani = valid("Ingresa year de nacimiento: ", 1950, 2023);
+    me = valid("Ingresa mes de nacimiento: ", 1, 12);
+    di = valid("Ingresa dia de nacimiento: ", 1, 31);
 
-//         if (i == 3)
-//         {
-//             curp[i] = nom[0];
-//         }
-//     }
+    snprintf(anio, 4, "%d", ani);
+    snprintf(mes, 2, "%d", me);
+    snprintf(dia, 2, "%d", di);
 
-//     system("CLS");
-//     ani = valid("Ingresa year de nacimiento: ", 1950, 2023);
-//     me = valid("Ingresa mes de nacimiento: ", 01, 12);
-//     di = valid("Ingresa dia de nacimiento: ", 1, 31);
+    lar=strlen(anio);
+    lon[0] = anio[lar - 2];
+    lon[1] = anio[lar - 1];
 
-//     snprintf(anio, 20, "%d", ani);
-//     snprintf(mes, 20, "%d", me);
-//     snprintf(dia, 20, "%d", di);
+    strncat(curp, lon , 2);
+    curp[6] = '\0';
+    // strncat(curp, mes, 2);
+    curp[8] = '\0';
+    strncat(curp, dia, 2);
 
-//     for (k = 2, j = i; j < 6; j++, i++, k++)
-//     {
-//         curp[j] = anio[k];
-//     }
-//     for (k = 0, j = i; j < 8; j++, i++, k++)
-//     {
-//         curp[j] = mes[k];
-//     }
-//     for (k = 0, j = i; j < 9; j++, i++, k++)
-//     {
-//         curp[j]='0';
-//         curp[j+1] = dia[k];
-//     }
+    // s=valid("Ingresa sexo: ",1,2);
+    // if (s==1)
+    // {
+    //     strcpy(sex,'H');
+    // }
+    // if (s==2)
+    // {
+    //     curp[j+1]='M';
+    // }
 
-//     sex=valid("Ingresa sexo: ",1,2);
-//     if (sex==1)
-//     {
-//         curp[j+1]='H';
-//     }
-//     if (sex==2)
-//     {
-//         curp[j+1]='M';
-//     }
-    
-    
-//     estados(est);
-    
-//     for (k=0, j = i+1; j < 12; k++,j++,i++)
-//     {
-//         curp[j]=est[k];
-//     }
-    
-
-//     printf("%s", curp);
-//     system("PAUSE");
+    estados(est);
+    printf("%s\n",lon);
+    printf("%s", curp);
+    system("PAUSE");
 }
-
-void agregarACurp(char agreg[],char curp[18])
-{
-    static int i,j;
-
-}
-
-
-void apP()
-{
-    char aP[15];
-    validCad("Ingrese apellido paterno ", aP);
-    agregarACurp(aP);
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 void estados(char est[])
 {
     int a;
-    char estados[32][20]= {
+    char estados[32][20] = {
         "AG", "BC", "BS", "CC", "CS", "CH", "CL", "CM",
         "DF", "DG", "GR", "GT", "HG", "JC", "MC", "MN",
         "MS", "NT", "NL", "OC", "PL", "QT", "QR", "SP",
-        "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS"
-    };
-    a=valid("Ingrese estado",1,32);
-    strcpy(est,estados[a-1]);
+        "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS"};
+    a = valid("Ingrese estado", 1, 32);
+    strcpy(est, estados[a - 1]);
 }
