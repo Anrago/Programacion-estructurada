@@ -8,11 +8,13 @@
 int msg();
 void menu();
 void curp();
-void nombre(char curp[],char nomb[],char apP[],char apM[]);
-void nacimiento(char curp[]);
+void nombre(char curp[], char nomb[], char apP[], char apM[]);
+int nacimiento(char curp[]);
 void sexo(char curp[]);
 void estados(char curp[]);
-void consonantes(char curp[],char nomb[],char apP[],char apM[]);
+void imprimirEstados();
+void consonantes(char curp[], char nomb[], char apP[], char apM[]);
+void generacio(char curp[], int year);
 
 int main()
 {
@@ -49,32 +51,34 @@ void curp()
 {
     char curp[18];
     char nomb[15], apP[15], apM[15];
+    int year;
 
     validCad("Ingrese nombre: ", nomb);
     validCad("Ingrese apellido paterno: ", apP);
     validCad("Ingrese apellido materno: ", apM);
-    
 
-    nombre(curp,nomb,apP,apM);
+    nombre(curp, nomb, apP, apM);
 
-    nacimiento(curp);
+    year = nacimiento(curp);
 
     sexo(curp);
 
     estados(curp);
 
-    consonantes(curp,nomb,apP,apM);
+    consonantes(curp, nomb, apP, apM);
+
+    generacio(curp, year);
 
     printf("%s\n", curp);
     system("PAUSE");
 }
 
-void nombre(char curp[],char nomb[],char apP[],char apM[])
+void nombre(char curp[], char nomb[], char apP[], char apM[])
 {
     mayusculas(nomb);
- 
+
     mayusculas(apP);
-    
+
     mayusculas(apM);
 
     strncpy(curp, apP, 2);
@@ -85,7 +89,7 @@ void nombre(char curp[],char nomb[],char apP[],char apM[])
     curp[4] = '\0';
 }
 
-void nacimiento(char curp[])
+int nacimiento(char curp[])
 {
     char anio[5], mes[3], dia[3], cero[2];
     int year, mont, day, lar;
@@ -112,6 +116,8 @@ void nacimiento(char curp[])
     curp[9] = '\0';
     strncat(curp, dia, 2);
     curp[10] = '\0';
+
+    return year;
 }
 
 void sexo(char curp[])
@@ -137,56 +143,120 @@ void sexo(char curp[])
 void estados(char curp[])
 {
     char est[2];
-    int a, i;
-    char estados[32][20] = {
+    int a;
+    char estados[33][20] = {
         "AG", "BC", "BS", "CC", "CS", "CH", "CL", "CM",
-        "DF", "DG", "GR", "GT", "HG", "JC", "MC", "MN",
+        "CM", "DG", "GR", "GT", "HG", "JC", "EM", "MN",
         "MS", "NT", "NL", "OC", "PL", "QT", "QR", "SP",
-        "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS"};
+        "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS",
+        "NE"};
 
-    for (i = 0; i < 32; i++)
-    {
-        printf("Estado %d: %s\n", i + 1, estados[i]);
-    }
+    imprimirEstados();
 
-    a = valid("Ingrese estado: ", 1, 32);
+    a = valid("Ingrese estado: ", 1, 33);
     strcpy(est, estados[a - 1]);
     strncat(curp, est, 2);
     curp[13] = '\0';
 }
 
-void consonantes(char curp[],char nomb[],char apP[],char apM[])
+void imprimirEstados()
 {
-    char conso_nomb[10],conso_apP[10],conso_apM[10];
-    char consN[2],consP[2],consM[2];
-    int lar_nomb,lar_apP,lar_apM;
+    int i;
+    char estados[33][30] = {
+        "Aguascalientes",
+        "Baja California",
+        "Baja California Sur",
+        "Campeche",
+        "Coahuila",
+        "Colima",
+        "Chiapas",
+        "Chihuahua",
+        "Ciudad de mexico",
+        "Durango",
+        "Guanajuato",
+        "Guerrero",
+        "Hidalgo",
+        "Jalisco",
+        "Estado de Mexico",
+        "Michoacan",
+        "Morelos",
+        "Nayarit",
+        "Nuevo Leon",
+        "Oaxaca",
+        "Puebla",
+        "Quertaro",
+        "Quintana Roo",
+        "San Luis Potosi",
+        "Sinaloa",
+        "Sonora",
+        "Tabasco",
+        "Tamaulipas",
+        "Tlaxcala",
+        "Veracruz",
+        "Yucatan",
+        "Zacatecas",
+        "Nacido en el extrangero"};
 
-    lar_apP=strlen(apP);
-    solo_consonantes(apP,lar_apP,conso_apP);
+    for (i = 0; i < 33; i++)
+    {
+        printf("%d.- %s\n", i + 1, estados[i]);
+    }
+}
+
+void consonantes(char curp[], char nomb[], char apP[], char apM[])
+{
+    char conso_nomb[10], conso_apP[10], conso_apM[10];
+    char consN[2], consP[2], consM[2];
+    int lar_nomb, lar_apP, lar_apM;
+
+    lar_apP = strlen(apP);
+    solo_consonantes(apP, lar_apP, conso_apP);
 
     consP[0] = conso_apP[1];
-    
-    strncat(curp,consP,2);
+
+    strncat(curp, consP, 2);
 
     curp[14] = '\0';
 
-
-    lar_apM=strlen(apM);
-    solo_consonantes(apM,lar_apM,conso_apM);
+    lar_apM = strlen(apM);
+    solo_consonantes(apM, lar_apM, conso_apM);
 
     consM[0] = conso_apM[1];
-    
-    strncat(curp,consM,2);
+
+    strncat(curp, consM, 2);
     curp[15] = '\0';
 
-
-    lar_nomb=strlen(nomb);
-    solo_consonantes(nomb,lar_nomb,conso_nomb);
+    lar_nomb = strlen(nomb);
+    solo_consonantes(nomb, lar_nomb, conso_nomb);
 
     consN[0] = conso_nomb[0];
-    
-    strncat(curp,consN,2);
-    curp[16] = '\0';
 
-    
+    strncat(curp, consN, 2);
+    curp[16] = '\0';
+}
+
+void generacio(char curp[], int year)
+{
+    char gen[2];
+    if (year < 2000)
+    {
+        strcpy(gen, "0");
+        strncat(curp, gen, 2);
+    }
+    else
+    {
+        if (year < 2010)
+        {
+            strcpy(gen, "A");
+            strncat(curp, gen, 2);
+        }
+        else
+        {
+            if (year < 2020)
+            {
+                strcpy(gen, "B");
+                strncat(curp, gen, 2);
+            }
+        }
+    }
 }

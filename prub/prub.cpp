@@ -88,7 +88,17 @@ void validCad(const char msg[], char cad[])
             {
                 if (cad[k] > 122)
                 {
-                    band = 1;
+                    if (cad[k]!=164)
+                    {
+                        if (cad[k]!=165)
+                        {
+                            band=1;
+                        }
+                        
+                    
+                    }
+                    
+                    
                 }
             }
 
