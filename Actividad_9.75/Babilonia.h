@@ -14,8 +14,8 @@ void OrderVect(int vect[], int m);
 int SearchVect(int vect[], int m, int num);
 // Cadenas
 void mayusculas(char cad[]);
-int largo_cadena(char cad[]);
 void validCad(const char msg[], char cad[]);
+void solo_consonantes(char cad[], int i, char conso[]);
 
 // Genera numero aleatorios no repetidos en un vector
 void vectRand(int vect[], int m, int lim_in, int lim_sup)
@@ -115,15 +115,6 @@ int SearchVect(int vect[], int m, int num)
 }
 
 //*********************Cadenas*********************
-int largo_cadena(char cad[])
-{
-    int i = 0;
-    while (cad[i] != '\0')
-    {
-        i++;
-    }
-    return i;
-}
 
 void mayusculas(char cad[])
 {
@@ -146,7 +137,7 @@ void mayusculas(char cad[])
 void validCad(const char msg[], char cad[])
 {
     int band, j, i, k;
-    band=0;
+    band = 0;
     do
     {
 
@@ -195,7 +186,7 @@ void validCad(const char msg[], char cad[])
             j++;
         }
 
-         while (k < i) 
+        while (k < i)
         {
             if (cad[k] < 97)
             {
@@ -224,8 +215,6 @@ void validCad(const char msg[], char cad[])
 
             k++;
         }
-
-      
 
         // k = 0;
         // while (k < i)
@@ -266,4 +255,35 @@ void validCad(const char msg[], char cad[])
         // }
 
     } while (band != 0);
+}
+
+void solo_consonantes(char cad[], int i, char conso[])
+{
+    system("CLS");
+    int j = 0;
+    int k = 0;
+    while (j < i)
+    {
+        // if que se encarga de analizar si los caracteres son vocales o consonantes
+        if (cad[j] != 'A')
+        {
+            if (cad[j] != 'E')
+            {
+                if (cad[j] != 'I')
+                {
+                    if (cad[j] != 'O')
+                    {
+                        if (cad[j] != 'U')
+                        {
+                            conso[k] = cad[j];
+                            k++;
+                        }
+                    }
+                }
+            }
+        }
+
+        j++; // controla el ciclo
+    }
+    printf("\n");
 }
