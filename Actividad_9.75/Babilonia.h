@@ -15,7 +15,7 @@ int SearchVect(int vect[], int m, int num);
 // Cadenas
 void mayusculas(char cad[]);
 int largo_cadena(char cad[]);
-void validCad(const char msg[],char cad[]);
+void validCad(const char msg[], char cad[]);
 
 // Genera numero aleatorios no repetidos en un vector
 void vectRand(int vect[], int m, int lim_in, int lim_sup)
@@ -65,7 +65,7 @@ int valid(const char msg[], int lim_in, int lim_sup)
     int opc;      // guardara un numer
 
     do
-    {   
+    {
         printf("%s", msg);
         fflush(stdin);
         gets(cad);       // lee el un numero como caracter
@@ -128,7 +128,7 @@ int largo_cadena(char cad[])
 void mayusculas(char cad[])
 {
     int j = 0, i;
-    i = largo_cadena(cad); // llama a la funcion para calcular la cantidad de caracteres
+    i = strlen(cad); // llama a la funcion para calcular la cantidad de caracteres
     while (j < i)
     {
         if (cad[j] >= 'a')
@@ -143,22 +143,23 @@ void mayusculas(char cad[])
 }
 
 // RGA_Act7_Pt2_10_932
-void validCad(const char msg[],char cad[])
+void validCad(const char msg[], char cad[])
 {
-    int val = 0, j, i, k;
+    int band, j, i, k;
+    band=0;
     do
     {
 
         system("CLS");
-        if (val != 0)
+        if (band != 0)
         {
             printf("INTENTE DENUEVO.(SOLO MAYUSCULAS)\n");
         }
-        val = 0;
+        band = 0;
         i = 0;
         j = 0;
         k = 0;
-        printf("%s",msg);
+        printf("%s", msg);
         fflush(stdin);
         gets(cad);
 
@@ -167,19 +168,19 @@ void validCad(const char msg[],char cad[])
             i++;
         }
 
-        if(cad[0]=='\0')
+        if (cad[0] == '\0')
         {
-            val++;
+            band = 1;
         }
 
         if (cad[0] == ' ') // no puede iniciar con espacios
         {
-            val++;
+            band = 1;
         }
-        
+
         if (cad[i - 1] == ' ') // no puede terminar con espacios
         {
-            val++;
+            band = 1;
         }
 
         while (j < i)
@@ -188,30 +189,81 @@ void validCad(const char msg[],char cad[])
             {
                 if (cad[j + 1] == ' ') // verifica que no haya 2 espacios seguidos
                 {
-                    val++;
+                    band = 1;
                 }
             }
             j++;
         }
 
-        while (k < i) // verifica que los caracteres dados sean en mayusculas
+         while (k < i) 
         {
-            if (cad[k] > 'Z')
+            if (cad[k] < 97)
             {
-                val++;
-            }
-            else
-            {
-                if (cad[k] < 'A')
+                if (cad[k] > 90)
                 {
-                    if (cad[k] != ' ')
+                    band = 1;
+                }
+                else
+                {
+                    if (cad[k] < 65)
                     {
-                        val++;
+                        if (cad[k] != ' ')
+                        {
+                            band = 1;
+                        }
                     }
                 }
             }
+            else
+            {
+                if (cad[k] > 122)
+                {
+                    band = 1;
+                }
+            }
+
             k++;
         }
 
-    } while (val != 0);
+      
+
+        // k = 0;
+        // while (k < i)
+        // {
+        //     if (cad[k] == 'Á')
+        //     {
+        //         band = 1;
+        //     }
+        //     else
+        //     {
+        //         if (cad[k] == 'É')
+        //         {
+        //             band = 1;
+        //         }
+        //         else
+        //         {
+        //             if (cad[k] == 'Í')
+        //             {
+        //                 band = 1;
+        //             }
+        //             else
+        //             {
+        //                 if (cad[k] == 'Ó')
+        //                 {
+        //                     band = 1;
+        //                 }
+        //                 else
+        //                 {
+        //                     if (cad[k] == 'Ú')
+        //                     {
+        //                         band = 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     k++;
+        // }
+
+    } while (band != 0);
 }

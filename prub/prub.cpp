@@ -1,29 +1,139 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-int main() {
-    char nombre[50]; // Declara una cadena para guardar el nombre
-    char apellido[50]; // Declara una cadena para guardar el primer apellido
-    char apellido_materno[50]; // Declara una cadena para guardar el apellido materno
-    char codigo[7];  // Declara una cadena para guardar el código único
+void validCad(const char msg[], char cad[]);
 
-    // Supongamos que tienes un nombre, un primer apellido y un apellido materno
-    strcpy(nombre, "Juan"); // Ejemplo de nombre
-    strcpy(apellido, "Perez"); // Ejemplo de primer apellido
-    strcpy(apellido_materno, "Lopez"); // Ejemplo de apellido materno
+int main()
+{
 
-    // Copia los primeros 2 caracteres del nombre a la cadena "codigo"
-    strncpy(codigo, nombre, 2);
-    codigo[2] = '\0'; // Agrega el carácter nulo al final
-
-    // Concatena los primeros 2 caracteres del primer apellido a la cadena "codigo"
-    strncat(codigo, apellido, 2);
-
-    // Concatena los primeros 2 caracteres del apellido materno a la cadena "codigo"
-    strncat(codigo, apellido_materno, 2);
-
-    // Imprime el código resultante
-    printf("Código único: %s\n", codigo);
+    char nombre[15];
+    validCad("Ingrese nombre: ", nombre);
+    printf("%s", nombre);
 
     return 0;
+}
+
+void validCad(const char msg[], char cad[])
+{
+    int band, j, i, k;
+    do
+    {
+
+        system("CLS");
+        if (band != 0)
+        {
+            printf("INTENTE DENUEVO.(SOLO MAYUSCULAS)\n");
+        }
+        band = 0;
+        i = 0;
+        j = 0;
+        k = 0;
+        printf("%s", msg);
+        fflush(stdin);
+        gets(cad);
+
+        while (cad[i] != '\0') // obtiene la longitud de la cadena
+        {
+            i++;
+        }
+
+        if (cad[0] == '\0')
+        {
+            band = 1;
+        }
+
+        if (cad[0] == ' ') // no puede iniciar con espacios
+        {
+            band = 1;
+        }
+
+        if (cad[i - 1] == ' ') // no puede terminar con espacios
+        {
+            band = 1;
+        }
+
+        while (j < i)
+        {
+            if (cad[j] == ' ')
+            {
+                if (cad[j + 1] == ' ') // verifica que no haya 2 espacios seguidos
+                {
+                    band = 1;
+                }
+            }
+            j++;
+        }
+
+        while (k < i) 
+        {
+            if (cad[k] < 97)
+            {
+                if (cad[k] > 90)
+                {
+                    band = 1;
+                }
+                else
+                {
+                    if (cad[k] < 65)
+                    {
+                        if (cad[k] != ' ')
+                        {
+                            band = 1;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (cad[k] > 122)
+                {
+                    band = 1;
+                }
+            }
+
+            k++;
+        }
+
+      
+
+        // k = 0;
+        // while (k < i)
+        // {
+        //     if (cad[k] == 'Á')
+        //     {
+        //         band = 1;
+        //     }
+        //     else
+        //     {
+        //         if (cad[k] == 'É')
+        //         {
+        //             band = 1;
+        //         }
+        //         else
+        //         {
+        //             if (cad[k] == 'Í')
+        //             {
+        //                 band = 1;
+        //             }
+        //             else
+        //             {
+        //                 if (cad[k] == 'Ó')
+        //                 {
+        //                     band = 1;
+        //                 }
+        //                 else
+        //                 {
+        //                     if (cad[k] == 'Ú')
+        //                     {
+        //                         band = 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     k++;
+        // }
+
+    } while (band != 0);
 }
