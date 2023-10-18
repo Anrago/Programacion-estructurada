@@ -8,16 +8,18 @@
 int msg();
 void menu();
 void curp();
-void nombre(char curp[], char nomb[], char apP[], char apM[]);
+int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[]);
 int nacimiento(char curp[]);
 void sexo(char curp[]);
 void estados(char curp[]);
 void imprimirEstados();
-void consonantes(char curp[], char nomb[], char apP[], char apM[]);
+void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[], int val);
 void generacio(char curp[], int year);
-
+void numAl(char curp[]);
+int nomb_Novalid(char nomb[]);
 int main()
 {
+    srand(time(NULL));
     fflush(stdin);
     menu();
     return 0;
@@ -50,14 +52,15 @@ void menu()
 void curp()
 {
     char curp[18];
-    char nomb[15], apP[15], apM[15];
-    int year;
-
+    char nomb[15], nomb2[51], apP[15], apM[15];
+    int year, val;
+    
     validCad("Ingrese nombre: ", nomb);
+    validCad("Ingrese 2do nombre: ", nomb2);
     validCad("Ingrese apellido paterno: ", apP);
     validCad("Ingrese apellido materno: ", apM);
 
-    nombre(curp, nomb, apP, apM);
+    val=nombre(curp, nomb, nomb2, apP, apM);
 
     year = nacimiento(curp);
 
@@ -65,28 +68,36 @@ void curp()
 
     estados(curp);
 
-    consonantes(curp, nomb, apP, apM);
+    consonantes(curp, nomb, nomb2, apP, apM, val);
 
     generacio(curp, year);
+
+    numAl(curp);
 
     printf("%s\n", curp);
     system("PAUSE");
 }
 
-void nombre(char curp[], char nomb[], char apP[], char apM[])
+int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
 {
-    mayusculas(nomb);
-
-    mayusculas(apP);
-
-    mayusculas(apM);
-
+    int val;
     strncpy(curp, apP, 2);
     curp[2] = '\0';
     strncat(curp, apM, 1);
     curp[3] = '\0';
-    strncat(curp, nomb, 1);
-    curp[4] = '\0';
+
+    val = nomb_Novalid(nomb);
+    if (!val)
+    {
+        strncat(curp, nomb, 1);
+        curp[4] = '\0';
+    }
+    else
+    {
+        strncat(curp, nomb2, 1);
+        curp[4] = '\0';
+    }
+    return val;
 }
 
 int nacimiento(char curp[])
@@ -203,7 +214,7 @@ void imprimirEstados()
     }
 }
 
-void consonantes(char curp[], char nomb[], char apP[], char apM[])
+void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[], int val)
 {
     char conso_nomb[10], conso_apP[10], conso_apM[10];
     char consN[2], consP[2], consM[2];
@@ -226,10 +237,23 @@ void consonantes(char curp[], char nomb[], char apP[], char apM[])
     strncat(curp, consM, 2);
     curp[15] = '\0';
 
-    lar_nomb = strlen(nomb);
-    solo_consonantes(nomb, lar_nomb, conso_nomb);
+    printf("%d",val);
+    system("PAUSE");
+    if (val==0)
+    {
+        lar_nomb = strlen(nomb);
+        solo_consonantes(nomb, lar_nomb, conso_nomb);
 
-    consN[0] = conso_nomb[0];
+        consN[0] = conso_nomb[0];
+    }
+    else
+    {
+        lar_nomb = strlen(nomb2);
+        solo_consonantes(nomb2, lar_nomb, conso_nomb);
+        consN[0] = conso_nomb[0];
+    }
+
+    
 
     strncat(curp, consN, 2);
     curp[16] = '\0';
@@ -259,4 +283,42 @@ void generacio(char curp[], int year)
             }
         }
     }
+    curp[18] = '\0';
+}
+
+void numAl(char curp[])
+{
+    int num, i;
+    char n[2];
+    for (i = 0; i < 10; i++)
+    {
+        num = rand() % 10;
+    }
+    snprintf(n, 2, "%d", num);
+
+    strncat(curp, n, 2);
+}
+
+int nomb_Novalid(char nomb[])
+{
+    int i, band;
+    char noVali[8][10] = {
+        "MARIA/",
+        "MA.",
+        "MA",
+        "M.",
+        "M",
+        "JOSE",
+        "J.",
+        "J"};
+
+    
+    for (i = 0; i < 8; i++)
+    {
+        if (strcmp(nomb, noVali[i])==1)
+        {
+              return band=1;
+        }
+    }
+    return band=0;
 }
