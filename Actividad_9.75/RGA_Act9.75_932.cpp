@@ -109,7 +109,19 @@ int nacimiento(char curp[])
     system("CLS");
     year = valid("Ingresa year de nacimiento: ", 1950, 2023);
     mont = valid("Ingresa mes de nacimiento: ", 1, 12);
-    day = valid("Ingresa dia de nacimiento: ", 1, 31);
+    if(mont==1||mont==3||mont==5||mont==7||mont==8||mont==10||mont==12)
+    {
+        day = valid("Ingresa dia de nacimiento: ", 1, 31);
+    }
+    if(mont==4||mont==6||mont==9||mont==11)
+    {
+        day = valid("Ingresa dia de nacimiento: ", 1, 30);
+    }
+    if(mont==2)
+    {
+        day = valid("Ingresa dia de nacimiento: ", 1, 28);
+    }
+
 
     snprintf(anio, 5, "%d", year);
     snprintf(mes, 3, "%d", mont);
