@@ -1,97 +1,149 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include <conio.h>
 
 void validCad(const char msg[], char cad[]);
-void mayusculas(char cad[]);
 
 int main()
 {
-
-    char nombre[15];
-    validCad("Ingrese nombre: ", nombre);
-    printf("%s", nombre);
+    int a;
+    a=getch();
+    printf("%d",a);
 
     return 0;
 }
 
-void validCad(const char msg[], char cad[])
-{
-    int band, i, len;
-    band = 1;
-    do
-    {
+// void validCad(const char msg[], char cad[])
+// {
+//     int band, j, i, k;
+//     do
+//     {
 
-        system("CLS");
-        if (band != 1)
-        {
-            printf("INTENTE DENUEVO.(SOLO MAYUSCULAS)\n");
-        }
-        band = 1;
-        i = 0;
-    
-        printf("%s", msg);
-        fflush(stdin);
-        gets(cad);
-        mayusculas(cad);
+//         system("CLS");
+//         if (band != 0)
+//         {
+//             printf("INTENTE DENUEVO.(SOLO MAYUSCULAS)\n");
+//         }
+//         band = 0;
+//         i = 0;
+//         j = 0;
+//         k = 0;
+//         printf("%s", msg);
+//         fflush(stdin);
+//         gets(cad);
 
-        len = strlen(cad);
+//         while (cad[i] != '\0') // obtiene la longitud de la cadena
+//         {
+//             i++;
+//         }
 
-        for (i = 0; i < len; i++)
-        {
-            if (!isalpha(cad[i]))
-            {
-                if (cad[i] == ' ')
-                {
-                    if (cad[i + 1] == ' ') // verifica que no haya 2 espacios seguidos
-                    {
-                        band = 0;
-                    }
-                }
-                else
-                {
+//         if (cad[0] == '\0')
+//         {
+//             band = 1;
+//         }
 
-                    if (cad[i] == -92 || cad[i] == -91)
-                    {
-                        cad[i] = 'X';
-                    }
-                }
-            }
-        }
+//         if (cad[0] == ' ') // no puede iniciar con espacios
+//         {
+//             band = 1;
+//         }
 
-        if (cad[0] == '\0')
-        {
-            band = 0;
-        }
+//         if (cad[i - 1] == ' ') // no puede terminar con espacios
+//         {
+//             band = 1;
+//         }
 
-        if (cad[0] == ' ') // no puede iniciar con espacios
-        {
-            band = 0;
-        }
+//         while (j < i)
+//         {
+//             if (cad[j] == ' ')
+//             {
+//                 if (cad[j + 1] == ' ') // verifica que no haya 2 espacios seguidos
+//                 {
+//                     band = 1;
+//                 }
+//             }
+//             j++;
+//         }
 
-        if (cad[i - 1] == ' ') // no puede terminar con espacios
-        {
-            band = 0;
-        }
+//         while (k < i) 
+//         {
+//             if (cad[k] < 97)
+//             {
+//                 if (cad[k] > 90)
+//                 {
+//                     band = 1;
+//                 }
+//                 else
+//                 {
+//                     if (cad[k] < 65)
+//                     {
+//                         if (cad[k] != ' ')
+//                         {
+//                             band = 1;
+//                         }
+//                     }
+//                 }
+//             }
+//             else
+//             {
+                
+//                     if (cad[k]!=164)
+//                     {
+                        
+                    
+//                     }
+//                     if (cad[k]!=165)
+//                         {
+//                             band=1;
+//                         }
+                        
+                    
+                    
+                
+//             }
 
-    } while (band != 1);
-}
+//             k++;
+//         }
 
-void mayusculas(char cad[])
-{
-    int i = 0,len;
-    len = strlen(cad); // llama a la funcion para calcular la cantidad de caracteres
-    while (i < len)
-    {
-        if (cad[i] >= 'a')
-        {
-            if (cad[i] <= 'z')
-            {
-                cad[i] -= 32; // resta 32 en codigo ASCCI volviendo las minusculas a mayusculas
-            }
-            
-        }
-        i++;
-    }
-}
+      
+
+//         // k = 0;
+//         // while (k < i)
+//         // {
+//         //     if (cad[k] == 'Á')
+//         //     {
+//         //         band = 1;
+//         //     }
+//         //     else
+//         //     {
+//         //         if (cad[k] == 'É')
+//         //         {
+//         //             band = 1;
+//         //         }
+//         //         else
+//         //         {
+//         //             if (cad[k] == 'Í')
+//         //             {
+//         //                 band = 1;
+//         //             }
+//         //             else
+//         //             {
+//         //                 if (cad[k] == 'Ó')
+//         //                 {
+//         //                     band = 1;
+//         //                 }
+//         //                 else
+//         //                 {
+//         //                     if (cad[k] == 'Ú')
+//         //                     {
+//         //                         band = 1;
+//         //                     }
+//         //                 }
+//         //             }
+//         //         }
+//         //     }
+//         //     k++;
+//         // }
+
+//     } while (band != 0);
+// }
