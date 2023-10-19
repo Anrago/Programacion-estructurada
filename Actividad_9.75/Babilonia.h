@@ -138,18 +138,18 @@ void mayusculas(char cad[])
 void validCad(const char msg[], char cad[])
 {
     int band, i, len;
-    band = 1;
+    band = 0;
     do
     {
 
         system("CLS");
-        if (band != 1)
+        if (band != 0)
         {
             printf("CARACTER NO VALIDO\n");
         }
-        band = 1;
+        band = 0;
         i = 0;
-    
+
         printf("%s", msg);
         fflush(stdin);
         gets(cad);
@@ -157,40 +157,57 @@ void validCad(const char msg[], char cad[])
 
         len = strlen(cad);
 
-        for (i = 0; i < len; i++)
-        {
-            if (!isalpha(cad[i]))
-            {
-                if (cad[i] == ' ')
-                {
-                    if (cad[i + 1] == ' ') // verifica que no haya 2 espacios seguidos
-                    {
-                        band = 0;
-                    }
-                }
-                else
-                {
-
-                    if (cad[i] == -92 || cad[i] == -91)
-                    {
-                        cad[i] = 'X';
-                    }
-                }
-            }
-        }
-
-
         if (cad[0] == ' ') // no puede iniciar con espacios
         {
-            band = 0;
+            band = 1;
         }
 
         if (cad[i - 1] == ' ') // no puede terminar con espacios
         {
-            band = 0;
+            band = 1;
+        }
+        i = 0;
+        while (i < len)
+        {
+            if (cad[i] == ' ')
+            {
+                if (cad[i + 1] == ' ') // verifica que no haya 2 espacios seguidos
+                {
+                    band = 1;
+                }
+            }
+            i++;
         }
 
-    } while (band != 1);
+        i = 0;
+        while (i < len) // verifica que los caracteres dados sean en mayusculas
+        {
+            if (cad[i] > 'Z')
+            {
+                band = 1;
+            }
+            else
+            {
+                if (cad[i] < 'A')
+                {
+                    if (cad[i] != ' ')
+                    {
+                        if (cad[i] == -92 || cad[i] == -91)
+                        {
+                            cad[i] = 'X';
+                        }
+                        else
+                        {
+                            band=1;
+                        }
+                    }
+                }
+            }
+            i++;
+            ;
+        }
+
+    } while (band != 0);
 }
 
 void solo_consonantes(char cad[], int i, char conso[])

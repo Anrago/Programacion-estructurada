@@ -53,14 +53,27 @@ void curp()
 {
     char curp[18];
     char nomb[15], nomb2[51], apP[15], apM[15];
-    int year, val;
-    
-    validCad("Ingrese nombre: ", nomb);
-    validCad("Ingrese 2do nombre: ", nomb2);
-    validCad("Ingrese apellido paterno: ", apP);
-    validCad("Ingrese apellido materno: ", apM);
+    int year, val, nulo;
+    do
+    {
+        validCad("Ingrese nombre: ", nomb);
+        nulo = strlen(nomb);
+    } while (nomb[nulo] == '\0' && nulo == 0);
 
-    val=nombre(curp, nomb, nomb2, apP, apM);
+    validCad("Ingrese 2do nombre: ", nomb2);
+    do
+    {
+        validCad("Ingrese apellido paterno: ", apP);
+        nulo = strlen(apP);
+    } while (apP[nulo] == '\0' && nulo == 0);
+
+    do
+    {
+        validCad("Ingrese apellido materno: ", apM);
+        nulo = strlen(apM);
+    } while (apM[nulo] == '\0' && nulo == 0);
+
+    val = nombre(curp, nomb, nomb2, apP, apM);
 
     year = nacimiento(curp);
 
@@ -107,25 +120,24 @@ int nacimiento(char curp[])
     strcpy(cero, "0");
 
     system("CLS");
-    year = valid("Ingresa year de nacimiento: ", 1950, 2023);
+    year = valid("Ingresa anio de nacimiento: ", 1950, 2023);
     mont = valid("Ingresa mes de nacimiento: ", 1, 12);
-    if(mont==1||mont==3||mont==5||mont==7||mont==8||mont==10||mont==12)
+    if (mont == 1 || mont == 3 || mont == 5 || mont == 7 || mont == 8 || mont == 10 || mont == 12)
     {
         day = valid("Ingresa dia de nacimiento: ", 1, 31);
     }
-    if(mont==4||mont==6||mont==9||mont==11)
+    if (mont == 4 || mont == 6 || mont == 9 || mont == 11)
     {
         day = valid("Ingresa dia de nacimiento: ", 1, 30);
     }
-    if(mont==2)
+    if (mont == 2)
     {
         day = valid("Ingresa dia de nacimiento: ", 1, 28);
     }
 
-
     snprintf(anio, 5, "%d", year);
-    snprintf(mes, 3, "%d", mont);
-    snprintf(dia, 2, "%d", day);
+    snprintf(mes, 3, "%02d", mont);
+    snprintf(dia, 3, "%02d", day);
 
     lar = strlen(anio);
     anio[0] = anio[lar - 2];
@@ -135,8 +147,6 @@ int nacimiento(char curp[])
     curp[6] = '\0';
     strncat(curp, mes, 2);
     curp[8] = '\0';
-    strncat(curp, cero, 1);
-    curp[9] = '\0';
     strncat(curp, dia, 2);
     curp[10] = '\0';
 
@@ -249,9 +259,8 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
     strncat(curp, consM, 2);
     curp[15] = '\0';
 
-    printf("%d",val);
     system("PAUSE");
-    if (val==0)
+    if (val == 0)
     {
         lar_nomb = strlen(nomb);
         solo_consonantes(nomb, lar_nomb, conso_nomb);
@@ -264,8 +273,6 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
         solo_consonantes(nomb2, lar_nomb, conso_nomb);
         consN[0] = conso_nomb[0];
     }
-
-    
 
     strncat(curp, consN, 2);
     curp[16] = '\0';
@@ -324,13 +331,12 @@ int nomb_Novalid(char nomb[])
         "J.",
         "J"};
 
-    
     for (i = 0; i < 8; i++)
     {
-        if (strcmp(nomb, noVali[i])==1)
+        if (strcmp(nomb, noVali[i]) == 1)
         {
-              return band=1;
+            return band = 1;
         }
     }
-    return band=0;
+    return band = 0;
 }
