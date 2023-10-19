@@ -17,6 +17,7 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
 void generacio(char curp[], int year);
 void numAl(char curp[]);
 int nomb_Novalid(char nomb[]);
+bool palabrasInconvenientes(char curp[]);
 bool validConso(char curp[], char cad[]);
 
 int main()
@@ -89,6 +90,11 @@ void curp()
 
     numAl(curp);
 
+    if (palabrasInconvenientes(curp)==1)
+    {
+        curp[1]='X';
+    }
+    
     printf("%s\n", curp);
     system("PAUSE");
 }
@@ -122,7 +128,14 @@ int nacimiento(char curp[])
 
     system("CLS");
     year = valid("Ingresa anio de nacimiento: ", 1950, 2023);
-    mont = valid("Ingresa mes de nacimiento: ", 1, 12);
+    if (year == 2023)
+    {
+        mont = valid("Ingresa mes de nacimiento: ", 1, 10);
+    }
+    else
+    {
+        mont = valid("Ingresa mes de nacimiento: ", 1, 12);
+    }
     if (mont == 1 || mont == 3 || mont == 5 || mont == 7 || mont == 8 || mont == 10 || mont == 12)
     {
         day = valid("Ingresa dia de nacimiento: ", 1, 31);
@@ -256,7 +269,7 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
 
     consP[0] = conso_apP[1];
 
-    strncat(curp, conso_apP, 2);
+    strncat(curp, consP, 2);
 
     curp[14] = '\0';
     /********************************************************************/
@@ -330,7 +343,7 @@ int nomb_Novalid(char nomb[])
 {
     int i, band;
     char noVali[8][10] = {
-        "MARIA/",
+        "MARIA",
         "MA.",
         "MA",
         "M.",
@@ -349,6 +362,101 @@ int nomb_Novalid(char nomb[])
     return band = 0;
 }
 
-bool validConso(char curp[], char cad[])
+bool palabrasInconvenientes(char curp[])
 {
+    char inc[80][5] =
+        {
+            "BAKA",
+            "BUEI",
+            "BUEY",
+            "CACA",
+            "CACO",
+            "CAGA",
+            "CAGO",
+            "CAKA",
+            "CAKO",
+            "COGE",
+            "COGI",
+            "COJA",
+            "COJE",
+            "COJI",
+            "COJO",
+            "COLA",
+            "CULO",
+            "FALO",
+            "FETO",
+            "GETA",
+            "GUEI",
+            "GUEY",
+            "JETA",
+            "JOTO",
+            "KACA",
+            "KACO",
+            "KAGA",
+            "KAGO",
+            "KAKA",
+            "KAKO",
+            "KOGE",
+            "KOGI",
+            "KOJA",
+            "KOJE",
+            "KOJI",
+            "KOJO",
+            "KOLA",
+            "KULO",
+            "LILO",
+            "LOCA",
+            "LOCO",
+            "LOKA",
+            "LOKO",
+            "MAME",
+            "MAMO",
+            "MEAR",
+            "MEAS",
+            "MEON",
+            "MIAR",
+            "MION",
+            "MOCO",
+            "MOKO",
+            "MULA",
+            "MULO",
+            "NACA",
+            "NACO",
+            "PEDA",
+            "PEDO",
+            "PENE",
+            "PIPI",
+            "PITO",
+            "POPO",
+            "PUTA",
+            "PUTO",
+            "QULO",
+            "RATA",
+            "ROBA",
+            "ROBE",
+            "ROBO",
+            "RUIN",
+            "SENO",
+            "TETA",
+            "VACA",
+            "VAGA",
+            "VAGO",
+            "VAKA",
+            "VUEI",
+            "VUEY",
+            "WUEI",
+            "WUEY"
+        };
+    char cpy[5];
+    int i;
+    strncat(cpy,curp,4);
+
+    for ( i = 0; i < 80; i++)
+    {
+        if(strcmp(cpy, inc[i])==1)
+        {
+            return 1;
+        }
+    }
+    return 0;
 }
