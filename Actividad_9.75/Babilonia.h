@@ -13,6 +13,7 @@ void vectRand(int vect[], int m, int lim_inf, int lim_sup);
 void PrintVect(int vect[], int m);
 void OrderVect(int vect[], int m);
 int SearchVect(int vect[], int m, int num);
+int bisiesto(int year);
 // Cadenas
 void mayusculas(char cad[]);
 void validCad(const char msg[], char cad[]);
@@ -115,6 +116,31 @@ int SearchVect(int vect[], int m, int num)
     return -1; // si no encuentra el valor, retorna -1
 }
 
+// año bisiesto
+int bisiesto(int year)
+{
+
+    if (year % 4 == 0)
+    {
+        if (year % 100 == 0)
+        {
+            if (year % 400 == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
 //*********************Cadenas*********************
 
 void mayusculas(char cad[])
@@ -143,7 +169,7 @@ void validCad(const char msg[], char cad[])
     {
 
         system("CLS");
-        if (band != 0)
+        if (band == 1)
         {
             printf("CARACTER NO VALIDO\n");
         }
@@ -198,7 +224,7 @@ void validCad(const char msg[], char cad[])
                         }
                         else
                         {
-                            band=1;
+                            band = 1;
                         }
                     }
                 }

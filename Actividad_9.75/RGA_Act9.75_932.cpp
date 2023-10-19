@@ -17,6 +17,8 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
 void generacio(char curp[], int year);
 void numAl(char curp[]);
 int nomb_Novalid(char nomb[]);
+bool validConso(char curp[], char cad[]);
+
 int main()
 {
     srand(time(NULL));
@@ -52,7 +54,7 @@ void menu()
 void curp()
 {
     char curp[18];
-    char nomb[15], nomb2[51], apP[15], apM[15];
+    char nomb[15], nomb2[30], apP[15], apM[15];
     int year, val, nulo;
     do
     {
@@ -60,7 +62,7 @@ void curp()
         nulo = strlen(nomb);
     } while (nomb[nulo] == '\0' && nulo == 0);
 
-    validCad("Ingrese 2do nombre: ", nomb2);
+    validCad("Ingrese 2do nombre(si tiene mas de 2 ingreselos aqui): ", nomb2);
     do
     {
         validCad("Ingrese apellido paterno: ", apP);
@@ -115,9 +117,8 @@ int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
 
 int nacimiento(char curp[])
 {
-    char anio[5], mes[3], dia[3], cero[2];
-    int year, mont, day, lar;
-    strcpy(cero, "0");
+    char anio[5], mes[3], dia[3];
+    int year, mont, day, lar, bis;
 
     system("CLS");
     year = valid("Ingresa anio de nacimiento: ", 1950, 2023);
@@ -132,7 +133,15 @@ int nacimiento(char curp[])
     }
     if (mont == 2)
     {
-        day = valid("Ingresa dia de nacimiento: ", 1, 28);
+        bis = bisiesto(year);
+        if (!bis)
+        {
+            day = valid("Ingresa dia de nacimiento: ", 1, 28);
+        }
+        else
+        {
+            day = valid("Ingresa dia de nacimiento: ", 1, 29);
+        }
     }
 
     snprintf(anio, 5, "%d", year);
@@ -240,37 +249,36 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
 {
     char conso_nomb[10], conso_apP[10], conso_apM[10];
     char consN[2], consP[2], consM[2];
-    int lar_nomb, lar_apP, lar_apM;
-
-    lar_apP = strlen(apP);
-    solo_consonantes(apP, lar_apP, conso_apP);
+    int lar_cad;
+    /********************************************************************/
+    lar_cad = strlen(apP);
+    solo_consonantes(apP, lar_cad, conso_apP);
 
     consP[0] = conso_apP[1];
 
-    strncat(curp, consP, 2);
+    strncat(curp, conso_apP, 2);
 
     curp[14] = '\0';
-
-    lar_apM = strlen(apM);
-    solo_consonantes(apM, lar_apM, conso_apM);
+    /********************************************************************/
+    lar_cad = strlen(apM);
+    solo_consonantes(apM, lar_cad, conso_apM);
 
     consM[0] = conso_apM[1];
 
     strncat(curp, consM, 2);
     curp[15] = '\0';
-
-    system("PAUSE");
+    /********************************************************************/
     if (val == 0)
     {
-        lar_nomb = strlen(nomb);
-        solo_consonantes(nomb, lar_nomb, conso_nomb);
+        lar_cad = strlen(nomb);
+        solo_consonantes(nomb, lar_cad, conso_nomb);
 
         consN[0] = conso_nomb[0];
     }
     else
     {
-        lar_nomb = strlen(nomb2);
-        solo_consonantes(nomb2, lar_nomb, conso_nomb);
+        lar_cad = strlen(nomb2);
+        solo_consonantes(nomb2, lar_cad, conso_nomb);
         consN[0] = conso_nomb[0];
     }
 
@@ -339,4 +347,8 @@ int nomb_Novalid(char nomb[])
         }
     }
     return band = 0;
+}
+
+bool validConso(char curp[], char cad[])
+{
 }
