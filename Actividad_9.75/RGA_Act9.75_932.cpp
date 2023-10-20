@@ -56,25 +56,22 @@ void curp()
 {
     char curp[18];
     char nomb[15], nomb2[30], apP[15], apM[15];
-    int year, val, nulo;
+    int year, val,inc;
     do
     {
         validCad("Ingrese nombre: ", nomb);
-        nulo = strlen(nomb);
-    } while (nomb[nulo] == '\0' && nulo == 0);
+
+    } while (nomb[0] == '\0');
 
     validCad("Ingrese 2do nombre(si tiene mas de 2 ingreselos aqui): ", nomb2);
-    do
-    {
-        validCad("Ingrese apellido paterno: ", apP);
-        nulo = strlen(apP);
-    } while (apP[nulo] == '\0' && nulo == 0);
+
+    validCad("Ingrese apellido paterno: ", apP);
 
     do
     {
         validCad("Ingrese apellido materno: ", apM);
-        nulo = strlen(apM);
-    } while (apM[nulo] == '\0' && nulo == 0);
+
+    } while (apM[0] == '\0');
 
     val = nombre(curp, nomb, nomb2, apP, apM);
 
@@ -90,7 +87,8 @@ void curp()
 
     numAl(curp);
 
-    if (palabrasInconvenientes(curp) == 1)
+    inc=palabrasInconvenientes(curp);
+    if (inc == 1)
     {
         curp[1] = 'X';
     }
@@ -101,9 +99,34 @@ void curp()
 
 int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
 {
-    int val;
+    int val, len;
+    if (apP[0] == '\0')
+    {
+        apP[0] = 'X';
+        apP[1] = 'X';
+        strncpy(curp, apP, 2);
+        curp[2] = '\0';
+    }
+    if (apP[2] == ' ')
+    {
+        len = strlen(apP);
+        for (int j = 3, i = 0; i < len; i++, j++)
+        {
+            apP[i] = apP[j];
+        }
+    }
+    if (apP[3] == ' ')
+    {
+        len = strlen(apP);
+        for (int j = 4, i = 0; i < len; i++, j++)
+        {
+            apP[i] = apP[j];
+        }
+    }
+    system("PAUSE");
     strncpy(curp, apP, 2);
     curp[2] = '\0';
+
     strncat(curp, apM, 1);
     curp[3] = '\0';
 
@@ -199,17 +222,17 @@ void estados(char curp[])
 {
     char est[2];
     int a;
-    char estados[33][20] = {
-        "AG", "BC", "BS", "CC", "CS", "CH", "CL", "CM",
-        "CM", "DG", "GR", "GT", "HG", "JC", "EM", "MN",
-        "MS", "NT", "NL", "OC", "PL", "QT", "QR", "SP",
-        "SL", "SR", "TC", "TS", "TL", "VZ", "YN", "ZS",
-        "NE"};
+    char estados[33][3] = {
+    "AS", "BC", "BS", "CC", "CS", "CH", "CL", "CM", "DG",
+    "GT", "GR", "HG", "JC", "MC", "MN", "MS", "NT", "NL",
+    "OC", "PL", "QT", "QR", "SP", "SL", "SR", "TC", "TS",
+    "TL", "VZ", "YN", "ZS", "DF", "NE"};
 
     imprimirEstados();
 
     a = valid("Ingrese estado: ", 1, 33);
-    strcpy(est, estados[a - 1]);
+    a--;
+    strcpy(est, estados[a]);
     strncat(curp, est, 2);
     curp[13] = '\0';
 }
@@ -218,39 +241,39 @@ void imprimirEstados()
 {
     int i;
     char estados[33][30] = {
-        "Aguascalientes",
-        "Baja California",
-        "Baja California Sur",
-        "Campeche",
-        "Coahuila",
-        "Colima",
-        "Chiapas",
-        "Chihuahua",
-        "Ciudad de mexico",
-        "Durango",
-        "Guanajuato",
-        "Guerrero",
-        "Hidalgo",
-        "Jalisco",
-        "Estado de Mexico",
-        "Michoacan",
-        "Morelos",
-        "Nayarit",
-        "Nuevo Leon",
-        "Oaxaca",
-        "Puebla",
-        "Quertaro",
-        "Quintana Roo",
-        "San Luis Potosi",
-        "Sinaloa",
-        "Sonora",
-        "Tabasco",
-        "Tamaulipas",
-        "Tlaxcala",
-        "Veracruz",
-        "Yucatan",
-        "Zacatecas",
-        "Nacido en el extrangero"};
+        "Aguascalientes\n",
+        "Baja California\n",
+        "Baja California Sur\n",
+        "Campeche\n",
+        "Chiapas\n",
+        "Chihuahua\n",
+        "Coahuila\n",
+        "Colima\n",
+        "Durango\n",
+        "Guanajuato\n",
+        "Guerrero\n",
+        "Hidalgo\n",
+        "Jalisco\n",
+        "Estado de Mexico\n",
+        "Michoacan\n",
+        "Morelos\n",
+        "Nayarit\n",
+        "Nuevo Leon\n",
+        "Oaxaca\n",
+        "Puebla\n",
+        "Queretaro\n",
+        "Quintana Roo\n",
+        "San Luis Potosi\n",
+        "Sinaloa\n",
+        "Sonora\n",
+        "Tabasco\n",
+        "Tamaulipas\n",
+        "Tlaxcala\n",
+        "Veracruz\n",
+        "Yucatan\n",
+        "Zacatecas\n",
+        "Ciudad de Mexico",
+        "Extranjero"};
 
     for (i = 0; i < 33; i++)
     {
@@ -446,13 +469,13 @@ bool palabrasInconvenientes(char curp[])
             "VUEY",
             "WUEI",
             "WUEY"};
-    char cpy[5];
+    char cpy[4];
     int i;
-    strncat(cpy, curp, 4);
+    strncat(cpy, curp, 5);
 
     for (i = 0; i < 80; i++)
     {
-        if (strcmp(cpy, inc[i]) == 1)
+        if (strcmp(cpy, inc[i]) == 0)
         {
             return 1;
         }

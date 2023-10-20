@@ -224,7 +224,7 @@ void validCad(const char msg[], char cad[])
                         }
                         else
                         {
-                            if (cad[i] == 154 || cad[i] == 0220)
+                            if ((unsigned char)cad[i] == 154 )
                             {
                                 cad[i] = 'U';
                             }
@@ -233,6 +233,7 @@ void validCad(const char msg[], char cad[])
                                 band = 1;
                             }
                         }
+                        
                     }
                 }
             }
