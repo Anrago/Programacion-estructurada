@@ -8,8 +8,8 @@ void validCad(const char msg[], char cad[]);
 int main()
 {
     int a;
-    a=getch();
-    printf("%d",a);
+    a = getch();
+    printf("%d", a);
 
     return 0;
 }
@@ -20,7 +20,7 @@ int main()
 //     do
 //     {
 
-//         system("CLS");
+//         system("CLS");ÜÜ
 //         if (band != 0)
 //         {
 //             printf("INTENTE DENUEVO.(SOLO MAYUSCULAS)\n");
@@ -65,7 +65,7 @@ int main()
 //             j++;
 //         }
 
-//         while (k < i) 
+//         while (k < i)
 //         {
 //             if (cad[k] < 97)
 //             {
@@ -86,26 +86,20 @@ int main()
 //             }
 //             else
 //             {
-                
+
 //                     if (cad[k]!=164)
 //                     {
-                        
-                    
+
 //                     }
 //                     if (cad[k]!=165)
 //                         {
 //                             band=1;
 //                         }
-                        
-                    
-                    
-                
+
 //             }
 
 //             k++;
 //         }
-
-      
 
 //         // k = 0;
 //         // while (k < i)

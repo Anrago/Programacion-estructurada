@@ -90,11 +90,11 @@ void curp()
 
     numAl(curp);
 
-    if (palabrasInconvenientes(curp)==1)
+    if (palabrasInconvenientes(curp) == 1)
     {
-        curp[1]='X';
+        curp[1] = 'X';
     }
-    
+
     printf("%s\n", curp);
     system("PAUSE");
 }
@@ -445,15 +445,14 @@ bool palabrasInconvenientes(char curp[])
             "VUEI",
             "VUEY",
             "WUEI",
-            "WUEY"
-        };
+            "WUEY"};
     char cpy[5];
     int i;
-    strncat(cpy,curp,4);
+    strncat(cpy, curp, 4);
 
-    for ( i = 0; i < 80; i++)
+    for (i = 0; i < 80; i++)
     {
-        if(strcmp(cpy, inc[i])==1)
+        if (strcmp(cpy, inc[i]) == 1)
         {
             return 1;
         }
