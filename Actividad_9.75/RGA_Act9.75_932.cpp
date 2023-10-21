@@ -17,7 +17,7 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
 void generacio(char curp[], int year);
 void numAl(char curp[]);
 int nomb_Novalid(char nomb[]);
-bool palabrasInconvenientes(char curp[]);
+int palabrasInconvenientes(char curp[]);
 bool validConso(char curp[], char cad[]);
 
 int main()
@@ -88,11 +88,12 @@ void curp()
     numAl(curp);
 
     inc=palabrasInconvenientes(curp);
+    
+
     if (inc == 1)
     {
         curp[1] = 'X';
     }
-
     printf("%s\n", curp);
     system("PAUSE");
 }
@@ -123,7 +124,7 @@ int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
             apP[i] = apP[j];
         }
     }
-    system("PAUSE");
+ 
     strncpy(curp, apP, 2);
     curp[2] = '\0';
 
@@ -385,7 +386,7 @@ int nomb_Novalid(char nomb[])
     return band = 0;
 }
 
-bool palabrasInconvenientes(char curp[])
+int palabrasInconvenientes(char curp[])
 {
     char inc[80][5] =
         {
@@ -469,13 +470,13 @@ bool palabrasInconvenientes(char curp[])
             "VUEY",
             "WUEI",
             "WUEY"};
-    char cpy[4];
-    int i;
-    strncat(cpy, curp, 5);
-
+    char cpy[2];
+    int i,ne;
+    strncat(cpy, curp, 4);
     for (i = 0; i < 80; i++)
     {
-        if (strcmp(cpy, inc[i]) == 0)
+        ne=strcmp(cpy, inc[i]);
+        if (ne == 0)
         {
             return 1;
         }

@@ -218,7 +218,7 @@ void validCad(const char msg[], char cad[])
                 {
                     if (cad[i] != ' ')
                     {
-                        if (cad[i] == -92 || cad[i] == -91)
+                        if ((unsigned char)cad[i] ==164)
                         {
                             cad[i] = 'X';
                         }
