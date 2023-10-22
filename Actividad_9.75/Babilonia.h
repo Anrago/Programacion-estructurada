@@ -18,6 +18,7 @@ int bisiesto(int year);
 void mayusculas(char cad[]);
 void validCad(const char msg[], char cad[]);
 void solo_consonantes(char cad[], int i, char conso[]);
+void solo_vocales(char cad[], int i, char voc[]);
 
 // Genera numero aleatorios no repetidos en un vector
 void vectRand(int vect[], int m, int lim_in, int lim_sup)
@@ -188,10 +189,11 @@ void validCad(const char msg[], char cad[])
             band = 1;
         }
 
-        if (cad[i - 1] == ' ') // no puede terminar con espacios
+        if (cad[len - 1] == ' ') // no puede terminar con espacios
         {
             band = 1;
         }
+
         i = 0;
         while (i < len)
         {
@@ -218,22 +220,28 @@ void validCad(const char msg[], char cad[])
                 {
                     if (cad[i] != ' ')
                     {
-                        if ((unsigned char)cad[i] ==164)
+                        if ((unsigned char)cad[i] == 164 || (unsigned char)cad[i] == 165)
                         {
                             cad[i] = 'X';
                         }
                         else
                         {
-                            if ((unsigned char)cad[i] == 154 )
+                            if ((unsigned char)cad[i] == 129 || (unsigned char)cad[i] == 154)
                             {
                                 cad[i] = 'U';
                             }
                             else
                             {
-                                band = 1;
+                                if (cad[i] == '/' || cad[i] == '.' || cad[i] == '`' || cad[i] == '-' || cad[i] == 34)
+                                {
+                                    cad[i] = 'X';
+                                }
+                                else
+                                {
+                                    band = 1;
+                                }
                             }
                         }
-                        
                     }
                 }
             }
@@ -272,5 +280,45 @@ void solo_consonantes(char cad[], int i, char conso[])
 
         j++; // controla el ciclo
     }
+    conso[k] = '\0';
+    printf("\n");
+}
+
+void solo_vocales(char cad[], int i, char voc[])
+{
+    int j = 0;
+    int k = 0;
+    while (j < i)
+    {
+        // if que se encarga de analizar si los caracteres son vocales o consonantes
+        if (cad[j] == 'A')
+        {
+            voc[k] = cad[j];
+            k++;
+        }
+        if (cad[j] == 'E')
+        {
+            voc[k] = cad[j];
+            k++;
+        }
+        if (cad[j] == 'I')
+        {
+            voc[k] = cad[j];
+            k++;
+        }
+        if (cad[j] == 'O')
+        {
+            voc[k] = cad[j];
+            k++;
+        }
+        if (cad[j] == 'U')
+        {
+            voc[k] = cad[j];
+            k++;
+        }
+
+        j++; // controla el ciclo
+    }
+    voc[k] = '\0';
     printf("\n");
 }
