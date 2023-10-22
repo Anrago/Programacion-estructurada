@@ -1,7 +1,7 @@
 // Antonio Ramos Gonzalez Mt: 372576
-// 10/9/2023 || 10/12/2023
+// 10/12/2023 || 10/22/2023
 // En esta Practica se definira un tipo de variable como un struct, para ingresar datos de distintos alumnos con un menu
-// RGA_Act10_Pt1_932
+// RGA_Act9.75_932
 
 #include "Babilonia.h"
 
@@ -141,6 +141,7 @@ int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
 
     if (nomb2[0] == '\0')
     {
+
         validnumb(nomb);
         strncat(curp, nomb, 1);
         curp[4] = '\0';
@@ -261,37 +262,37 @@ void imprimirEstados()
 {
     int i;
     char estados[33][30] = {
-        "Aguascalientes\n",
-        "Baja California\n",
-        "Baja California Sur\n",
-        "Campeche\n",
-        "Chiapas\n",
-        "Chihuahua\n",
-        "Coahuila\n",
-        "Colima\n",
-        "Durango\n",
-        "Guanajuato\n",
-        "Guerrero\n",
-        "Hidalgo\n",
-        "Jalisco\n",
-        "Estado de Mexico\n",
-        "Michoacan\n",
-        "Morelos\n",
-        "Nayarit\n",
-        "Nuevo Leon\n",
-        "Oaxaca\n",
-        "Puebla\n",
-        "Queretaro\n",
-        "Quintana Roo\n",
-        "San Luis Potosi\n",
-        "Sinaloa\n",
-        "Sonora\n",
-        "Tabasco\n",
-        "Tamaulipas\n",
-        "Tlaxcala\n",
-        "Veracruz\n",
-        "Yucatan\n",
-        "Zacatecas\n",
+        "Aguascalientes",
+        "Baja California",
+        "Baja California Sur",
+        "Campeche",
+        "Chiapas",
+        "Chihuahua",
+        "Coahuila",
+        "Colima",
+        "Durango",
+        "Guanajuato",
+        "Guerrero",
+        "Hidalgo",
+        "Jalisco",
+        "Estado de Mexico",
+        "Michoacan",
+        "Morelos",
+        "Nayarit",
+        "Nuevo Leon",
+        "Oaxaca",
+        "Puebla",
+        "Queretaro",
+        "Quintana Roo",
+        "San Luis Potosi",
+        "Sinaloa",
+        "Sonora",
+        "Tabasco",
+        "Tamaulipas",
+        "Tlaxcala",
+        "Veracruz",
+        "Yucatan",
+        "Zacatecas",
         "Ciudad de Mexico",
         "Extranjero"};
 
@@ -320,15 +321,23 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
 
     curp[15] = '\0';
     /********************************************************************/
-    if (val == 0)
+    if (nomb2[0] == '\0')
     {
         lar_cad = strlen(nomb);
         solo_consonantes(nomb, lar_cad, conso_nomb);
     }
     else
     {
-        lar_cad = strlen(nomb2);
-        solo_consonantes(nomb2, lar_cad, conso_nomb);
+        if (val == 0)
+        {
+            lar_cad = strlen(nomb);
+            solo_consonantes(nomb, lar_cad, conso_nomb);
+        }
+        else
+        {
+            lar_cad = strlen(nomb2);
+            solo_consonantes(nomb2, lar_cad, conso_nomb);
+        }
     }
     validConso(curp, conso_nomb);
     curp[16] = '\0';
@@ -538,13 +547,15 @@ void validnumb(char cad[])
 {
     int len, i, j;
     len = strlen(cad);
-
+    printf("%s\n", cad);
+    system("PAUSE");
     if (cad[1] == ' ')
     {
         for (j = 2, i = 0; i < len; i++, j++)
         {
             cad[i] = cad[j];
         }
+        cad[i + 1] = '\0';
     }
     if (cad[2] == ' ')
     {
@@ -555,6 +566,7 @@ void validnumb(char cad[])
             {
                 cad[i] = cad[j];
             }
+            cad[i + 1] = '\0';
         }
         else
         {
@@ -563,6 +575,7 @@ void validnumb(char cad[])
             {
                 cad[i] = cad[j];
             }
+            cad[i + 1] = '\0';
         }
     }
     if (cad[3] == ' ')
@@ -572,8 +585,8 @@ void validnumb(char cad[])
         {
             cad[i] = cad[j];
         }
+        cad[i + 1] = '\0';
     }
-    cad[i + 1] = '\0';
 }
 
 void digitos(char curp[], char cad[])
@@ -583,12 +596,12 @@ void digitos(char curp[], char cad[])
     len = strlen(cad);
     solo_consonantes(cad, len, cons);
     solo_vocales(cad, len, voc);
-
     if (curp[0] == 'A' || curp[0] == 'E' || curp[0] == 'I' || curp[0] == 'O' || curp[0] == 'U')
     {
         curp[0] = cons[0];
     }
-    if (curp[1] != 'A' || curp[1] != 'E' || curp[1] != 'I' || curp[1] != 'O' || curp[1] != 'U')
+
+    if (curp[1] != 'A' && curp[1] != 'E' && curp[1] != 'I' && curp[1] != 'O' && curp[1] != 'U')
     {
         if (curp[0] == 'A' || curp[1] == 'E' || curp[1] == 'I' || curp[1] == 'O' || curp[1] == 'U')
         {
