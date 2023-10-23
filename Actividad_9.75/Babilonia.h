@@ -232,23 +232,87 @@ void validCad(const char msg[], char cad[])
                             }
                             else
                             {
-                                if (cad[i] != '/' || cad[i] != '.' || cad[i] != '`' || cad[i] != '-' || cad[i] != 34)
+                                if ((unsigned char)cad[i] == 160)
                                 {
-                                    cad[i] = 'X';
+                                    cad[i] = 'A';
                                 }
                                 else
                                 {
-                                    band = 1;
+                                    if ((unsigned char)cad[i] == 130)
+                                    {
+                                        cad[i] = 'E';
+                                    }
+                                    else
+                                    {
+                                        if ((unsigned char)cad[i] == 161)
+                                        {
+                                            cad[i] = 'I';
+                                        }
+                                        else
+                                        {
+                                            if ((unsigned char)cad[i] == 162)
+                                            {
+                                                cad[i] = 'O';
+                                            }
+                                            else
+                                            {
+                                                if ((unsigned char)cad[i] == 163)
+                                                {
+                                                    cad[i] = 'U';
+                                                }
+                                                else
+                                                {
+                                                    if ((unsigned char)cad[i] == 181)
+                                                    {
+                                                        cad[i] = 'A';
+                                                    }
+                                                    else
+                                                    {
+                                                        if ((unsigned char)cad[i] == 144)
+                                                        {
+                                                            cad[i] = 'E';
+                                                        }
+                                                        else
+                                                        {
+                                                            if ((unsigned char)cad[i] == 214)
+                                                            {
+                                                                cad[i] = 'I';
+                                                            }
+                                                            else
+                                                            {
+                                                                if ((unsigned char)cad[i] == 224)
+                                                                {
+                                                                    cad[i] = 'O';
+                                                                }
+                                                                else
+                                                                {
+                                                                    if ((unsigned char)cad[i] == 233)
+                                                                    {
+                                                                        cad[i] = 'U';
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (cad[i] != '/' && cad[i] != '.' && cad[i] != '`' && cad[i] != '-' && cad[i] != 39)
+                                                                        {
+                                                                            band = 1;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                i++;
             }
-            i++;
-            ;
         }
-
     } while (band != 0);
 }
 

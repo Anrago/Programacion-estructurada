@@ -1,8 +1,10 @@
 // Antonio Ramos Gonzalez Mt: 372576
 // 10/12/2023 || 10/22/2023
-// En esta Practica se definira un tipo de variable como un struct, para ingresar datos de distintos alumnos con un menu
+// se pediran datos al usuario para poder generar su CURP, haciendo todas las validaciones del mismo
 // RGA_Act9.75_932
-
+/*
+ivan
+*/
 #include "Babilonia.h"
 
 int msg();
@@ -22,6 +24,10 @@ void validConsoAp(char curp[], char cad[]);
 void validConsoNomb(char curp[], char cad[]);
 void validnumb(char cad[]);
 void digitos(char curp[], char cad[]);
+void caractapP(char curp[], char cad[]);
+void caractapM(char curp[], char cad[]);
+void caractano(char curp[], char cad[]);
+void conv(char cad[]);
 
 int main()
 {
@@ -57,7 +63,7 @@ void menu()
 
 void curp()
 {
-    char curp[18];
+    char curp[18], falap[10], falam[10], falno[10], falno2[10];
     char nomb[30], nomb2[30], apP[30], apM[30];
     int year, val, inc;
     curp[0] = '\0';
@@ -82,6 +88,15 @@ void curp()
         validCad("Ingrese apellido materno: ", apM);
     } while (strlen(apM) > 15);
 
+    strcpy(falap, apP);
+    validnumb(falap);
+    strcpy(falam, apM);
+    validnumb(falam);
+    strcpy(falno, nomb);
+    validnumb(falno);
+    strcpy(falno2, nomb2);
+    validnumb(falno2);
+
     val = nombre(curp, nomb, nomb2, apP, apM);
 
     year = nacimiento(curp);
@@ -97,6 +112,24 @@ void curp()
     numAl(curp);
 
     inc = palabrasInconvenientes(curp);
+
+    caractapP(curp, falap);
+    caractapM(curp, falam);
+    if (nomb2[0] == '\0')
+    {
+        caractano(curp, falno);
+    }
+    else
+    {
+        if (val == 0)
+        {
+            caractano(curp, falno);
+        }
+        else
+        {
+            caractano(curp, falno2);
+        }
+    }
 
     if (inc == 1)
     {
@@ -120,9 +153,10 @@ int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
     {
         validnumb(apP);
     }
-
-    strncpy(curp, apP, 2);
+    conv(apP);
+    strncat(curp, apP, 2);
     digitos(curp, apP);
+
     curp[2] = '\0';
 
     if (apM[0] == '\0')
@@ -135,7 +169,7 @@ int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
     {
         validnumb(apM);
     }
-
+    conv(apM);
     strncat(curp, apM, 1);
     curp[3] = '\0';
 
@@ -145,6 +179,7 @@ int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
     {
 
         validnumb(nomb);
+        conv(nomb);
         strncat(curp, nomb, 1);
         curp[4] = '\0';
     }
@@ -153,12 +188,14 @@ int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
         if (val == 0)
         {
             validnumb(nomb);
+            conv(nomb);
             strncat(curp, nomb, 1);
             curp[4] = '\0';
         }
         else
         {
             validnumb(nomb2);
+            conv(nomb2);
             strncat(curp, nomb2, 1);
             curp[4] = '\0';
         }
@@ -225,7 +262,7 @@ void sexo(char curp[])
 {
     char sex[2];
     int s;
-    s = valid("ingresa sexo: ", 1, 2);
+    s = valid("ingresa sexo(1.-Hombre, 2.-Mujer): ", 1, 2);
 
     if (s == 1)
     {
@@ -313,7 +350,7 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
     solo_consonantes(apP, lar_cad, conso_apP);
 
     validConsoAp(curp, conso_apP);
-
+    conv(apP);
     curp[14] = '\0';
     /********************************************************************/
     lar_cad = strlen(apM);
@@ -414,7 +451,7 @@ int nomb_Novalid(char nomb[])
         }
     }
 
-    return band = 1;
+    return band = 0;
 }
 
 bool palabrasInconvenientes(char curp[])
@@ -518,7 +555,7 @@ bool palabrasInconvenientes(char curp[])
 void validConsoAp(char curp[], char cad[])
 {
     int len;
-    char caract[2];
+    char car[2];
     len = strlen(cad);
     if (len == 1)
     {
@@ -528,20 +565,20 @@ void validConsoAp(char curp[], char cad[])
     {
         if (cad[0] == curp[0])
         {
-            caract[0] = cad[1];
-            strncat(curp, caract, 2);
+            car[0] = cad[1];
+            strncat(curp, car, 2);
         }
         else
         {
             if (cad[0] == curp[2])
             {
-                caract[0] = cad[1];
-                strncat(curp, caract, 2);
+                car[0] = cad[1];
+                strncat(curp, car, 2);
             }
             else
             {
-                caract[0] = cad[0];
-                strncat(curp, caract, 2);
+                car[0] = cad[0];
+                strncat(curp, car, 2);
             }
         }
     }
@@ -572,8 +609,6 @@ void validnumb(char cad[])
 {
     int len, i, j;
     len = strlen(cad);
-    printf("%s\n", cad);
-    system("PAUSE");
     if (cad[1] == ' ')
     {
         for (j = 2, i = 0; i < len; i++, j++)
@@ -635,6 +670,100 @@ void digitos(char curp[], char cad[])
         else
         {
             curp[1] = voc[0];
+        }
+    }
+}
+
+void caractapP(char curp[], char cad[])
+{
+    char fal[8];
+    int len;
+    len = strlen(cad);
+
+    if (!isalpha(cad[0]))
+    {
+        curp[0] = 'X';
+    }
+    if (!isalpha(cad[1]))
+    {
+        if (cad[1] != ' ')
+        {
+            curp[1] = 'X';
+        }
+    }
+
+    solo_consonantes(cad, len, fal);
+    len = strlen(fal);
+    conv(fal);
+    if (len != 1)
+    {
+        if (curp[1] == fal[1])
+        {
+            curp[13] = fal[2];
+        }
+    }
+}
+
+void caractapM(char curp[], char cad[])
+{
+    char fal[8];
+    int len;
+    len = strlen(cad);
+    if (!isalpha(cad[0]))
+    {
+        if (cad[0] != ' ')
+        {
+            curp[2] = 'X';
+        }
+    }
+
+    solo_consonantes(cad, len, fal);
+    len = strlen(fal);
+    conv(fal);
+    if (len != 1)
+    {
+        if (curp[2] == fal[0])
+        {
+            curp[14] = fal[1];
+        }
+    }
+}
+
+void caractano(char curp[], char cad[])
+{
+    char fal[8];
+    int len;
+    len = strlen(cad);
+    if (!isalpha(cad[0]))
+    {
+        if (cad[0] != ' ')
+        {
+            curp[3] = 'X';
+        }
+    }
+
+    solo_consonantes(cad, len, fal);
+    conv(fal);
+
+    if (curp[3] == fal[0])
+    {
+        curp[15] = fal[1];
+    }
+}
+
+void conv(char cad[])
+{
+    int i, len;
+    len = strlen(cad);
+
+    for (i = 0; i < len; i++)
+    {
+        if (!isalpha(cad[i]))
+        {
+            if (cad[i] != ' ')
+            {
+                cad[i] = 'X';
+            }
         }
     }
 }
