@@ -18,7 +18,8 @@ void generacio(char curp[], int year);
 void numAl(char curp[]);
 int nomb_Novalid(char nomb[]);
 bool palabrasInconvenientes(char curp[]);
-void validConso(char curp[], char cad[]);
+void validConsoAp(char curp[], char cad[]);
+void validConsoNomb(char curp[], char cad[]);
 void validnumb(char cad[]);
 void digitos(char curp[], char cad[]);
 
@@ -80,6 +81,7 @@ void curp()
     {
         validCad("Ingrese apellido materno: ", apM);
     } while (strlen(apM) > 15);
+
     val = nombre(curp, nomb, nomb2, apP, apM);
 
     year = nacimiento(curp);
@@ -310,14 +312,14 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
     lar_cad = strlen(apP);
     solo_consonantes(apP, lar_cad, conso_apP);
 
-    validConso(curp, conso_apP);
+    validConsoAp(curp, conso_apP);
 
     curp[14] = '\0';
     /********************************************************************/
     lar_cad = strlen(apM);
     solo_consonantes(apM, lar_cad, conso_apM);
 
-    validConso(curp, conso_apM);
+    validConsoAp(curp, conso_apM);
 
     curp[15] = '\0';
     /********************************************************************/
@@ -325,6 +327,7 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
     {
         lar_cad = strlen(nomb);
         solo_consonantes(nomb, lar_cad, conso_nomb);
+        validConsoNomb(curp, conso_nomb);
     }
     else
     {
@@ -332,14 +335,15 @@ void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[],
         {
             lar_cad = strlen(nomb);
             solo_consonantes(nomb, lar_cad, conso_nomb);
+            validConsoNomb(curp, conso_nomb);
         }
         else
         {
             lar_cad = strlen(nomb2);
             solo_consonantes(nomb2, lar_cad, conso_nomb);
+            validConsoNomb(curp, conso_nomb);
         }
     }
-    validConso(curp, conso_nomb);
     curp[16] = '\0';
 }
 
@@ -511,7 +515,7 @@ bool palabrasInconvenientes(char curp[])
     return 0;
 }
 
-void validConso(char curp[], char cad[])
+void validConsoAp(char curp[], char cad[])
 {
     int len;
     char caract[2];
@@ -540,6 +544,27 @@ void validConso(char curp[], char cad[])
                 strncat(curp, caract, 2);
             }
         }
+    }
+}
+
+void validConsoNomb(char curp[], char cad[])
+{
+    int len;
+    char caract[2];
+    len = strlen(cad);
+    if (len == 1)
+    {
+        strncat(curp, cad, 1);
+    }
+    if (cad[0] == curp[3])
+    {
+        caract[0] = cad[1];
+        strncat(curp, caract, 1);
+    }
+    else
+    {
+        caract[0] = cad[0];
+        strncat(curp, caract, 1);
     }
 }
 
@@ -598,7 +623,7 @@ void digitos(char curp[], char cad[])
     solo_vocales(cad, len, voc);
     if (curp[0] == 'A' || curp[0] == 'E' || curp[0] == 'I' || curp[0] == 'O' || curp[0] == 'U')
     {
-        curp[0] = cons[0];
+        curp[1] = voc[1];
     }
 
     if (curp[1] != 'A' && curp[1] != 'E' && curp[1] != 'I' && curp[1] != 'O' && curp[1] != 'U')

@@ -232,7 +232,7 @@ void validCad(const char msg[], char cad[])
                             }
                             else
                             {
-                                if (cad[i] == '/' || cad[i] == '.' || cad[i] == '`' || cad[i] == '-' || cad[i] == 34)
+                                if (cad[i] != '/' || cad[i] != '.' || cad[i] != '`' || cad[i] != '-' || cad[i] != 34)
                                 {
                                     cad[i] = 'X';
                                 }
