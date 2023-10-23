@@ -2,9 +2,7 @@
 // 10/12/2023 || 10/22/2023
 // se pediran datos al usuario para poder generar su CURP, haciendo todas las validaciones del mismo
 // RGA_Act9.75_932
-/*
-ivan
-*/
+
 #include "Babilonia.h"
 
 int msg();
@@ -135,7 +133,7 @@ void curp()
     {
         curp[1] = 'X';
     }
-    printf("%s\n", curp);
+    printf("Su curp es: %s\n", curp);
     system("PAUSE");
 }
 
@@ -213,11 +211,11 @@ int nacimiento(char curp[])
     year = valid("Ingresa anio de nacimiento: ", 1950, 2023);
     if (year == 2023)
     {
-        mont = valid("Ingresa mes de nacimiento: ", 1, 10);
+        mont = valid("Ingresa mes de nacimiento(enero=01,diciembre=12): ", 1, 10);
     }
     else
     {
-        mont = valid("Ingresa mes de nacimiento: ", 1, 12);
+        mont = valid("Ingresa mes de nacimiento(enero=01,diciembre=12): ", 1, 12);
     }
     if (mont == 1 || mont == 3 || mont == 5 || mont == 7 || mont == 8 || mont == 10 || mont == 12)
     {
