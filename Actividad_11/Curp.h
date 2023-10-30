@@ -77,8 +77,6 @@ void curp(char curp[], char nomb[], char nomb2[], char apP[], char apM[], int di
     {
         curp[1] = 'X';
     }
-    printf("%s",curp);
-    system("PAUSE");
 }
 
 int nombre(char curp[], char nomb[], char nomb2[], char apP[], char apM[])
