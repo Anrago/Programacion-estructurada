@@ -2,7 +2,6 @@
 // 10/12/2023 || 10/22/2023
 // se pediran datos al usuario para poder generar su CURP, haciendo todas las validaciones del mismo
 // RGA_Act9.75_932
-
 #include "Babilonia.h"
 
 int msg();
