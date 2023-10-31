@@ -311,7 +311,7 @@ void nombreAl(char nombre[], int sex)
         "MIRIAM", "LIDIA", "YOLANDA", "INES", "MARINA", "CAROLINA", "PILAR", "IRENE"};
     for (i = 0; i < 10; i++)
     {
-        al = rand() % 50 + 1;
+        al = rand() % 50;
     }
     if (sex == 1)
     {
@@ -326,7 +326,7 @@ void nombreAl(char nombre[], int sex)
 void apAl(char apellido[])
 {
     int i, al;
-    char ap[100][20] =
+    char ap[87][20] =
         {
             "PEREZ", "LOPEZ", "GONZALEZ", "RODRIGUEZ", "MARTINEZ", "SANCHEZ", "FERNANDEZ", "GARCIA", "RODRIGUEZ", "DIAZ", "TORRES", "RAMIREZ", "JIMENEZ",
             "VARGAS", "MORALES", "RUIZ", "CASTRO", "HERRERA", "MEDINA", "NAVARRO", "DELGADO", "ROMERO", "MORENO", "GOMEZ", "VARGAS", "PEREZ", "FLORES", "GONZALEZ",
@@ -336,7 +336,7 @@ void apAl(char apellido[])
             "SOTO", "TORRES", "PEREZ", "MEDINA", "BENITEZ", "GARCIA", "VARGAS", "RODRIGUEZ", "RAMIREZ", "TORRES", "MORALES", "HERRERA", "JIMENEZ"};
     for (i = 0; i < 10; i++)
     {
-        al = rand() % 100 + 1;
+        al = rand() % 87;
     }
     strcpy(apellido, ap[al]);
 }
@@ -380,9 +380,10 @@ int day(int anio, int mes)
 
 Treg cargar(Treg reg[], int i)
 {
+    char nomb[30], nomb2[30], apP[30], apM[30];
     int sex, est = 0;
     int n, j = 0;
-    reg[j].kay = rand() % 100000 + 300000;
+    reg[i].kay = rand() % 100000 + 300000;
 
     sex = rand() % 2 + 1;
     if (sex == 1)
@@ -394,8 +395,9 @@ Treg cargar(Treg reg[], int i)
         strcpy(reg[i].sex, "M");
     }
 
-    nombreAl(reg[i].nombre.nombre, sex);
+    nombreAl(nomb, sex);
 
+    strcpy(reg[i].nombre.nombre, nomb);
     while (j < 10)
     {
         n = rand() % 10 + 1;
@@ -404,14 +406,17 @@ Treg cargar(Treg reg[], int i)
 
     if (n % 2 == 0)
     {
-        reg[i].nombre.nombre2[0] = '\0';
+        nomb2[0] = '\0';
     }
     else
     {
-        nombreAl(reg[i].nombre.nombre2, sex);
+        nombreAl(nomb2, sex);
     }
-    apAl(reg[i].nombre.apP);
-    apAl(reg[i].nombre.apM);
+    strcpy(reg[i].nombre.nombre2, nomb2);
+    apAl(apP);
+    strcpy(reg[i].nombre.apP, apP);
+    apAl(apM);
+    strcpy(reg[i].nombre.apM, apM);
 
     reg[i].fecha.anio = 1950 + rand() % (2023 - 1950 + 1);
     reg[i].fecha.mes = month(reg[i].fecha.anio);
@@ -423,7 +428,7 @@ Treg cargar(Treg reg[], int i)
     }
 
     estados(est, reg[i].estado);
-    curp(reg[i].curp, reg[i].nombre.nombre, reg[i].nombre.nombre2, reg[i].nombre.apP, reg[i].nombre.apM, reg[i].fecha.dia, reg[i].fecha.mes, reg[i].fecha.anio, sex, est);
+    curp(reg[i].curp, nomb, nomb2, apP, apM, reg[i].fecha.dia, reg[i].fecha.mes, reg[i].fecha.anio, sex, est);
 
     return reg[i];
 }
@@ -511,11 +516,11 @@ int orderSel(Treg reg[], int n)
 void pintReg(Treg reg[], int n)
 {
     int i = 0;
-    printf("%-3s %-10s %-10s %-10s %-10s %-10s %-4s \n",
+    printf("%-6s %-15s %-23s %-15s %-10s %-10s %-4s \n",
            "No.", "Matricula", "Nombre", "ApP", "ApM", "Fecha", "Sexo");
     while (i < 40 && i < n)
     {
-        printf("%-3d %-10d %-10s %-10s %-10s %-10s %-4d-%d-%d %-5s\n",
+        printf("%-6d %-10d %-10s %-15s %-15s %-10s %02d-%02d-%-8d %-5s\n",
                i + 1, reg[i].kay, reg[i].nombre.nombre, reg[i].nombre.nombre2, reg[i].nombre.apP,
                reg[i].nombre.apM, reg[i].fecha.mes, reg[i].fecha.dia, reg[i].fecha.anio, reg[i].sex);
         i++;
