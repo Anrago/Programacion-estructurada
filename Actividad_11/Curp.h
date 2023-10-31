@@ -198,7 +198,7 @@ void estados(char curp[],int nest)
         "OC", "PL", "QT", "QR", "SP", "SL", "SR", "TC", "TS",
         "TL", "VZ", "YN", "ZS", "DF", "NE"};
 
-    imprimirEstados();
+    
 
     
     a=nest;

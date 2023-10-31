@@ -1,5 +1,5 @@
 #include "Curp.h"
-#define N 500
+#define N 2000
 typedef struct _NombC
 {
     char nombre[30];
@@ -15,7 +15,7 @@ typedef struct _FrechaN
 } TFecha;
 typedef struct _Reg
 {
-    int status;
+    bool status = 1;
     int kay;
     TNomb nombre;
     TFecha fecha;
@@ -29,12 +29,18 @@ int msg();
 int msg2();
 void menu();
 void estados(int est, char nombestado[]);
+void estadosAl(int est, char nombestado[]);
 Treg agregarM(Treg reg[], int i);
 Treg cargar(Treg reg[], int i);
 void nombreAl(char nombre[], int sex);
 void apAl(char apellido[]);
 int month(int anio);
 int day(int anio, int mes);
+int searchSec(Treg reg[], int n, int mt);
+int searchBin(Treg reg[], int inf, int sup, int mt);
+int orderBu(Treg reg[], int n);
+int orderSel(Treg reg[], int n);
+void pintReg(Treg reg[], int n);
 
 int main()
 {
@@ -70,8 +76,8 @@ int msg2()
 
 void menu()
 {
-    int opc, elec;
-    int i = 0;
+    int opc, elec, kay;
+    int i = 0, j, band;
     Treg reg[N];
     do
     {
@@ -82,15 +88,79 @@ void menu()
             elec = msg2();
             if (elec == 1)
             {
-                reg[i] = agregarM(reg, i);
+                if (i < N)
+                {
+                    reg[i] = agregarM(reg, i);
+                    i++;
+                    band = 1;
+                }
+                else
+                {
+                    printf("Base de datos llena\n");
+                    system("PAUSE");
+                }
             }
             if (elec == 2)
             {
-                reg[i] = cargar(reg, i);
+                if (i < N)
+                {
+
+                    for (j = 0; i < 100; j++)
+                    {
+                        if (i < N)
+                        {
+                            reg[i] = cargar(reg, i);
+                            i++;
+                            band = 1;
+                        }
+                    }
+                }
+                else
+                {
+                    printf("Base de datos llena\n");
+                    system("PAUSE");
+                }
             }
-            printf("%s", reg[i].curp);
-            system("PAUSE");
-            i++;
+
+            break;
+        case 2:
+            kay = valid("Ingrese matricula que desea eliminar: ", 300000, 399999);
+            if (band)
+            {
+                reg[searchSec(reg, i, kay)].status = 0;
+            }
+            else
+            {
+                reg[searchBin(reg, 0, i, kay)].status = 0;
+            }
+
+            break;
+        case 3:
+            kay = valid("Ingrese matricula que desea eliminar: ", 300000, 399999);
+            if (band)
+            {
+                reg[searchSec(reg, i, kay)].status = 0;
+            }
+            else
+            {
+                reg[searchBin(reg, 0, i, kay)].status = 0;
+            }
+            break;
+        case 4:
+            if (band)
+            {
+                if (i < 500)
+                {
+                    band = orderBu(reg, i);
+                }
+                else
+                {
+                    band = orderSel(reg, i);
+                }
+            }
+            break;
+        case 5:
+            pintReg(reg, i);
             break;
         }
     } while (opc != 0);
@@ -178,8 +248,7 @@ Treg agregarM(Treg reg[], int i)
     {
         strcpy(reg[i].sex, "M");
     }
-    printf("%s", reg[i].nombre.nombre);
-    system("PAUSE");
+
     return reg[i];
 }
 
@@ -352,11 +421,104 @@ Treg cargar(Treg reg[], int i)
     {
         est = rand() % 33 + 1;
     }
-    printf("%d", reg[i].fecha.dia);
-    system("PAUSE");
 
     estados(est, reg[i].estado);
     curp(reg[i].curp, reg[i].nombre.nombre, reg[i].nombre.nombre2, reg[i].nombre.apP, reg[i].nombre.apM, reg[i].fecha.dia, reg[i].fecha.mes, reg[i].fecha.anio, sex, est);
 
     return reg[i];
+}
+
+int searchSec(Treg reg[], int n, int mt)
+{
+    int i;
+    i = 0;
+    for (i = 0; i <= n; i++)
+    {
+        if (reg[i].kay == mt)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int searchBin(Treg reg[], int inf, int sup, int mt)
+{
+    int med; // variable local
+    while (inf <= sup)
+    {
+        med = (inf + sup) / 2;
+        if (reg[med].kay == mt)
+        {
+            return med;
+        }
+        else
+        {
+            if (mt < reg[med].kay)
+            {
+                sup = med--;
+            }
+            else
+            {
+                inf = med++;
+            }
+        }
+    }
+    return -1;
+}
+
+int orderBu(Treg reg[], int n)
+{
+    int i, j;
+    Treg temp;
+
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = i + 1; j < n; j++)
+        {
+            if (reg[j].kay < reg[i].kay)
+            {
+                temp = reg[i];
+                reg[i] = reg[j];
+                reg[j] = temp;
+            }
+        }
+    }
+    return 0;
+}
+
+int orderSel(Treg reg[], int n)
+{
+    int i, j, men, temp;
+
+    for (i = 0; i < n - 1; i++)
+    {
+        men = i;
+        for (j = i; j < n; j++)
+        {
+            if (reg[j].kay < reg[men].kay)
+            {
+                men = j;
+            }
+        }
+        temp = reg[i].kay;
+        reg[i].kay = reg[men].kay;
+        reg[men].kay = temp;
+    }
+    return 0;
+}
+
+void pintReg(Treg reg[], int n)
+{
+    int i = 0;
+    printf("%-3s %-10s %-10s %-10s %-10s %-10s %-4s \n",
+           "No.", "Matricula", "Nombre", "ApP", "ApM", "Fecha", "Sexo");
+    while (i < 40 && i < n)
+    {
+        printf("%-3d %-10d %-10s %-10s %-10s %-10s %-4d-%d-%d %-5s\n",
+               i + 1, reg[i].kay, reg[i].nombre.nombre, reg[i].nombre.nombre2, reg[i].nombre.apP,
+               reg[i].nombre.apM, reg[i].fecha.mes, reg[i].fecha.dia, reg[i].fecha.anio, reg[i].sex);
+        i++;
+    }
+    system("PAUSE");
 }
