@@ -244,11 +244,6 @@ void imprimirEstados()
         "Zacatecas",
         "Ciudad de Mexico",
         "Extranjero"};
-
-    for (i = 0; i < 33; i++)
-    {
-        printf("%d.- %s\n", i + 1, estados[i]);
-    }
 }
 
 void consonantes(char curp[], char nomb[], char nomb2[], char apP[], char apM[], int val)
@@ -356,7 +351,6 @@ int nomb_Novalid(char nomb[])
     {
         if (strcmp(nomb, noVali[i]) == 0)
         {
-            printf("%s", noVali[i]);
             return band = 1;
         }
     }

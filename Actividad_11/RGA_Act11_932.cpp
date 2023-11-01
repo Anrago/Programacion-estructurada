@@ -28,6 +28,7 @@ typedef struct _Reg
 int msg();
 int msg2();
 void menu();
+int verMt(Treg reg[], int n, int mt);
 void estados(int est, char nombestado[]);
 void estadosAl(int est, char nombestado[]);
 Treg agregarM(Treg reg[], int i);
@@ -41,6 +42,7 @@ int searchBin(Treg reg[], int inf, int sup, int mt);
 int orderBu(Treg reg[], int n);
 int orderSel(Treg reg[], int n);
 void pintReg(Treg reg[], int n);
+void pintOneReg(Treg reg[], int n);
 
 int main()
 {
@@ -77,7 +79,7 @@ int msg2()
 void menu()
 {
     int opc, elec, kay;
-    int i = 0, j, band;
+    int i = 0, j, band, bus;
     Treg reg[N];
     do
     {
@@ -127,24 +129,33 @@ void menu()
             kay = valid("Ingrese matricula que desea eliminar: ", 300000, 399999);
             if (band)
             {
-                reg[searchSec(reg, i, kay)].status = 0;
+                bus = searchSec(reg, i, kay);
+                pintOneReg(reg, bus);
             }
             else
             {
-                reg[searchBin(reg, 0, i, kay)].status = 0;
+                bus = searchBin(reg, 0, i, kay);
+                pintOneReg(reg, bus);
+            }
+            if (valid("DESEA ELIMINAR ALUMNO\n1.-Si\n0.-NO\n", 0, 1))
+            {
+                reg[bus].status = 0;
             }
 
             break;
         case 3:
-            kay = valid("Ingrese matricula que desea eliminar: ", 300000, 399999);
+            kay = valid("Ingrese matricula que desea Buscar: ", 300000, 399999);
             if (band)
             {
-                reg[searchSec(reg, i, kay)].status = 0;
+                bus = searchSec(reg, i, kay);
+                pintOneReg(reg, bus);
             }
             else
             {
-                reg[searchBin(reg, 0, i, kay)].status = 0;
+                bus = searchBin(reg, 0, i, kay);
+                pintOneReg(reg, bus);
             }
+            system("PAUSE");
             break;
         case 4:
             if (band)
@@ -171,8 +182,10 @@ Treg agregarM(Treg reg[], int i)
     char nomb[30], nomb2[30], apP[30], apM[30];
     char carp[18];
     int dia, mes, anio, bis, sex, est = 0;
-
-    reg[i].kay = valid("Ingrese matricula: ", 300000, 399999);
+    do
+    {
+        reg[i].kay = valid("Ingrese matricula: ", 300000, 399999);
+    } while (verMt(reg, i, reg[i].kay));
 
     do
     {
@@ -383,7 +396,10 @@ Treg cargar(Treg reg[], int i)
     char nomb[30], nomb2[30], apP[30], apM[30];
     int sex, est = 0;
     int n, j = 0;
-    reg[i].kay = rand() % 100000 + 300000;
+    do
+    {
+        reg[i].kay = rand() % 100000 + 300000;
+    } while (verMt(reg, i, reg[i].kay));
 
     sex = rand() % 2 + 1;
     if (sex == 1)
@@ -428,6 +444,7 @@ Treg cargar(Treg reg[], int i)
     }
 
     estados(est, reg[i].estado);
+    printf("ANTES DEL CURP");
     curp(reg[i].curp, nomb, nomb2, apP, apM, reg[i].fecha.dia, reg[i].fecha.mes, reg[i].fecha.anio, sex, est);
 
     return reg[i];
@@ -515,15 +532,50 @@ int orderSel(Treg reg[], int n)
 
 void pintReg(Treg reg[], int n)
 {
-    int i = 0;
-    printf("%-6s %-15s %-23s %-15s %-10s %-10s %-4s \n",
-           "No.", "Matricula", "Nombre", "ApP", "ApM", "Fecha", "Sexo");
-    while (i < 40 && i < n)
+    int i = 0, j = 0, elec;
+    printf("%-6s %-15s %-23s %-15s %-10s %-10s %-4s %s \n",
+           "No.", "Matricula", "Nombre", "ApP", "ApM", "Fecha", "Sexo", "Curp");
+    do
     {
-        printf("%-6d %-10d %-10s %-15s %-15s %-10s %02d-%02d-%-8d %-5s\n",
-               i + 1, reg[i].kay, reg[i].nombre.nombre, reg[i].nombre.nombre2, reg[i].nombre.apP,
-               reg[i].nombre.apM, reg[i].fecha.mes, reg[i].fecha.dia, reg[i].fecha.anio, reg[i].sex);
-        i++;
-    }
+        i = 0;
+        while (i < 40 && i <= n)
+        {
+
+            if (reg[j].status)
+            {
+                printf("%-6d %-10d %-10s %-15s %-15s %-10s %02d-%02d-%-8d %-5s %s\n",
+                       j + 1, reg[j].kay, reg[j].nombre.nombre, reg[j].nombre.nombre2, reg[j].nombre.apP,
+                       reg[j].nombre.apM, reg[j].fecha.mes, reg[j].fecha.dia, reg[j].fecha.anio, reg[j].sex, reg[j].curp);
+            }
+            i++;
+            j++;
+        }
+        elec = valid("1.-SI\n0.-NO\nSEGUIR IMPRIMIENDO: ", 0, 1);
+    } while (elec);
     system("PAUSE");
+}
+
+void pintOneReg(Treg reg[], int n)
+{
+
+    printf("MATRICULA: %d\nNOMBRE: %s %s\nAPELLIDO PATERNO: %s\nAPELLIDO MATERNO: %s\nFECHA DE NACIMIENTO: %02d-%02d-%d\nSEXO: %s\nCURP: %s\n",
+           reg[n].kay, reg[n].nombre.nombre, reg[n].nombre.nombre2, reg[n].nombre.apP,
+           reg[n].nombre.apM, reg[n].fecha.mes, reg[n].fecha.dia, reg[n].fecha.anio, reg[n].sex, reg[n].curp);
+}
+
+int verMt(Treg reg[], int n, int mt)
+{
+    int i, j;
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j <= i; j++)
+        {
+            if (reg[j].kay == mt)
+            {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
 }
