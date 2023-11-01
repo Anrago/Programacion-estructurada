@@ -1,0 +1,102 @@
+No.    Matricula       Nombre                  ApP             ApM        Edad       Sexo       Curp 
+1      372576     ANTONIO                    RAMOS           GONZALEZ   10-03-2004     H     RAGA041003HBCMNNA7
+2      312794     LUISA                      GONZALEZ        MENDEZ     08-24-2009     MHidalgo GOML090824MHGNNSA2
+3      317129     VALERIA                    SALAZAR         VARGAS     12-28-2009     MZacatecas SAVV091228MZSLRLA9
+4      325926     ALEJANDRO  DAVID           PAREDES         MENDEZ     11-06-1998     HMichoacan PAMA981106HMNRNL08
+5      303418     ANAIS      RAQUEL          RIOS            SOTO       05-23-1950     MBaja California Sur RISA500523MBSSTN08
+6      309967     PEDRO      ANTONIO         RODRIGUEZ       GARCIA     12-19-2008     HNuevo Leon ROGP081219HNLDRDA4
+7      326109     LAURA                      SILVA           VARGAS     08-22-1990     MGuerrero SIVL900822MGRLRR03
+8      309675     PILAR      CAROLINA        DELGADO         RUIZ       04-12-2021     MQuintana Roo DERP210412MQRLZLC5
+9      312082     RODRIGO    ARMANDO         SOTO            NAVARRO    04-19-2016     HHidalgo SONR160419HHGTVDB7
+10     300465     VALENTINA                  MENDEZ          PAREDES    04-09-2014     MSonora MEPV140409MSRNRLB5
+11     305792     VERONICA   LAURA           OCHOA           FERNANDEZ  11-30-2013     MQuintana Roo OOFV131130MQRCRRB5
+12     313459     ESTHER     ALICIA          MORENO          GUZMAN     06-20-1988     MCoahuila MOGE880620MCLRZS09
+13     313003     ELENA                      CASTRO          PEREZ      12-10-1996     MChihuahua CAPE961210MCHSRL00
+14     309154     GUSTAVO                    GOMEZ           MORALES    06-14-1971     HGuanajuato GOMG710614HGTMRS09
+15     323212     RODRIGO                    LOPEZ           CASTRO     07-26-1998     HVeracruz LOCR980726HVZPSD06
+16     306036     MARIANA    VERONICA        ARAYA           RIVAS      10-25-1982     MSan Luis Potosi AARM821025MSPYVR05
+17     317595     ANGEL      RICARDO         PAREDES         RIOS       10-12-2021     HQueretaro PARA211012HQTRSNC2
+18     331106     CARMEN                     ROJAS           HERRERA    06-25-2011     MCiudad de Mexico ROHC110625MDFJRRB8
+19     300956     ARMANDO    IGNACIO         JIMENEZ         ROJAS      04-18-2019     HHidalgo JIRA190418HHGMJRB3
+20     316144     ELENA      LORENA          FERNANDEZ       DIAZ       02-22-1981     MDurango FEDE810222MDGRZL01
+21     310651     MARTINA                    SOTO            RAMIREZ    12-09-1994     MExtranjero SORM941209MNETMR09
+22     316064     EDUARDO                    ROJAS           TORRES     12-30-1992     HJalisco ROTE921230HJCJRD05
+23     323068     JORGE      JULIO           FLORES          RUIZ       10-23-1982     HVeracruz FORJ821023HVZLZR01
+24     322226     IGNACIO                    TORRES          FLORES     07-11-1959     HNayarit TOFI590711HNTRLG08
+25     330503     GLORIA     INES            RODRIGUEZ       BENITEZ    10-02-1953     MCoahuila ROBG531002MCLDNL05
+26     305233     FRANCISCO                  RODRIGUEZ       CASTRO     05-08-2018     HCoahuila ROCF180508HCLDSRB8
+27     327215     RAFAELA                    RAMIREZ         PAREDES    10-30-1979     MCoahuila RAPR791030MCLMRF09
+28     301798     RAFAELA    ESTHER          MENDEZ          OCHOA      01-31-2020     MCampeche MEOR200131MCCNCFC2
+29     307716     JULIO      GERARDO         MARTINEZ        JIMENEZ    02-04-2007     HGuanajuato MAJJ070204HGTRMLA3
+30     319535     GUILLERMO                  RAMIREZ         BENITEZ    05-21-1964     HNuevo Leon RABG640521HNLMNL01
+31     308841     LIDIA      LOLA            DIAZ            ROJAS      11-03-1958     MSinaloa DIRL581103MSLZJD09
+32     307519     OMAR                       TORRES          RIOS       01-02-1969     HVeracruz TORO690102HVZRSM07
+33     308959     PABLO      RAUL            SOTO            MORALES    02-28-1985     HOaxaca SOMP850228HOCTRB03
+34     317495     LUISA                      CASTRO          FLORES     12-21-1982     MNayarit CAFL821221MNTSLS06
+35     316436     SANDRA     ANTONIA         RIOS            SILVA      01-05-1959     MMichoacan RISS590105MMNSLN02
+36     319204     LUCIA      ANA             JIMENEZ         HERRERA    06-13-1994     MGuerrero JIHL940613MGRMRC02
+37     316592     ANA        RAQUEL          RUIZ            MARTINEZ   04-08-1950     MVeracruz RUMA500408MVZZRN03
+38     307718     GERARDO                    MORENO          MORALES    09-23-1950     HTabasco MOMG500923HTCRRR00
+39     321565     SANTIAGO                   TORRES          VILLANUEVA 03-12-2020     H     XOVS200312HRLNLN
+40     321078     ISABEL     CAROLINA        SANDOVAL        ROJAS      02-06-1956     MJalisco SARI560206MJCNJS04
+41     304545     RODOLFO    SERGIO          RODRIGUEZ       FERNANDEZ  08-09-1993     HSan Luis Potosi ROFR930809HSPDRD04
+42     301109     ENRIQUE    PABLO           MENDOZA         MORALES    03-13-1953     HVeracruz MEME530313HVZNRN08
+43     304406     MARIANA                    SALAZAR         RODRIGUEZ  01-30-2008     M     SARM080130MLDRDR
+44     303091     YOLANDA                    PEREZ           RIVAS      04-28-1990     MDurango PERY900428MDGRVL01
+45     309018     FRANCISCO  CARLOS          MENDEZ          SALAZAR    05-25-2009     HTabasco MESF090525HTCNLRA4
+46     301515     RAQUEL                     PEREZ           SANDOVAL   11-03-2019     MColima PESR191103MCMRNQB8
+47     307292     JUAN       ERNESTO         BENITEZ         CABRERA    03-08-1974     HExtranjero BECJ740308HNENBN02
+48     330332     RAUL                       LOPEZ           ACOSTA     12-24-1990     HExtranjero LOAR901224HNEPCL06
+49     301411     LIDIA                      SALAS           TORRES     12-23-2011     MExtranjero SATL111223MNELRDB2
+50     328448     ISABEL                     MARTINEZ        MENDOZA    06-03-1985     MTamaulipas MAMI850603MTSRNS09
+51     300416     CARMEN     CAROLINA        SANDOVAL        PEREZ      08-08-1983     MChihuahua SAPC830808MCHNRR00
+52     315884     ANAIS                      TORRES          PEREZ      10-15-2005     MColima TOPA051015MCMRRNA5
+53     301350     ANAIS                      MORALES         GONZALEZ   08-26-1993     MPuebla MOGA930826MPLRNN03
+54     321690     ESTHER     ROCIO           SALAS           VARGAS     08-09-1980     MBaja California SAVE800809MBCLRS09
+55     322727     MARIANA    ANA             RIOS            MUNOZ      01-06-1960     MZacatecas RIMM600106MZSSNR01
+56     323131     VANESA     VICTORIA        RUIZ            CORDERO    04-20-2003     MSan Luis Potosi RUCV030420MSPZRNA7
+57     320861     SANTIAGO   ALBERTO         GARCIA          GARCIA     04-08-2006     HChiapas GAGS060408HCSRRNA0
+58     304617     ENRIQUE                    PAREDES         VARGAS     03-04-1960     HNayarit PAVE600304HNTRRN08
+59     303737     ANDREA     PILAR           RODRIGUEZ       RUIZ       04-01-2020     M     RORA200401MDZNZ7
+60     303815     RAQUEL     ROCIO           CASTRO          MENDOZA    03-01-1981     M     CAMR810301MSNQNQ
+61     305466     CARLOS     FERNANDO        NAVARRO         SANCHEZ    04-12-1990     HDurango NASC900412HDGVNR00
+62     306196     OMAR                       MORALES         VILLANUEVA 11-21-2005     HCoahuila XOVO051121HCLRLMA3
+63     332744     ADRIAN     JAVIER          OCHOA           AGUIRRE    10-01-1970     HGuanajuato OOAA701001HGTCGD01
+64     313145     JUAN       RAFAEL          RODRIGUEZ       MORALES    02-10-1979     HEstado de Mexico ROMJ790210HMCDRN08
+65     316565     ADRIANA    ISABEL          SOTO            DELGADO    04-16-1998     MTabasco SODA980416MTCTLD00
+66     317160     MIRIAM     BEATRIZ         GOMEZ           PAREDES    08-26-1997     MTlaxcala GOPM970826MTLMRR01
+67     328309     LUCIA                      RAMIREZ         MENDOZA    09-14-1952     MMichoacan RAML520914MMNMNC08
+68     305857     DAVID                      GUZMAN          PEREZ      01-21-2012     HGuerrero GUPD120121HGRZRVB0
+69     327927     LOLA                       VARGAS          NUNEZ      08-20-1954     MQuintana Roo VANL540820MQRRNL09
+70     329007     SANDRA     ISABEL          ROMERO          VALENZUELA 06-13-1983     MBaja California XOVS830613MBCMLN06
+71     300989     LUCIA      CLAUDIA         ROJAS           MARTINEZ   08-21-2011     MMichoacan ROML110821MMNJRCB8
+72     313628     LORENA                     PEREZ           VALENZUELA 08-27-2012     MSan Luis Potosi XEVL120827MSPRLRB5
+73     314786     BEATRIZ    GLORIA          GARCIA          RODRIGUEZ  04-17-2008     MTamaulipas GARB080417MTSRDTA6
+74     305890     ANA        ANA             TORRES          VARGAS     03-17-1991     MExtranjero TOVA910317MNERRN00
+75     320294     ROSA       ANAIS           VARGAS          CASTRO     12-09-2017     MQuintana Roo VACR171209MQRRSSB2
+76     322623     LAURA      MARINA          TORRES          ESPINOZA   12-11-1976     MVeracruz TOEL761211MVZRSR00
+77     331202     LOLA       NATALIA         MEDINA          PEREZ      09-20-1952     MMorelos MEPL520920MMSDRL02
+78     300180     OMAR       PABLO           DIAZ            MORALES    08-11-1973     HPuebla DIMO730811HPLZRM04
+79     319377     RODRIGO    ARTURO          MENDEZ          VALENZUELA 12-09-1997     HQuintana Roo XEVR971209HQRNLD05
+80     326340     ANA                        TORRES          SANDOVAL   10-25-1993     MChihuahua TOSA931025MCHRNN01
+81     326111     RODRIGO                    ROJAS           MENDEZ     08-31-1964     HMorelos ROMR640831HMSJND02
+82     305602     EMILIO                     TORRES          ACOSTA     12-27-2012     HTabasco TOAE121227HTCRCMB8
+83     318115     OMAR       GERARDO         MENDOZA         BENITEZ    04-17-2006     HOaxaca MEBO060417HOCNNMA2
+84     327833     NATALIA                    SANCHEZ         DELGADO    03-29-1997     MBaja California Sur SADN970329MBSNLT09
+85     305717     MANUEL                     LOPEZ           CABRERA    01-07-1982     HCampeche LOCM820107HCCPBN02
+86     325611     PATRICIA                   SANCHEZ         PEREZ      09-12-1980     MGuanajuato SAPP800912MGTNRT04
+87     309913     ERNESTO                    FERNANDEZ       SOTO       04-25-1966     HZacatecas FESE660425HZSRTR05
+88     323537     ANA                        RIVAS           LOPEZ      06-16-1950     MExtranjero RILA500616MNEVPN03
+89     322885     HORACIO                    DELGADO         HERRERA    07-30-1994     HGuanajuato DEHH940730HGTLRR00
+90     301539     JULIA      ANDREA          AGUIRRE         NAVARRO    04-30-1999     MBaja California AUNJ990430MBCGVL08
+91     308943     ANA        SOFIA           MENDOZA         GOMEZ      12-01-1950     MCoahuila MEGA501201MCLNMN05
+92     326363     LORENA     ANA             TORRES          GOMEZ      03-09-1979     MQueretaro TOGL790309MQTRMR08
+93     319438     ENRIQUE    FERNANDO        ACOSTA          MENDOZA    06-24-1978     HGuanajuato AOME780624HGTCNN02
+94     316168     GLORIA                     RODRIGUEZ       ACOSTA     04-25-2001     MTlaxcala ROAG010425MTLDCLA5
+95     323828     ADRIAN     PEDRO           SANCHEZ         BENITEZ    10-15-2019     HGuerrero SABA191015HGRNNDB1
+96     323214     LUCIA      LUISA           BENITEZ         MUNOZ      01-29-1955     MGuanajuato BEML550129MGTNNC03
+97     330376     LUCIA      PILAR           RODRIGUEZ       SILVA      12-20-2022     MTabasco ROSL221220MTCDLCC7
+98     322597     VALERIA    MARIANA         MENDOZA         RODRIGUEZ  03-25-1961     MPuebla MERV610325MPLNDL08
+99     322533     GUSTAVO    LUCAS           JIMENEZ         MUNOZ      03-29-2013     HTamaulipas JIMG130329HTSMNSB5
+100    307378     SOFIA      LAURA           ROMERO          MENDEZ     02-29-2008     MOaxaca ROMS080229MOCMNFA4
+101    332421     IGNACIO    SANTIAGO        SALAZAR         MORALES    01-30-1980     HZacatecas SAMI800130HZSLRG00

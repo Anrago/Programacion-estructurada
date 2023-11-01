@@ -73,12 +73,6 @@ int valid(const char msg[], int lim_in, int lim_sup)
         fflush(stdin);
         gets(cad);       // lee el un numero como caracter
         opc = atoi(cad); // convierte el caracter en un numero
-
-        if (opc < lim_in || opc > lim_sup) // imprime mensaje en caso de que no se valido el numero
-        {
-            system("CLS");
-            printf("SOLO OPCIONES VALIDAS\n");
-        }
         system("CLS");
     } while (opc < lim_in || opc > lim_sup); // valida que el numero sea correcto
     return opc;
@@ -169,14 +163,9 @@ void validCad(const char msg[], char cad[])
     do
     {
 
-        system("CLS");
-        if (band == 1)
-        {
-            printf("CARACTER NO VALIDO\n");
-        }
         band = 0;
         i = 0;
-
+        system("CLS");
         printf("%s", msg);
         fflush(stdin);
         gets(cad);
@@ -345,7 +334,6 @@ void solo_consonantes(char cad[], int i, char conso[])
         j++; // controla el ciclo
     }
     conso[k] = '\0';
-    printf("\n");
 }
 
 void solo_vocales(char cad[], int i, char voc[])
@@ -384,5 +372,4 @@ void solo_vocales(char cad[], int i, char voc[])
         j++; // controla el ciclo
     }
     voc[k] = '\0';
-    printf("\n");
 }

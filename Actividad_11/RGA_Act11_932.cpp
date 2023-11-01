@@ -19,7 +19,7 @@ typedef struct _Reg
     int kay;
     TNomb nombre;
     TFecha fecha;
-    char sex[1];
+    char sex[2];
     char estado[30];
     char curp[18];
 
@@ -40,10 +40,12 @@ int day(int anio, int mes);
 int searchSec(Treg reg[], int n, int mt);
 int searchBin(Treg reg[], int inf, int sup, int mt);
 int orderBu(Treg reg[], int n);
-int orderSel(Treg reg[], int n);
 void pintReg(Treg reg[], int n);
 void pintOneReg(Treg reg[], int n);
+void swap(Treg reg[], int i, int j);
 void createTXT(Treg reg[], int n);
+int partition(Treg reg[], int low, int high);
+void quicksort(Treg reg[], int low, int high);
 
 int main()
 {
@@ -108,7 +110,7 @@ void menu()
                 if (i < N)
                 {
 
-                    for (j = 0; i < 100; j++)
+                    for (j = 0; j < 100; j++)
                     {
                         if (i < N)
                         {
@@ -167,7 +169,8 @@ void menu()
                 }
                 else
                 {
-                    band = orderSel(reg, i);
+                    band = 1;
+                    quicksort(reg, 0, i);
                 }
             }
             break;
@@ -247,6 +250,11 @@ Treg agregarM(Treg reg[], int i)
     imprimirEstados();
     est = valid("Ingrese estado: ", 1, 33);
     est--;
+    printf("%d", est);
+    system("PAUSE");
+    estados(est, reg[i].estado);
+    printf("%s", reg[i].estado);
+    system("PAUSE");
     curp(carp, nomb, nomb2, apP, apM, dia, mes, anio, sex, est);
     strcpy(reg[i].nombre.nombre, nomb);
     strcpy(reg[i].nombre.nombre2, nomb2);
@@ -256,7 +264,6 @@ Treg agregarM(Treg reg[], int i)
     reg[i].fecha.anio = anio;
     reg[i].fecha.mes = mes;
     reg[i].fecha.dia = dia;
-    estados(est, reg[i].estado);
     if (sex == 1)
     {
         strcpy(reg[i].sex, "H");
@@ -306,7 +313,7 @@ void estados(int est, char nombestado[])
         "Zacatecas",
         "Ciudad de Mexico",
         "Extranjero"};
-    strcpy(estados[est], nombestado);
+    strcpy(nombestado, estados[est]);
 }
 
 void nombreAl(char nombre[], int sex)
@@ -444,13 +451,12 @@ Treg cargar(Treg reg[], int i)
 
     for (j = 0; j < 10; j++)
     {
-        est = rand() % 33 + 1;
+        est = rand() % 33;
     }
 
     estados(est, reg[i].estado);
-    printf("ANTES DEL CURP");
-    curp(reg[i].curp, nomb, nomb2, apP, apM, reg[i].fecha.dia, reg[i].fecha.mes, reg[i].fecha.anio, sex, est);
 
+    curp(reg[i].curp, nomb, nomb2, apP, apM, reg[i].fecha.dia, reg[i].fecha.mes, reg[i].fecha.anio, sex, est);
     return reg[i];
 }
 
@@ -513,58 +519,53 @@ int orderBu(Treg reg[], int n)
     return 0;
 }
 
-int orderSel(Treg reg[], int n)
-{
-    int i, j, men, temp;
-
-    for (i = 0; i < n - 1; i++)
-    {
-        men = i;
-        for (j = i; j < n; j++)
-        {
-            if (reg[j].kay < reg[men].kay)
-            {
-                men = j;
-            }
-        }
-        temp = reg[i].kay;
-        reg[i].kay = reg[men].kay;
-        reg[men].kay = temp;
-    }
-    return 0;
-}
-
 void pintReg(Treg reg[], int n)
 {
     int i = 0, j = 0, elec;
-    printf("%-6s %-15s %-23s %-15s %-10s %-10s %-4s %s \n",
-           "No.", "Matricula", "Nombre", "ApP", "ApM", "Fecha", "Sexo", "Curp");
+    printf("%s", reg[n].sex);
+    system("PAUSE");
+    printf("%-6s %-15s %-23s %-15s %-10s %-10s %-10s %s \n",
+           "No.", "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo", "Curp");
     do
     {
         i = 0;
-        while (i < 40 && i <= n)
+        if (j < n)
         {
-
-            if (reg[j].status)
+            while (i < 40 && j < n)
             {
-                printf("%-6d %-10d %-10s %-15s %-15s %-10s %02d-%02d-%-8d %-5s %s\n",
-                       j + 1, reg[j].kay, reg[j].nombre.nombre, reg[j].nombre.nombre2, reg[j].nombre.apP,
-                       reg[j].nombre.apM, reg[j].fecha.mes, reg[j].fecha.dia, reg[j].fecha.anio, reg[j].sex, reg[j].curp);
+
+                if (reg[j].status)
+                {
+                    printf("%-6d %-10d %-10s %-15s %-15s %-13s %-10d %-5s %s\n",
+                           j + 1, reg[j].kay, reg[j].nombre.nombre, reg[j].nombre.nombre2, reg[j].nombre.apP,
+                           reg[j].nombre.apM, 2023 - reg[j].fecha.anio, reg[j].sex, reg[j].curp);
+                }
+                i++;
+                j++;
             }
-            i++;
-            j++;
+            elec = valid("1.-SI\n0.-NO\nSEGUIR IMPRIMIENDO: ", 0, 1);
         }
-        elec = valid("1.-SI\n0.-NO\nSEGUIR IMPRIMIENDO: ", 0, 1);
+        else
+        {
+            printf("LIMITE ALCANZADO\n");
+            elec = 0;
+        }
     } while (elec);
     system("PAUSE");
 }
 
 void pintOneReg(Treg reg[], int n)
 {
-
-    printf("MATRICULA: %d\nNOMBRE: %s %s\nAPELLIDO PATERNO: %s\nAPELLIDO MATERNO: %s\nFECHA DE NACIMIENTO: %02d-%02d-%d\nSEXO: %s\nCURP: %s\n",
-           reg[n].kay, reg[n].nombre.nombre, reg[n].nombre.nombre2, reg[n].nombre.apP,
-           reg[n].nombre.apM, reg[n].fecha.mes, reg[n].fecha.dia, reg[n].fecha.anio, reg[n].sex, reg[n].curp);
+    if (n != -1)
+    {
+        printf("MATRICULA: %d\nNOMBRE: %s %s\nAPELLIDO PATERNO: %s\nAPELLIDO MATERNO: %s\nFECHA DE NACIMIENTO: %02d-%02d-%d\nSEXO:%s\nESTADO: %s\nCURP: %s\n",
+               reg[n].kay, reg[n].nombre.nombre, reg[n].nombre.nombre2, reg[n].nombre.apP,
+               reg[n].nombre.apM, reg[n].fecha.mes, reg[n].fecha.dia, reg[n].fecha.anio, reg[n].sex, reg[n].estado, reg[n].curp);
+    }
+    else
+    {
+        printf("Registro no encontrado\n");
+    }
 }
 
 int verMt(Treg reg[], int n, int mt)
@@ -588,15 +589,53 @@ void createTXT(Treg reg[], int n)
 {
     FILE *fa;
     int i = 0;
-    fa = fopen("C:\\Users\\Anrago\\Documents\\GitHub\\Programacion-estructurada\\Actividad_11\\Archivo.txt", "a");
-    for (i = 0; i <= n; i++)
+    fa = fopen("C:\\Users\\PC\\Desktop\\UABC 3er sem\\Programacion-estructurada\\Actividad_11\\Registros.txt", "w");
+    fprintf(fa, "%-6s %-15s %-23s %-15s %-10s %-10s %-10s %s \n",
+            "No.", "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo", "Curp");
+    for (i = 0; i < n; i++)
     {
-
-        if (reg[i].status)
+        if (reg[i].status != 0)
         {
-            fprintf(fa,"%-6d %-10d %-10s %-15s %-15s %-10s %02d-%02d-%-8d %-5s %s\n",
-                   i + 1, reg[i].kay, reg[i].nombre.nombre, reg[i].nombre.nombre2, reg[i].nombre.apP,
-                   reg[i].nombre.apM, reg[i].fecha.mes, reg[i].fecha.dia, reg[i].fecha.anio, reg[i].sex, reg[i].curp);
+            fprintf(fa, "%-6d %-10d %-10s %-15s %-15s %-10s %02d-%02d-%-8d %-5s %s\n",
+                    i + 1, reg[i].kay, reg[i].nombre.nombre, reg[i].nombre.nombre2, reg[i].nombre.apP,
+                    reg[i].nombre.apM, reg[i].fecha.mes, reg[i].fecha.dia, reg[i].fecha.anio, reg[i].sex, reg[i].curp);
         }
+    }
+    fclose(fa);
+}
+
+void swap(Treg reg[], int i, int j)
+{
+    Treg temp = reg[i];
+    reg[i] = reg[j];
+    reg[j] = temp;
+}
+
+int partition(Treg reg[], int low, int high)
+{
+    Treg pivot;
+    pivot.kay = reg[high].kay;
+    int i = low - 1;
+
+    for (int j = low; j <= high - 1; j++)
+    {
+        if (reg[j].kay <= pivot.kay)
+        {
+            i++;
+            swap(reg, i, j);
+        }
+    }
+    swap(reg, i + 1, high);
+    return i + 1;
+}
+
+void quicksort(Treg reg[], int low, int high)
+{
+    if (low < high)
+    {
+        int pi = partition(reg, low, high);
+
+        quicksort(reg, low, pi - 1);
+        quicksort(reg, pi + 1, high);
     }
 }

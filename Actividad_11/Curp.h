@@ -149,7 +149,6 @@ int nacimiento(char curp[], int day, int mont, int year)
     char anio[5], mes[3], dia[3];
     int lar;
 
-    system("CLS");
 
     snprintf(anio, 5, "%d", year);
     snprintf(mes, 3, "%02d", mont);
@@ -198,9 +197,6 @@ void estados(char curp[],int nest)
         "OC", "PL", "QT", "QR", "SP", "SL", "SR", "TC", "TS",
         "TL", "VZ", "YN", "ZS", "DF", "NE"};
 
-    
-
-    
     a=nest;
     strcpy(est, estados[a]);
     strncat(curp, est, 2);
@@ -209,7 +205,6 @@ void estados(char curp[],int nest)
 
 void imprimirEstados()
 {
-    int i;
     char estados[33][30] = {
         "Aguascalientes",
         "Baja California",
