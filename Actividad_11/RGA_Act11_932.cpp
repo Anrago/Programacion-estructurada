@@ -43,6 +43,7 @@ int orderBu(Treg reg[], int n);
 int orderSel(Treg reg[], int n);
 void pintReg(Treg reg[], int n);
 void pintOneReg(Treg reg[], int n);
+void createTXT(Treg reg[], int n);
 
 int main()
 {
@@ -172,6 +173,9 @@ void menu()
             break;
         case 5:
             pintReg(reg, i);
+            break;
+        case 6:
+            createTXT(reg, i);
             break;
         }
     } while (opc != 0);
@@ -578,4 +582,21 @@ int verMt(Treg reg[], int n, int mt)
     }
 
     return 0;
+}
+
+void createTXT(Treg reg[], int n)
+{
+    FILE *fa;
+    int i = 0;
+    fa = fopen("C:\\Users\\Anrago\\Documents\\GitHub\\Programacion-estructurada\\Actividad_11\\Archivo.txt", "a");
+    for (i = 0; i <= n; i++)
+    {
+
+        if (reg[i].status)
+        {
+            fprintf(fa,"%-6d %-10d %-10s %-15s %-15s %-10s %02d-%02d-%-8d %-5s %s\n",
+                   i + 1, reg[i].kay, reg[i].nombre.nombre, reg[i].nombre.nombre2, reg[i].nombre.apP,
+                   reg[i].nombre.apM, reg[i].fecha.mes, reg[i].fecha.dia, reg[i].fecha.anio, reg[i].sex, reg[i].curp);
+        }
+    }
 }
