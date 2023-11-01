@@ -1,3 +1,7 @@
+// Antonio Ramos Gonzalez Mt: 372576
+// 01/11/2023
+// Se generara un archivo donde se almacenara datos generados por el usuario
+// RGA_Act11_932
 #include "Curp.h"
 #define N 2000
 typedef struct _NombC
@@ -170,7 +174,7 @@ void menu()
                 else
                 {
                     band = 1;
-                    quicksort(reg, 0, i);
+                    quicksort(reg, 0, i - 1);
                 }
             }
             break;
