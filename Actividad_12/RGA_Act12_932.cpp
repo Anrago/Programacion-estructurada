@@ -1,7 +1,7 @@
 // Antonio Ramos Gonzalez Mt: 372576
-// 01/11/2023
-// Se generara un archivo donde se almacenara datos generados por el usuario
-// RGA_Act11_932
+// 07/11/2023 || 12/11/2023
+// Se generara un archivo donde se almacenara datos generados por el usuario, y la lectura de archivos
+// RGA_Act12_932
 #include "Babilonia.h"
 #define N 2000
 typedef struct _Reg
@@ -79,6 +79,7 @@ void menu()
                 {
                     i = cargar(reg, i, "datos.txt");
                     fileBand = 1;
+                    band=1;
                 }
                 else
                 {
@@ -316,14 +317,15 @@ int orderBu(Treg reg[], int n)
 void pintReg(Treg reg[], int n)
 {
     int i = 0, j = 0, elec;
-    system("PAUSE");
-    printf("%-6s %-15s %-23s %-15s %-10s %-10s %-10s\n",
-           "No.", "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo");
+    
     do
     {
         i = 0;
         if (j < n)
         {
+            system("CLS");
+            printf("%-6s %-15s %-23s %-15s %-10s %-10s %-10s\n",
+           "No.", "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo");
             while (i < 40 && j < n)
             {
 
@@ -491,16 +493,13 @@ void regEliminados(Treg reg[], int n)
     int i = 0;
     char namefile[30];
 
-    validCad("Ingrese nombre del arvhivo: ", namefile);
-    strcat(namefile, ".txt");
+    strncpy(namefile, "RegEliminados.txt", 30);
     fa = fopen(namefile, "w");
-    fprintf(fa, "%-6s %-15s %-23s %-15s %-10s %-10s\n",
-            "No.", "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo");
     for (i = 0; i < n; i++)
     {
         if (reg[i].status == 0)
         {
-            fprintf(fa, "%-6d %-10d %-10s %-15s %-10s %-8d %s\n",
+            fprintf(fa, "%d.- %-10d %-10s %-15s %-10s %-8d %s\n",
                     i + 1, reg[i].kay, reg[i].nombre, reg[i].apP,
                     reg[i].apM, reg[i].edad, reg[i].sex);
         }
