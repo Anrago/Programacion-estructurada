@@ -4,25 +4,11 @@
 // RGA_Act11_932
 #include "Babilonia.h"
 #define N 2000
-typedef struct _NombC
-{
-    char nombre[30];
-    char nombre2[30];
-    char apP[30];
-    char apM[30];
-} TNomb;
-typedef struct _FrechaN
-{
-    int dia;
-    int mes;
-    int anio;
-} TFecha;
 typedef struct _Reg
 {
     bool status = 1;
     int kay;
     char nombre[30];
-    char nombre2[30];
     char apP[30];
     char apM[30];
     int edad;
@@ -31,10 +17,10 @@ typedef struct _Reg
 } Treg;
 
 int msg();
-int msg2();
 void menu();
 int verMt(Treg reg[], int n, int mt);
-Treg cargar(Treg reg[], int i);
+int cargar(Treg reg[], int n, char filename[]);
+Treg agregar(Treg reg[], int i);
 void nombreAl(char nombre[], int sex);
 void apAl(char apellido[]);
 int searchSec(Treg reg[], int n, int mt);
@@ -46,6 +32,8 @@ void swap(Treg reg[], int i, int j);
 void createTXT(Treg reg[], int n);
 int partition(Treg reg[], int low, int high);
 void quicksort(Treg reg[], int low, int high);
+void RegEnArch();
+void regEliminados(Treg reg[], int n);
 
 int main()
 {
@@ -59,30 +47,24 @@ int msg()
 {
     system("CLS");
     printf("Menu\n");
-    printf("1.-Agregar\n");
-    printf("2.-Eliminar registro\n");
-    printf("3.-Buscar Registro\n");
-    printf("4.-Ordenar\n");
-    printf("5.-Imprimir\n");
-    printf("6.-Archivo texto\n");
+    printf("1.-Cargar\n");
+    printf("2.-Agregar\n");
+    printf("3.-Eliminar registro\n");
+    printf("4.-Buscar Registro\n");
+    printf("5.-Ordenar\n");
+    printf("6.-Imprimir\n");
+    printf("7.-Archivo texto\n");
+    printf("8.-Cantidad de registros\n");
+    printf("9.-Registros eliminados\n");
     printf("0.-Salir\n");
-    return valid("Elije una opcion: ", 0, 6);
-}
-
-int msg2()
-{
-    system("CLS");
-    printf("Menu\n");
-    printf("1.-Agregar Manual\n");
-    printf("2.-Cargar\n");
-    printf("0.-Regresar\n");
-    return valid("Elije una opcion: ", 0, 2);
+    return valid("Elije una opcion: ", 0, 9);
 }
 
 void menu()
 {
-    int opc,kay;
+    int opc, kay;
     int i = 0, j, band, bus;
+    int fileBand = 0;
     Treg reg[N];
     do
     {
@@ -90,14 +72,36 @@ void menu()
         switch (opc)
         {
         case 1:
+            if (!fileBand)
+            {
+
+                if (i + 313 < N)
+                {
+                    i = cargar(reg, i, "datos.txt");
+                    fileBand = 1;
+                }
+                else
+                {
+                    printf("LA BASE DE DATOS HA SIDO LLENADA\n");
+                    system("PAUSE");
+                }
+            }
+            else
+            {
+                printf("YA SE HA CARGADO EL ARCHIVO\n");
+                system("PAUSE");
+            }
+            break;
+
+        case 2:
             if (i < N)
             {
 
-                for (j = 0; j < 100; j++)
+                for (j = 0; j < 10; j++)
                 {
                     if (i < N)
                     {
-                        reg[i] = cargar(reg, i);
+                        reg[i] = agregar(reg, i);
                         i++;
                         band = 1;
                     }
@@ -110,7 +114,7 @@ void menu()
             }
 
             break;
-        case 2:
+        case 3:
             kay = valid("Ingrese matricula que desea eliminar: ", 300000, 399999);
             if (band)
             {
@@ -128,7 +132,7 @@ void menu()
             }
 
             break;
-        case 3:
+        case 4:
             kay = valid("Ingrese matricula que desea Buscar: ", 300000, 399999);
             if (band)
             {
@@ -142,7 +146,7 @@ void menu()
             }
             system("PAUSE");
             break;
-        case 4:
+        case 5:
             if (band)
             {
                 if (i < 500)
@@ -156,11 +160,18 @@ void menu()
                 }
             }
             break;
-        case 5:
+        case 6:
             pintReg(reg, i);
             break;
-        case 6:
+        case 7:
             createTXT(reg, i);
+            break;
+        case 8:
+            RegEnArch();
+            system("PAUSE");
+            break;
+        case 9:
+            regEliminados(reg, i);
             break;
         }
     } while (opc != 0);
@@ -215,10 +226,9 @@ void apAl(char apellido[])
     strcpy(apellido, ap[al]);
 }
 
-Treg cargar(Treg reg[], int i)
+Treg agregar(Treg reg[], int i)
 {
-    int sex,min=18,max=35;
-    int n, j = 0;
+    int sex, min = 18, max = 35;
     do
     {
         reg[i].kay = rand() % 100000 + 300000;
@@ -236,25 +246,10 @@ Treg cargar(Treg reg[], int i)
 
     nombreAl(reg[i].nombre, sex);
 
-    while (j < 10)
-    {
-        n = rand() % 10 + 1;
-        j++;
-    }
-
-    if (n % 2 == 0)
-    {
-        reg[i].nombre2[0] = '\0';
-    }
-    else
-    {
-        nombreAl(reg[i].nombre2, sex);
-    }
-    
     apAl(reg[i].apP);
     apAl(reg[i].apM);
-    
-    reg[i].edad=rand()%(max-min+1)+min;
+
+    reg[i].edad = rand() % (max - min + 1) + min;
 
     return reg[i];
 }
@@ -321,7 +316,6 @@ int orderBu(Treg reg[], int n)
 void pintReg(Treg reg[], int n)
 {
     int i = 0, j = 0, elec;
-    printf("%s", reg[n].sex);
     system("PAUSE");
     printf("%-6s %-15s %-23s %-15s %-10s %-10s %-10s\n",
            "No.", "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo");
@@ -335,9 +329,9 @@ void pintReg(Treg reg[], int n)
 
                 if (reg[j].status)
                 {
-                    printf("%-6d %-10d %-10s %-15s %-15s %-13s %-10d %-5s\n",
-                           j + 1, reg[j].kay, reg[j].nombre, reg[j].nombre2, reg[j].apP,
-                           reg[j].apM,reg[i].edad, reg[j].sex);
+                    printf("%-6d.- %-10d %-10s %-15s  %-13s %-10d %-5s\n",
+                           j + 1, reg[j].kay, reg[j].nombre, reg[j].apP,
+                           reg[j].apM, reg[i].edad, reg[j].sex);
                 }
                 i++;
                 j++;
@@ -357,9 +351,9 @@ void pintOneReg(Treg reg[], int n)
 {
     if (n != -1)
     {
-        printf("MATRICULA: %d\nNOMBRE: %s %s\nAPELLIDO PATERNO: %s\nAPELLIDO MATERNO: %s\nEDAD: %d\nSEXO:%s\n",
-               reg[n].kay, reg[n].nombre, reg[n].nombre2, reg[n].apP,
-               reg[n].apM,reg[n].edad, reg[n].sex);
+        printf("MATRICULA: %d\nNOMBRE: %s \nAPELLIDO PATERNO: %s\nAPELLIDO MATERNO: %s\nEDAD: %d\nSEXO:%s\n",
+               reg[n].kay, reg[n].nombre, reg[n].apP,
+               reg[n].apM, reg[n].edad, reg[n].sex);
     }
     else
     {
@@ -388,16 +382,19 @@ void createTXT(Treg reg[], int n)
 {
     FILE *fa;
     int i = 0;
-    fa = fopen("C:\\Users\\PC\\Desktop\\UABC 3er sem\\Programacion-estructurada\\Actividad_11\\Registros.txt", "w");
-    fprintf(fa, "%-6s %-15s %-23s %-15s %-10s %-10s\n",
-            "No.", "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo");
+    char namefile[30];
+
+    validCad("Ingrese nombre del arvhivo: ", namefile);
+    strcat(namefile, ".txt");
+    fa = fopen(namefile, "w");
+    
     for (i = 0; i < n; i++)
     {
         if (reg[i].status != 0)
         {
-            fprintf(fa, "%-6d %-10d %-10s %-15s %-15s %-10s %-8d %s\n",
-                    i + 1, reg[i].kay, reg[i].nombre, reg[i].nombre2, reg[i].apP,
-                    reg[i].apM,reg[i].edad , reg[i].sex);
+            fprintf(fa, "%d.- %-10d %-10s %-15s %-10s %-8d %s\n",
+                    i + 1, reg[i].kay, reg[i].nombre, reg[i].apP,
+                    reg[i].apM, reg[i].edad, reg[i].sex);
         }
     }
     fclose(fa);
@@ -437,4 +434,76 @@ void quicksort(Treg reg[], int low, int high)
         quicksort(reg, low, pi - 1);
         quicksort(reg, pi + 1, high);
     }
+}
+
+int cargar(Treg reg[], int n, char filename[])
+{
+    FILE *fa;
+    Treg regTemp;
+    int No = 0;
+    fa = fopen(filename, "r");
+    if (fa)
+    {
+        do
+        {
+            fscanf(fa, "%d.- %d %s %s %s %d %s", &No, &regTemp.kay, regTemp.nombre, regTemp.apP, regTemp.apM,
+                   &regTemp.edad, regTemp.sex);
+            reg[n++] = regTemp;
+
+        } while (!feof(fa));
+        fclose(fa);
+    }
+    else
+    {
+        printf("ARCHIVO NO ENCONTRADO\n");
+        system("PAUSE");
+    }
+
+    return n - 1;
+}
+
+void RegEnArch()
+{
+    int count;
+    char fileName[50];
+    char cmd[50];
+
+    validCad("Ingrese el nombre del archivo ", fileName);
+
+    system("mingw32-gcc-6.3.0.exe countTXT.c -o countTXT"); 
+    sprintf(cmd, "countTXT.exe %s", fileName);
+    count = system(cmd);
+
+    if (count != -1)
+    {
+        printf("El archivo %s contiene %d registros\n", fileName, count);
+    }
+    else
+    {
+        printf("El archivo no fue encontrado\n");
+    }
+}
+
+void regEliminados(Treg reg[], int n)
+{
+
+    FILE *fa;
+    int i = 0;
+    char namefile[30];
+
+    validCad("Ingrese nombre del arvhivo: ", namefile);
+    strcat(namefile, ".txt");
+    fa = fopen(namefile, "w");
+    fprintf(fa, "%-6s %-15s %-23s %-15s %-10s %-10s\n",
+            "No.", "Matricula", "Nombre", "ApP", "ApM", "Edad", "Sexo");
+    for (i = 0; i < n; i++)
+    {
+        if (reg[i].status == 0)
+        {
+            fprintf(fa, "%-6d %-10d %-10s %-15s %-10s %-8d %s\n",
+                    i + 1, reg[i].kay, reg[i].nombre, reg[i].apP,
+                    reg[i].apM, reg[i].edad, reg[i].sex);
+        }
+    }
+    fclose(fa);
 }
