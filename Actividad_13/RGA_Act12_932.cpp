@@ -1,7 +1,7 @@
 // Antonio Ramos Gonzalez Mt: 372576
-// 07/11/2023 || 12/11/2023
+// 14/11/2023 || 19/11/2023
 // Se generara un archivo donde se almacenara datos generados por el usuario, y la lectura de archivos
-// RGA_Act12_932
+// RGA_Act13_932
 #include "Babilonia.h"
 #define N 5000
 typedef struct _Reg
