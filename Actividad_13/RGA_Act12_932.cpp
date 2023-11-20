@@ -60,8 +60,8 @@ int msg()
     printf("7.-Archivo texto\n");
     printf("8.-Mostrar archivo de texto\n");
     printf("9.-Archivo Binario\n");
-    printf("10.-Archivo Binario\n");
-    printf("11.-Archivo Binario\n");
+    printf("10.-Cargar Archivo binario\n");
+    printf("11.-Registros eliminados\n");
     printf("0.-Salir\n");
     return valid("Elije una opcion: ", 0, 11);
 }
@@ -377,9 +377,10 @@ void pintReg(Treg reg[], int n)
         {
             printf("LIMITE ALCANZADO\n");
             elec = 0;
+            system("PAUSE");
         }
     } while (elec);
-    system("PAUSE");
+    
 }
 
 void pintOneReg(Treg reg[], int n)
