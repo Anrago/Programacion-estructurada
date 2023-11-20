@@ -38,6 +38,7 @@ void modReg(Treg reg[], int n);
 void MostrarArchivo();
 void archivoBin(Treg reg[], int n);
 int cargarArchBin(Treg reg[], int n);
+void BinArchEl();
 
 int main()
 {
@@ -126,7 +127,7 @@ void menu()
                 bus = searchBin(reg, 0, i, kay);
                 pintOneReg(reg, bus);
             }
-            if (valid("DESEA ELIMINAR ALUMNO\n1.-Si\n0.-NO\n", 0, 1))
+            if (valid("\nDESEA ELIMINAR REGISTRO\n1.-Si\n0.-NO\n", 0, 1))
             {
                 reg[bus].status = 0;
             }
@@ -180,7 +181,7 @@ void menu()
 
             break;
         case 11:
-            regEliminados(reg, i);
+            BinArchEl();
             break;
         }
     } while (opc != 0);
@@ -380,7 +381,6 @@ void pintReg(Treg reg[], int n)
             system("PAUSE");
         }
     } while (elec);
-    
 }
 
 void pintOneReg(Treg reg[], int n)
@@ -511,14 +511,15 @@ void regEliminados(Treg reg[], int n)
 void modReg(Treg reg[], int n)
 {
     int opc;
-    printf("QUE CAMPO DESEA MODIFICAR?\n");
+    printf("\nQUE CAMPO DESEA MODIFICAR?\n");
     printf("1.-NOMBRE\n");
     printf("2.-APELLIDO PATERNO\n");
     printf("3.-APELLIDO MATERNO\n");
-    printf("4.-SEXO\n");
-    printf("5.-EDAD\n");
+    printf("4.-EDAD\n");
+    printf("5.-PUESTO\n");
+    printf("6.-SEXO\n");
     printf("0.-NINGUNO\n");
-    opc = valid("INGRESE OPCION: ", 0, 5);
+    opc = valid("INGRESE OPCION: ", 0, 6);
 
     switch (opc)
     {
@@ -571,10 +572,10 @@ void archivoBin(Treg reg[], int n)
 {
     FILE *fa;
     int i = 0;
-    char namefile[30];
+    char namefile[30] = "Datos.dll";
 
-    validCad("Ingrese nombre del arvhivo: ", namefile);
-    strcat(namefile, ".dll");
+    rename("Datos.dll", "Datos.tmp");
+
     fa = fopen(namefile, "wb");
     if (fa == NULL)
     {
@@ -584,13 +585,12 @@ void archivoBin(Treg reg[], int n)
     {
         for (i = 0; i < n; i++)
         {
-            if (reg[i].status != 0)
-            {
-                fwrite(&reg[i], sizeof(Treg), 1, fa);
-            }
+
+            fwrite(&reg[i], sizeof(Treg), 1, fa);
         }
-        printf("Archivo creado\n");
         fclose(fa);
+        printf("Archivo creado\n");
+        system("PAUSE");
     }
 }
 
@@ -621,5 +621,36 @@ int cargarArchBin(Treg reg[], int n)
         printf("Archivo cargado\n");
         fclose(fa);
         return i;
+    }
+}
+
+void BinArchEl()
+{
+    FILE *fa;
+    char namefile[30];
+    Treg Borrados[N], temp;
+    int cont = 0;
+    validCad("Ingrese nombre del arvhivo: ", namefile);
+    strcat(namefile, ".dll");
+    fa = fopen(namefile, "rb");
+    if (!fa)
+    {
+        printf("Error al abrir el archivo\n");
+        system("PAUSE");
+    }
+    else
+    {
+
+        while (fread(&temp, sizeof(Treg), 1, fa) == 1)
+        {
+
+            if (temp.status == 0)
+            {
+                Borrados[cont] = temp;
+                cont++;
+            }
+        }
+        regEliminados(Borrados, cont);
+        fclose(fa);
     }
 }
