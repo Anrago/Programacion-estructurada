@@ -22,12 +22,14 @@ int msg();
 void menu(int numReg);
 int cargar();
 void agregar(Treg reg[]);
+void cargar2(Treg reg[]);
+void agregar(Treg reg[],int n);
 
 int main()
 {
-    int tam=(cargar());
-    printf("%d",tam);
-    system("PAUSE");
+    int tam = (cargar());
+    // printf("%d",tam);
+    // system("PAUSE");
     fflush(stdin);
     srand(time(NULL));
     menu(tam);
@@ -52,8 +54,9 @@ int msg()
 void menu(int numReg)
 {
     int opc;
-    int tam=numReg * 1.25;
+    int tam = numReg * 1.25;
     Treg reg[tam];
+    cargar2(reg);
 
     do
     {
@@ -62,7 +65,11 @@ void menu(int numReg)
         {
         case 1:
             printf("AGREGAR\n");
-
+            numReg++;
+            agregar(reg,numReg);
+            printf("%s",reg[numReg-1].nomb);
+            system("PAUSE");
+            
             break;
         case 2:
             break;
@@ -102,3 +109,35 @@ int cargar()
     return i;
 }
 
+void cargar2(Treg reg[])
+{
+    Treg temp;
+    int i = 0;
+    FILE *fa;
+    fa = fopen("datos.dat", "rb");
+    if (fa == NULL)
+    {
+        printf("ERROR AL ABRIR ARCHIVO");
+    }
+    else
+    {
+        while (fread(&temp, sizeof(Treg), 1, fa))
+        {
+            reg[i] = temp;
+            i++;
+        }
+    }
+}
+
+void agregar(Treg reg[],int n)
+{
+
+    validCad("Ingresa nombre: ",reg[n].nomb);
+    validCad("Ingresa apelldio paterno: ",reg[n].apP);
+    validCad("Ingresa apelldio materno: ",reg[n].apM);
+    validCad("Ingresa sexo: ",reg[n].sex);
+    validCad("Ingresa puesto ",reg[n].puesto);
+    reg[n].edad=valid("Ingrese edad: ",18,40);
+    reg[n].Cel=valid("Ingrese edad: ",18,40);
+
+}
