@@ -7,6 +7,28 @@
 #include <time.h>
 #include <string.h>
 #include <ctype.h>
+typedef int Tkay;
+typedef struct _index
+{
+    Tkay id;
+    int index;
+} Tindex;
+
+typedef struct _WrKr
+{
+    int status;
+    Tkay enrollement;
+    char name[30];
+    char LastName1[50];
+    char LastName2[50];
+    char sex[15];
+    char JobPstion[30];
+    char state[30];
+    int age;
+    Tkay CellPhone;
+
+} TWrKr;
+
 
 int valid(const char msg[], int lim_inf, int lim_sup);
 void vectRand(int vect[], int m, int lim_inf, int lim_sup);
@@ -14,6 +36,7 @@ void PrintVect(int vect[], int m);
 void OrderVect(int vect[], int m);
 int SearchVect(int vect[], int m, int num);
 int bisiesto(int year);
+int verMt(TWrKr reg[], int n, int mt);
 // Cadenas
 void mayusculas(char cad[]);
 void validCad(const char msg[], char cad[]);
@@ -21,7 +44,25 @@ void solo_consonantes(char cad[], int i, char conso[]);
 void solo_vocales(char cad[], int i, char voc[]);
 void apAl(char apellido[]);
 void nombreAl(char nombre[], int sex);
+void puestoAl(char puesto[]);
+void estados( char nombestado[]);
 
+int verMt(TWrKr reg[], int n, int mt)
+{
+    int i, j;
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j <= i; j++)
+        {
+            if (reg[j].enrollement == mt)
+            {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
+}
 
 // Genera numero aleatorios no repetidos en un vector
 void vectRand(int vect[], int m, int lim_in, int lim_sup)
@@ -429,6 +470,69 @@ void nombreAl(char nombre[], int sex)
 void estados(int est, char nombestado[])
 {
 
+    char estados[33][30] = {
+        "Aguascalientes",
+        "Baja California",
+        "Baja California Sur",
+        "Campeche",
+        "Chiapas",
+        "Chihuahua",
+        "Coahuila",
+        "Colima",
+        "Durango",
+        "Guanajuato",
+        "Guerrero",
+        "Hidalgo",
+        "Jalisco",
+        "Estado de Mexico",
+        "Michoacan",
+        "Morelos",
+        "Nayarit",
+        "Nuevo Leon",
+        "Oaxaca",
+        "Puebla",
+        "Queretaro",
+        "Quintana Roo",
+        "San Luis Potosi",
+        "Sinaloa",
+        "Sonora",
+        "Tabasco",
+        "Tamaulipas",
+        "Tlaxcala",
+        "Veracruz",
+        "Yucatan",
+        "Zacatecas",
+        "Ciudad de Mexico",
+        "Extranjero"};
+    strcpy(nombestado, estados[est]);
+}
+
+void puestoAl(char puesto[])
+{
+    int num;
+    char pus[11][30]{
+        "COMERCIAL",
+        "TECNICO",
+        "INGENIERO",
+        "REPRESENTANTE",
+        "INTENDENTE",
+        "CONTADOR",
+        "REPARTIDOR",
+        "ADMINISTRADOR",
+        "SECRETARIA",
+        "AUXILIAR",
+        "TELEFONISTA"};
+
+    for (int i = 0; i < 11; i++)
+    {
+        num = rand() % 11;
+    }
+    strcpy(puesto, pus[num]);
+}
+
+void estados( char nombestado[])
+{
+    int est=rand()%33+1;
     char estados[33][30] = {
         "Aguascalientes",
         "Baja California",
