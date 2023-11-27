@@ -11,7 +11,8 @@ void agregar(TWrKr reg[]);
 void cargar2(TWrKr reg[], Tindex index[]);
 void agregar(TWrKr reg[], int n);
 int searchSec(Tindex index[], int n, int mt);
-void printReg(TWrKr reg[], int n);
+void printReg(TWrKr reg);
+void eliminar(TWrKr reg[], int n);
 
 int main()
 {
@@ -78,8 +79,8 @@ void menu(int numReg)
             }
             if (pos != -1)
             {
-                printReg(reg, pos);
-                system("pause");
+                printReg(reg[pos]);
+                eliminar(reg, pos);
             }
             else
             {
@@ -87,6 +88,7 @@ void menu(int numReg)
             }
             break;
         case 3:
+        
             break;
         case 4:
 
@@ -185,14 +187,39 @@ int searchSec(Tindex index[], int n, int mt)
     }
     return -1;
 }
-void printReg(TWrKr reg[], int n)
+
+void printReg(TWrKr reg)
 {
-    printf("NOMBRE: %s\n", reg[n].name);
-    printf("APELLIDO PATERNO: %s\n", reg[n].LastName1);
-    printf("APELLIDO MATERNO: %s\n", reg[n].LastName2);
-    printf("MATRICULA: %d\n", reg[n].enrollement);
-    printf("EDAD: %d\n", reg[n].age);
-    printf("SEXO: %s\n", reg[n].sex);
-    printf("PUESTO: %s\n", reg[n].JobPstion);
-    printf("ESTADO: %s\n", reg[n].state);
+    printf("NOMBRE: %s\n", reg.name);
+    printf("APELLIDO PATERNO: %s\n", reg.LastName1);
+    printf("APELLIDO MATERNO: %s\n", reg.LastName2);
+    printf("MATRICULA: %d\n", reg.enrollement);
+    printf("EDAD: %d\n", reg.age);
+    printf("SEXO: %s\n", reg.sex);
+    printf("PUESTO: %s\n", reg.JobPstion);
+    printf("ESTADO: %s\n", reg.state);
+}
+
+void eliminar(TWrKr reg[], int n)
+{
+    int opc;
+    FILE *fa;
+    TWrKr temp;
+
+    fa = fopen("datos.dat", "rb+");
+    fseek(fa, reg[n].status * sizeof(TWrKr), SEEK_SET);
+    fread(&temp, sizeof(TWrKr), 1, fa);
+    opc = valid("\nDesea eliminarlo?\n1.-Si\n2.-No  ", 1, 2);
+    if (opc == 1)
+    {
+        temp.status = 0;
+        fseek(fa, reg[n].status * sizeof(TWrKr), SEEK_SET);
+        fwrite(&reg, sizeof(TWrKr), 1, fa);
+        printf("Se ha eliminado con exito\n");
+    }
+    else
+    {
+        printf("No se ha eliminado\n");
+    }
+    fclose(fa);
 }
