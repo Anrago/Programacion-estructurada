@@ -13,6 +13,9 @@ void agregar(TWrKr reg[], int n);
 int searchSec(Tindex index[], int n, int mt);
 void printReg(TWrKr reg);
 void eliminar(TWrKr reg[], int n);
+void buscar(TWrKr reg[], int n);
+void agregarbin(TWrKr reg);
+int orderBu(TWrKr reg[], int n);
 
 int main()
 {
@@ -46,7 +49,7 @@ void menu(int numReg)
     TWrKr reg[tam];
     Tindex index[tam];
     cargar2(reg, index);
-    printf("%d", reg[255].enrollement);
+    printf("%d", reg[0].enrollement);
     do
     {
         opc = msg();
@@ -56,7 +59,6 @@ void menu(int numReg)
             if (numReg < tam)
             {
                 agregar(reg, numReg);
-                printf("%s", reg[numReg].name);
                 numReg++;
                 band = 1;
             }
@@ -80,6 +82,7 @@ void menu(int numReg)
             if (pos != -1)
             {
                 printReg(reg[pos]);
+                printf("\n");
                 eliminar(reg, pos);
             }
             else
@@ -88,7 +91,7 @@ void menu(int numReg)
             }
             break;
         case 3:
-        
+
             break;
         case 4:
 
@@ -172,6 +175,11 @@ void agregar(TWrKr reg[], int n)
     estados(reg[n].state);
 
     reg[n].age = rand() % 60 + 18;
+    do
+    {
+        reg[n].CellPhone = rand() % 1000000 + 1999999;
+    } while (verMt(reg, n, reg[n].CellPhone));
+    agregarbin(reg[n]);
 }
 
 int searchSec(Tindex index[], int n, int mt)
@@ -207,14 +215,27 @@ void eliminar(TWrKr reg[], int n)
     TWrKr temp;
 
     fa = fopen("datos.dat", "rb+");
-    fseek(fa, reg[n].status * sizeof(TWrKr), SEEK_SET);
+    fseek(fa, n * sizeof(TWrKr), SEEK_SET);
     fread(&temp, sizeof(TWrKr), 1, fa);
-    opc = valid("\nDesea eliminarlo?\n1.-Si\n2.-No  ", 1, 2);
+
+    printf("%d", temp.status);
+    system("pause");
+    if (temp.status == 1)
+    {
+        printReg(temp);
+        opc = valid("\nDesea eliminarlo?\n1.-Si\n2.-No  ", 1, 2);
+    }
+    else
+    {
+        printf("El registro ya esta eliminado\n");
+    }
+
     if (opc == 1)
     {
         temp.status = 0;
-        fseek(fa, reg[n].status * sizeof(TWrKr), SEEK_SET);
-        fwrite(&reg, sizeof(TWrKr), 1, fa);
+        fseek(fa, n * sizeof(TWrKr), SEEK_SET);
+        fwrite(&temp, sizeof(TWrKr), 1, fa);
+        reg[n].status = 0;
         printf("Se ha eliminado con exito\n");
     }
     else
@@ -222,4 +243,60 @@ void eliminar(TWrKr reg[], int n)
         printf("No se ha eliminado\n");
     }
     fclose(fa);
+}
+
+void buscar(TWrKr reg[], int n)
+{
+    FILE *fa;
+    TWrKr temp;
+
+    fa = fopen("datos.dat", "rb+");
+    fseek(fa, n * sizeof(TWrKr), SEEK_SET);
+    fread(&temp, sizeof(TWrKr), 1, fa);
+
+    if (temp.status == 1)
+    {
+        printReg(temp);
+       
+    }
+    else
+    {
+        printf("Registro no existente\n");
+    }
+   
+}
+
+void agregarbin(TWrKr reg)
+{
+    FILE *fa;
+    fa = fopen("datos.dat", "ab");
+    if (fa == NULL)
+    {
+        printf("ERROR AL ABRIR ARCHIVO");
+    }
+    else
+    {
+        fwrite(&reg, sizeof(TWrKr), 1, fa);
+    }
+    fclose(fa);
+}
+
+int orderBu(TWrKr reg[], int n)
+{
+    int i, j;
+    TWrKr temp;
+
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = i + 1; j < n; j++)
+        {
+            if (reg[j].enrollement < reg[i].enrollement)
+            {
+                temp = reg[i];
+                reg[i] = reg[j];
+                reg[j] = temp;
+            }
+        }
+    }
+    return 0;
 }
