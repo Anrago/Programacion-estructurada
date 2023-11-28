@@ -7,7 +7,6 @@ typedef int Tkay;
 int msg();
 void menu(int numReg);
 int cargar();
-void agregar(TWrKr reg[]);
 void cargar2(TWrKr reg[], Tindex index[]);
 void agregar(TWrKr reg[], int n);
 int searchSec(Tindex index[], int n, int mt);
@@ -15,7 +14,10 @@ void printReg(TWrKr reg);
 void eliminar(TWrKr reg[], int n);
 void buscar(TWrKr reg[], int n);
 void agregarbin(TWrKr reg);
-int orderBu(TWrKr reg[], int n);
+int orderBu(Tindex reg[], int n);
+void printOrder(Tindex indice[], int n);
+void printOriginal(int n);
+
 
 int main()
 {
@@ -59,6 +61,8 @@ void menu(int numReg)
             if (numReg < tam)
             {
                 agregar(reg, numReg);
+                index[numReg].id = reg[numReg].enrollement;
+                index[numReg].index = numReg;
                 numReg++;
                 band = 1;
             }
@@ -91,16 +95,46 @@ void menu(int numReg)
             }
             break;
         case 3:
-
+            if (band == 0)
+            {
+                mt = valid("INGRESA MATRICULA A ELIMINAR: ", 300000, 399999);
+                pos = searchSec(index, numReg, mt);
+            }
+            else
+            {
+            }
+            if (pos != -1)
+            {
+                printReg(reg[pos]);
+            }
+            else
+            {
+                printf("NO SE ENCONTRO EL REGISTRO\n");
+            }
             break;
         case 4:
-
+            orderBu(index, numReg);
             break;
         case 5:
+            printOrder(index, numReg);
             break;
         case 6:
+            printOriginal(numReg);
             break;
         case 7:
+            int elec;
+            printf("1.-ORDENADO");
+            printf("2.-Desordenado");
+            printf("0.-SALIR");
+            valid("COMO DESEA GENERAR EL ARCHIVO DE TEXTO: ", 0, 2);
+            if (elec == 1)
+            {
+            }
+            else
+            {
+                
+            }
+
             break;
         }
     } while (opc != 0);
@@ -152,32 +186,33 @@ void cargar2(TWrKr reg[], Tindex index[])
 void agregar(TWrKr reg[], int n)
 {
 
+    TWrKr temp;
     int sex;
-    reg[n].status = 1;
+    temp.status = 1;
     do
     {
-        reg[n].enrollement = rand() % 100000 + 399999;
-    } while (verMt(reg, n, reg[n].enrollement));
+        temp.enrollement = rand() % 100000 + 399999;
+    } while (verMt(reg, n, temp.enrollement));
     sex = rand() % 1 + 2;
-    nombreAl(reg[n].name, sex);
-    apAl(reg[n].LastName1);
-    apAl(reg[n].LastName2);
+    nombreAl(temp.name, sex);
+    apAl(temp.LastName1);
+    apAl(temp.LastName2);
     if (sex == 1)
     {
-        strcat(reg[n].sex, "HOMBRE");
+        strcat(temp.sex, "HOMBRE");
     }
     else
     {
-        strcat(reg[n].sex, "MUJER");
+        strcat(temp.sex, "MUJER");
     }
-    puestoAl(reg[n].JobPstion);
+    puestoAl(temp.JobPstion);
 
-    estados(reg[n].state);
+    estados(temp.state);
 
-    reg[n].age = rand() % 60 + 18;
+    temp.age = rand() % 60 + 18;
     do
     {
-        reg[n].CellPhone = rand() % 1000000 + 1999999;
+        temp.CellPhone = rand() % 1000000 + 1999999;
     } while (verMt(reg, n, reg[n].CellPhone));
     agregarbin(reg[n]);
 }
@@ -217,9 +252,6 @@ void eliminar(TWrKr reg[], int n)
     fa = fopen("datos.dat", "rb+");
     fseek(fa, n * sizeof(TWrKr), SEEK_SET);
     fread(&temp, sizeof(TWrKr), 1, fa);
-
-    printf("%d", temp.status);
-    system("pause");
     if (temp.status == 1)
     {
         printReg(temp);
@@ -257,13 +289,11 @@ void buscar(TWrKr reg[], int n)
     if (temp.status == 1)
     {
         printReg(temp);
-       
     }
     else
     {
         printf("Registro no existente\n");
     }
-   
 }
 
 void agregarbin(TWrKr reg)
@@ -281,16 +311,16 @@ void agregarbin(TWrKr reg)
     fclose(fa);
 }
 
-int orderBu(TWrKr reg[], int n)
+int orderBu(Tindex reg[], int n)
 {
     int i, j;
-    TWrKr temp;
+    Tindex temp;
 
     for (i = 0; i < n - 1; i++)
     {
         for (j = i + 1; j < n; j++)
         {
-            if (reg[j].enrollement < reg[i].enrollement)
+            if (reg[j].id < reg[i].id)
             {
                 temp = reg[i];
                 reg[i] = reg[j];
@@ -300,3 +330,39 @@ int orderBu(TWrKr reg[], int n)
     }
     return 0;
 }
+
+void printOrder(Tindex indice[], int n)
+{
+    FILE *fa;
+
+    TWrKr temp;
+    fa = fopen("datos.dat", "rb");
+    for (int i = 0; i < n; i++)
+    {
+
+        fseek(fa, indice[i].index * sizeof(TWrKr), SEEK_SET);
+        fread(&temp, sizeof(TWrKr), 1, fa);
+
+        printf("%s %s %s %s %s %s %d %d\n", temp.name, temp.LastName1, temp.LastName2,
+               temp.sex, temp.JobPstion, temp.state, temp.age, temp.CellPhone);
+    }
+}
+
+void printOriginal(int n)
+{
+    FILE *fa;
+
+    TWrKr temp;
+    fa = fopen("datos.dat", "rb");
+    for (int i = 0; i < n; i++)
+    {
+
+        fseek(fa, i * sizeof(TWrKr), SEEK_SET);
+        fread(&temp, sizeof(TWrKr), 1, fa);
+
+        printf("%s %s %s %s %s %s %d %d\n", temp.name, temp.LastName1, temp.LastName2,
+               temp.sex, temp.JobPstion, temp.state, temp.age, temp.CellPhone);
+    }
+}
+
+
