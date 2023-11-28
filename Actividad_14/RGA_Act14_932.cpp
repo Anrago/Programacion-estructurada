@@ -11,13 +11,14 @@ void cargar2(TWrKr reg[], Tindex index[]);
 void agregar(TWrKr reg[], int n);
 int searchSec(Tindex index[], int n, int mt);
 void printReg(TWrKr reg);
-void eliminar(TWrKr reg[], int n);
-void buscar(TWrKr reg[], int n);
+void eliminar( int n);
+void buscar( int n);
 void agregarbin(TWrKr reg);
 int orderBu(Tindex reg[], int n);
 void printOrder(Tindex indice[], int n);
 void printOriginal(int n);
-
+void crearTxtOrig();
+void crearTxtOrd(Tindex indice[], int n);
 
 int main()
 {
@@ -37,7 +38,8 @@ int msg()
     printf("4.-ORDENAR\n");
     printf("5.-IMPRIMIR REGISTRO ORIGINAL\n");
     printf("6.-IMPRIMIR REGISTRO ORDENADO\n");
-    printf("7.-EMPAQUETAR\n");
+    printf("7.-CREAR TXT\n");
+    printf("8.-EMPAQUETAR\n");
     printf("0.-SALIR\n");
 
     return valid("ELIJE UNA OPCION: ", 0, 7);
@@ -85,9 +87,7 @@ void menu(int numReg)
             }
             if (pos != -1)
             {
-                printReg(reg[pos]);
-                printf("\n");
-                eliminar(reg, pos);
+                eliminar(pos);
             }
             else
             {
@@ -123,16 +123,17 @@ void menu(int numReg)
             break;
         case 7:
             int elec;
-            printf("1.-ORDENADO");
-            printf("2.-Desordenado");
-            printf("0.-SALIR");
-            valid("COMO DESEA GENERAR EL ARCHIVO DE TEXTO: ", 0, 2);
+            printf("1.-ORDENADO\n");
+            printf("2.-Desordenado\n");
+            printf("0.-SALIR\n");
+            elec = valid("COMO DESEA GENERAR EL ARCHIVO DE TEXTO: ", 0, 2);
             if (elec == 1)
             {
+                crearTxtOrd(index, numReg);
             }
             else
             {
-                
+                crearTxtOrig();
             }
 
             break;
@@ -213,8 +214,8 @@ void agregar(TWrKr reg[], int n)
     do
     {
         temp.CellPhone = rand() % 1000000 + 1999999;
-    } while (verMt(reg, n, reg[n].CellPhone));
-    agregarbin(reg[n]);
+    } while (verMt(reg, n, temp.CellPhone));
+    agregarbin(temp);
 }
 
 int searchSec(Tindex index[], int n, int mt)
@@ -243,7 +244,7 @@ void printReg(TWrKr reg)
     printf("ESTADO: %s\n", reg.state);
 }
 
-void eliminar(TWrKr reg[], int n)
+void eliminar( int n)
 {
     int opc;
     FILE *fa;
@@ -267,7 +268,6 @@ void eliminar(TWrKr reg[], int n)
         temp.status = 0;
         fseek(fa, n * sizeof(TWrKr), SEEK_SET);
         fwrite(&temp, sizeof(TWrKr), 1, fa);
-        reg[n].status = 0;
         printf("Se ha eliminado con exito\n");
     }
     else
@@ -275,25 +275,6 @@ void eliminar(TWrKr reg[], int n)
         printf("No se ha eliminado\n");
     }
     fclose(fa);
-}
-
-void buscar(TWrKr reg[], int n)
-{
-    FILE *fa;
-    TWrKr temp;
-
-    fa = fopen("datos.dat", "rb+");
-    fseek(fa, n * sizeof(TWrKr), SEEK_SET);
-    fread(&temp, sizeof(TWrKr), 1, fa);
-
-    if (temp.status == 1)
-    {
-        printReg(temp);
-    }
-    else
-    {
-        printf("Registro no existente\n");
-    }
 }
 
 void agregarbin(TWrKr reg)
@@ -365,4 +346,63 @@ void printOriginal(int n)
     }
 }
 
+void crearTxtOrig()
+{
+    FILE *fabin;
+    FILE *fatxt;
 
+    TWrKr temp;
+
+    fabin = fopen("datos.dat", "rb");
+    fatxt = fopen("datos.txt", "w");
+
+    if (fabin == NULL || fatxt == NULL)
+    {
+        printf("ERROR AL ABRIR ARCHIVO");
+    }
+    else
+    {
+        while (fread(&temp, sizeof(TWrKr), 1, fabin))
+        {
+
+            fprintf(fatxt, "%-10s %-10s %-10s %-10s %-10s %-10s %-10d %d\n", temp.name, temp.LastName1,
+                    temp.LastName2, temp.sex, temp.JobPstion, temp.state, temp.age, temp.CellPhone);
+        }
+    }
+    printf("SE HA CREADO EL ARCHIVO DE TEXTO\n");
+
+    fclose(fabin);
+    fclose(fatxt);
+}
+
+void crearTxtOrd(Tindex indice[], int n)
+{
+
+    FILE *fabin;
+    FILE *fatxt;
+
+    TWrKr temp;
+
+    fabin = fopen("datos.dat", "rb");
+    fatxt = fopen("datosOrdenados.txt", "w");
+
+    if (fabin == NULL || fatxt == NULL)
+    {
+        printf("ERROR AL ABRIR ARCHIVO");
+    }
+    else
+    {
+        for (int i = 0; i < n; i++)
+        {
+            fseek(fabin, indice[i].index * sizeof(TWrKr), SEEK_SET);
+            fread(&temp, sizeof(TWrKr), 1, fabin);
+
+            fprintf(fatxt, "%-10s %-10s %-10s %-10s %-10s %-10s %-10d %d\n", temp.name, temp.LastName1,
+                    temp.LastName2, temp.sex, temp.JobPstion, temp.state, temp.age, temp.CellPhone);
+        }
+        printf("SE HA CREADO EL ARCHIVO DE TEXTO\n");
+
+        fclose(fabin);
+        fclose(fatxt);
+    }
+}

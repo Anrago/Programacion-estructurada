@@ -470,40 +470,42 @@ void nombreAl(char nombre[], int sex)
 void estados(int est, char nombestado[])
 {
 
-    char estados[33][30] = {
-        "Aguascalientes",
-        "Baja California",
-        "Baja California Sur",
-        "Campeche",
-        "Chiapas",
-        "Chihuahua",
-        "Coahuila",
-        "Colima",
-        "Durango",
-        "Guanajuato",
-        "Guerrero",
-        "Hidalgo",
-        "Jalisco",
-        "Estado de Mexico",
-        "Michoacan",
-        "Morelos",
-        "Nayarit",
-        "Nuevo Leon",
-        "Oaxaca",
-        "Puebla",
-        "Queretaro",
-        "Quintana Roo",
-        "San Luis Potosi",
-        "Sinaloa",
-        "Sonora",
-        "Tabasco",
-        "Tamaulipas",
-        "Tlaxcala",
-        "Veracruz",
-        "Yucatan",
-        "Zacatecas",
-        "Ciudad de Mexico",
-        "Extranjero"};
+    char estados[33][30] = 
+         {
+            "AG", // Aguascalientes
+            "BC", // Baja California
+            "BS", // Baja California Sur
+            "CC", // Campeche
+            "CL", // Coahuila de Zaragoza
+            "CM", // Colima
+            "CS", // Chiapas
+            "CH", // Chihuahua
+            "DF", // Ciudad de México
+            "DG", // Durango
+            "GT", // Guanajuato
+            "GR", // Guerrero
+            "HG", // Hidalgo
+            "JC", // Jalisco
+            "MC", // México
+            "MN", // Michoacán de Ocampo
+            "MS", // Morelos
+            "NT", // Nayarit
+            "NL", // Nuevo León
+            "OC", // Oaxaca
+            "PL", // Puebla
+            "QT", // Querétaro
+            "QR", // Quintana Roo
+            "SP", // San Luis Potosí
+            "SL", // Sinaloa
+            "SR", // Sonora
+            "TC", // Tabasco
+            "TS", // Tamaulipas
+            "TL", // Tlaxcala
+            "VZ", // Veracruz de Ignacio de la Llave
+            "YN", // Yucatán
+            "ZS", // Zacatecas
+            "NE"  // Foreign
+        };
     strcpy(nombestado, estados[est]);
 }
 
