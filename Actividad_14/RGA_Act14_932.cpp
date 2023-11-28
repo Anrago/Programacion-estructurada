@@ -1,5 +1,8 @@
 /*
-
+Antonio Ramos Gonzalez Mt: 372576
+24/11/2023 || 27/11/2023
+El ususario podra agregar, eliminar, buscar, ordenar, imprimir el registro original y el ordenado, crear un archivo de texto y empaquetar
+RGA_Act14_932
 */
 #include "Babilonia.h"
 typedef int Tkay;
