@@ -8,17 +8,23 @@ int msg();
 void menu(int numReg);
 int cargar();
 void cargar2(TWrKr reg[], Tindex index[]);
-void agregar(TWrKr reg[], int n);
+TWrKr agregar(TWrKr reg[], int n);
 int searchSec(Tindex index[], int n, int mt);
 void printReg(TWrKr reg);
-void eliminar( int n);
-void buscar( int n);
+void eliminar(int n);
+void buscar(int n);
 void agregarbin(TWrKr reg);
 int orderBu(Tindex reg[], int n);
 void printOrder(Tindex indice[], int n);
 void printOriginal(int n);
 void crearTxtOrig();
 void crearTxtOrd(Tindex indice[], int n);
+void Empaqueta(int n);
+void quicksort(Tindex reg[], int low, int high);
+void swap(Tindex reg[], int i, int j);
+int partition(Tindex reg[], int low, int high);
+void insertionSort(Tindex reg[], int n);
+int searchBin(Tindex reg[], int inf, int sup, int mt);
 
 int main()
 {
@@ -42,18 +48,18 @@ int msg()
     printf("8.-EMPAQUETAR\n");
     printf("0.-SALIR\n");
 
-    return valid("ELIJE UNA OPCION: ", 0, 7);
+    return valid("ELIJE UNA OPCION: ", 0, 8);
 }
 
 void menu(int numReg)
 {
     int opc;
     int tam, band = 0;
+    int band_order = 0;
     tam = numReg * 1.25;
     TWrKr reg[tam];
     Tindex index[tam];
     cargar2(reg, index);
-    printf("%d", reg[0].enrollement);
     do
     {
         opc = msg();
@@ -62,11 +68,17 @@ void menu(int numReg)
         case 1:
             if (numReg < tam)
             {
-                agregar(reg, numReg);
+                reg[numReg]=agregar(reg, numReg);
                 index[numReg].id = reg[numReg].enrollement;
+                printf("%d", index[numReg].id );
                 index[numReg].index = numReg;
+
                 numReg++;
-                band = 1;
+                band = 0;
+                if (band_order == 1)
+                {
+                    band = rand() % 2 + 1;
+                }
             }
             else
             {
@@ -87,6 +99,8 @@ void menu(int numReg)
             }
             if (pos != -1)
             {
+                printf("SE ENCONTRO EL REGISTRO\n");
+                system("pause");
                 eliminar(pos);
             }
             else
@@ -97,11 +111,14 @@ void menu(int numReg)
         case 3:
             if (band == 0)
             {
-                mt = valid("INGRESA MATRICULA A ELIMINAR: ", 300000, 399999);
+                mt = valid("INGRESA MATRICULA A BUSCAR: ", 300000, 399999);
                 pos = searchSec(index, numReg, mt);
             }
             else
             {
+                printf("BUSQUEDA BINARIA\n");
+                mt = valid("INGRESA MATRICULA A BUSCAR: ", 300000, 399999);
+                pos = searchBin(index, 0, numReg, mt);
             }
             if (pos != -1)
             {
@@ -113,13 +130,31 @@ void menu(int numReg)
             }
             break;
         case 4:
-            orderBu(index, numReg);
+            if (band == 0)
+            {
+                if (band_order == 0)
+                {
+                    quicksort(index, 0, numReg - 1);
+                    band_order = 1;
+                }
+                if (band_order == 1)
+                {
+                    insertionSort(index, numReg);
+                }
+
+                if (band_order == 2)
+                {
+                    orderBu(index, numReg);
+                }
+            }
+
+            band = 1;
             break;
         case 5:
-            printOrder(index, numReg);
+            printOriginal(numReg);
             break;
         case 6:
-            printOriginal(numReg);
+            printOrder(index, numReg);
             break;
         case 7:
             int elec;
@@ -135,7 +170,9 @@ void menu(int numReg)
             {
                 crearTxtOrig();
             }
-
+            break;
+        case 8:
+            Empaqueta(numReg);
             break;
         }
     } while (opc != 0);
@@ -158,7 +195,7 @@ int cargar()
             i++;
         }
     }
-
+    fclose(fa);
     return i;
 }
 
@@ -181,10 +218,11 @@ void cargar2(TWrKr reg[], Tindex index[])
             index[i].index = i;
             i++;
         }
+        fclose(fa);
     }
 }
 
-void agregar(TWrKr reg[], int n)
+TWrKr agregar(TWrKr reg[], int n)
 {
 
     TWrKr temp;
@@ -192,7 +230,7 @@ void agregar(TWrKr reg[], int n)
     temp.status = 1;
     do
     {
-        temp.enrollement = rand() % 100000 + 399999;
+        temp.enrollement = rand() % 100000 + 300000;
     } while (verMt(reg, n, temp.enrollement));
     sex = rand() % 1 + 2;
     nombreAl(temp.name, sex);
@@ -215,6 +253,7 @@ void agregar(TWrKr reg[], int n)
     {
         temp.CellPhone = rand() % 1000000 + 1999999;
     } while (verMt(reg, n, temp.CellPhone));
+    return temp;
     agregarbin(temp);
 }
 
@@ -244,7 +283,7 @@ void printReg(TWrKr reg)
     printf("ESTADO: %s\n", reg.state);
 }
 
-void eliminar( int n)
+void eliminar(int n)
 {
     int opc;
     FILE *fa;
@@ -327,6 +366,7 @@ void printOrder(Tindex indice[], int n)
         printf("%s %s %s %s %s %s %d %d\n", temp.name, temp.LastName1, temp.LastName2,
                temp.sex, temp.JobPstion, temp.state, temp.age, temp.CellPhone);
     }
+    fclose(fa);
 }
 
 void printOriginal(int n)
@@ -344,6 +384,7 @@ void printOriginal(int n)
         printf("%s %s %s %s %s %s %d %d\n", temp.name, temp.LastName1, temp.LastName2,
                temp.sex, temp.JobPstion, temp.state, temp.age, temp.CellPhone);
     }
+    fclose(fa);
 }
 
 void crearTxtOrig()
@@ -405,4 +446,110 @@ void crearTxtOrd(Tindex indice[], int n)
         fclose(fabin);
         fclose(fatxt);
     }
+}
+
+void Empaqueta(int n)
+{
+    FILE *fad, *fab;
+    TWrKr temp;
+    char nombre[11] = "datos.dat";
+    rename("datos.dat", "datos.bak");
+    fad = fopen(nombre, "wb");
+    fab = fopen("datos.bak", "rb");
+    if (fad == NULL)
+    {
+        printf("ERROR AL ABRIR ARCHIVO");
+    }
+    else
+    {
+        for (int i = 0; i < n; i++)
+        {
+            fseek(fab, i * sizeof(TWrKr), SEEK_SET);
+            fread(&temp, sizeof(TWrKr), 1, fab);
+            if (temp.status == 1)
+            {
+                fwrite(&temp, sizeof(TWrKr), 1, fad);
+            }
+        }
+        fclose(fad);
+        fclose(fab);
+    }
+}
+
+void quicksort(Tindex reg[], int low, int high)
+{
+    if (low < high)
+    {
+        int pi = partition(reg, low, high);
+
+        quicksort(reg, low, pi - 1);
+        quicksort(reg, pi + 1, high);
+    }
+}
+
+int partition(Tindex reg[], int low, int high)
+{
+    Tindex pivot;
+    pivot.id = reg[high].id;
+    int i = low - 1;
+
+    for (int j = low; j <= high - 1; j++)
+    {
+        if (reg[j].id <= pivot.id)
+        {
+            i++;
+            swap(reg, i, j);
+        }
+    }
+    swap(reg, i + 1, high);
+    return i + 1;
+}
+
+void swap(Tindex reg[], int i, int j)
+{
+    Tindex temp = reg[i];
+    reg[i] = reg[j];
+    reg[j] = temp;
+}
+
+void insertionSort(Tindex reg[], int n)
+{
+    Tindex temp;
+    int j;
+    for (int i = 1; i < n; i++)
+    {
+        temp = reg[i];
+        j = i - 1;
+        while (j >= 0 && reg[j].id > temp.id)
+        {
+            reg[j + 1] = reg[j];
+            j--;
+        }
+        reg[j + 1] = temp;
+    }
+}
+
+int searchBin(Tindex reg[], int inf, int sup, int mt)
+{
+    int med;
+    while (inf <= sup)
+    {
+        med = (inf + sup) / 2;
+        if (reg[med].id == mt)
+        {
+            return med;
+        }
+        else
+        {
+            if (mt < reg[med].id)
+            {
+                sup = med--;
+            }
+            else
+            {
+                inf = med++;
+            }
+        }
+    }
+    return -1;
 }

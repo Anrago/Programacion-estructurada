@@ -3358,14 +3358,3 @@ SUSANA     CAMACHO    ROJAS      MUJER      PsOrg      SR         25         101
 ARMANDO    PARDO      FLORES     HOMBRE     Arquitect  MN         45         1025737
 ALEJANDRA  ESTRELLA   VALENZUELA MUJER      TrabSoc    OC         23         1003841
 RAQUEL     DURAN      IGLESIAS   MUJER      AsServ     TS         22         1010993
-MIRIAM     GOMEZ      HERRERA    MUJER    ADMINISTRADOR Tlaxcala   36         2019824
-BEATRIZ    HERRERA    CABRERA    MUJER    CONTADOR   Extranjero 77         2029084
-INES       ROJAS      VARGAS     MUJER    REPRESENTANTE Coahuila   73         2019554
-ROSA       ESCOBAR    GOMEZ      MUJER    INGENIERO  Coahuila   19         2015590
-VALERIA    BENITEZ    RUIZ       MUJER    SECRETARIA Estado de Mexico 26         2031664
-CAROLINA   BENITEZ    GARCIA     MUJER    SECRETARIA Coahuila   77         2010665
-CAROLINA   RAMIREZ    RUIZ       MUJER    REPRESENTANTE Coahuila   39         2009645
-EVA        RIOS       PEREZ      MUJER    INGENIERO  Sinaloa    36         2000399
-INES       PAREDES    GONZALEZ   MUJER    COMERCIAL  San Luis Potosi 33         2014697
-ELENA      DELGADO    MORENO     MUJER    CONTADOR   Oaxaca     19         2018570
-ROCIO      RIOS       HERRERA    MUJER    AUXILIAR   Hidalgo    75         2027999
