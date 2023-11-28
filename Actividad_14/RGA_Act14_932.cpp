@@ -60,6 +60,9 @@ void menu(int numReg)
     int opc;
     int tam, band = 0;
     int band_order = 0;
+    int mt;
+    int pos;
+    int elec;
     tam = numReg * 1.25;
     TWrKr reg[tam];
     Tindex index[tam];
@@ -74,9 +77,8 @@ void menu(int numReg)
             {
                 reg[numReg] = agregar(reg, numReg);
                 index[numReg].id = reg[numReg].enrollement;
-                printf("%d\n", index[numReg].id);
+                printf("MATRICULA: %d\n", index[numReg].id);
                 index[numReg].index = numReg;
-
                 numReg++;
                 band = 0;
                 if (band_order == 3)
@@ -91,16 +93,20 @@ void menu(int numReg)
 
             break;
         case 2:
-            int mt;
-            int pos;
             if (band == 0)
             {
                 printf("BUSQUEDA SECUENCIAL\n");
                 mt = valid("INGRESA MATRICULA A ELIMINAR: ", 300000, 399999);
                 pos = searchSec(index, numReg, mt);
-                if (pos = -1)
+                if (pos != -1)
                 {
                     printReg(reg[pos]);
+                    elec = valid("Desea eliminarlo?\n1.-Si\n2.-No  ", 1, 2);
+                    if (elec == 1)
+                    {
+                        eliminar(pos);
+                    }
+                    
                 }
             }
             else
@@ -111,6 +117,11 @@ void menu(int numReg)
                 if (pos != -1)
                 {
                     printRegOr(index[pos]);
+                    elec = valid("Desea eliminarlo?\n1.-Si\n2.-No  ", 1, 2);
+                    if (elec == 1)
+                    {
+                        eliminar(pos);
+                    }
                 }
             }
             break;
@@ -120,7 +131,7 @@ void menu(int numReg)
                 printf("BUSQUEDA SECUENCIAL\n");
                 mt = valid("INGRESA MATRICULA A BUSCAR: ", 300000, 399999);
                 pos = searchSec(index, numReg, mt);
-                if (pos = -1)
+                if (pos != -1)
                 {
                     printReg(reg[pos]);
                 }
@@ -165,7 +176,7 @@ void menu(int numReg)
             printOrder(index, numReg);
             break;
         case 7:
-            int elec;
+
             printf("1.-ORDENADO\n");
             printf("2.-Desordenado\n");
             printf("0.-SALIR\n");
@@ -234,24 +245,26 @@ TWrKr agregar(TWrKr reg[], int n)
 {
 
     TWrKr temp;
-    int sex;
+    int sex = rand() % 2 + 1;
     temp.status = 1;
     do
     {
         temp.enrollement = rand() % 100000 + 300000;
     } while (verMt(reg, n, temp.enrollement));
-    sex = rand() % 2 + 1;
+
     nombreAl(temp.name, sex);
     apAl(temp.LastName1);
     apAl(temp.LastName2);
+
     if (sex == 1)
     {
-        strcat(temp.sex, "HOMBRE");
+        strcpy(temp.sex, "HOMBRE");
     }
     else
     {
-        strcat(temp.sex, "MUJER");
+        strcpy(temp.sex, "MUJER");
     }
+
     puestoAl(temp.JobPstion);
 
     estados(temp.state);
@@ -262,6 +275,7 @@ TWrKr agregar(TWrKr reg[], int n)
         temp.CellPhone = rand() % 1000000 + 1999999;
     } while (verMt(reg, n, temp.CellPhone));
     agregarbin(temp);
+
     return temp;
 }
 
@@ -431,9 +445,11 @@ void crearTxtOrig()
     {
         while (fread(&temp, sizeof(TWrKr), 1, fabin))
         {
-
-            fprintf(fatxt, "%-10s %-10s %-10s %-10s %-10s %-10s %-10d %d\n", temp.name, temp.LastName1,
-                    temp.LastName2, temp.sex, temp.JobPstion, temp.state, temp.age, temp.CellPhone);
+            if (temp.status == 1)
+            {
+                fprintf(fatxt, "%-10s %-10s %-10s %-10s %-10s %-10s %-10d %d\n", temp.name, temp.LastName1,
+                        temp.LastName2, temp.sex, temp.JobPstion, temp.state, temp.age, temp.CellPhone);
+            }
         }
     }
     printf("SE HA CREADO EL ARCHIVO DE TEXTO\n");
@@ -545,7 +561,7 @@ void insertionSort(Tindex reg[], int n)
     for (int i = 1; i < n; i++)
     {
         temp = reg[i];
-        j = i - 1;
+        ++j = i - 1;
         while (j >= 0 && reg[j].id > temp.id)
         {
             reg[j + 1] = reg[j];

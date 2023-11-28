@@ -142,6 +142,7 @@ LUIS       URIBE      MUNGUIA    HOMBRE     DisUX      VZ         28         100
 EDUARDO    MORA       MENENDEZ   HOMBRE     IngElec    MN         35         1022550
 MIGUEL     GUERRERO   REYES      HOMBRE     Abogado    TS         27         1031793
 JORGE      URIBE      HERNANDEZ  HOMBRE     InvCien    TS         26         1010179
+CARLOS     AGUIRRE    VARGAS     HOMBRE     TECNICO    PL         23         2013768
 BEATRIZ    CASTILLO   MEDINA     MUJER      DisUX      BS         30         1011282
 SUSANA     TORRES     LEON       MUJER      AsistAdm   AG         38         1017224
 MARIO      SERRANO    MERCADO    HOMBRE     DisGraf    TS         19         1001827
@@ -476,8 +477,8 @@ ERNESTO    PACHECO    CERVANTES  HOMBRE     AnMktDg    TC         42         101
 SOFIA      RIVERA     RAMIREZ    MUJER      GteProj    CL         25         1030658
 PAULA      SOTO       SANDOVAL   MUJER      Traduct    QR         36         1002169
 GLORIA     JIMENEZ    ESPINOZA   MUJER      IngRed     QT         27         1009441
-ANTONIA    MACIEL     CONTRERAS  MUJER      InvCien    CL         49         1014124
 ANTONIO    MERCADO    VALENCIA   HOMBRE     Abogado    DF         34         1016905
+ANTONIA    MACIEL     CONTRERAS  MUJER      InvCien    CL         49         1014124
 VICTORIA   ESPINOSA   LEON       MUJER      ChefEje    BS         31         1029519
 SUSANA     VALENCIA   GARZA      MUJER      EspSeg     BS         37         1015205
 HECTOR     MORA       MEDINA     HOMBRE     EspRRHH    JC         45         1002035
@@ -674,8 +675,8 @@ VICTORIA   SOLIS      CERVANTES  MUJER      RepVInt    SR         49         101
 AURORA     DIAZ       RIOS       MUJER      Traduct    MS         40         1019524
 EMILIO     MOLINA     PENA       HOMBRE     EspRRHH    TC         36         1004120
 MERCEDES   BARRIOS    CERVANTES  MUJER      DevSoft    ZS         20         1017668
-MANUEL     ESCOBAR    ESPINOSA   HOMBRE     AnlSist    GT         38         1001195
 AURORA     MACIEL     CONTRERAS  MUJER      MedGen     AG         21         1002915
+MANUEL     ESCOBAR    ESPINOSA   HOMBRE     AnlSist    GT         38         1001195
 ENRIQUE    CASILLAS   BELTRAN    HOMBRE     EspRRHH    JC         32         1016372
 SUSANA     DIAZ       PARDO      MUJER      DisGraf    PL         30         1008277
 EMILIO     LEAL       ROJAS      HOMBRE     GteProj    TS         43         1008621
@@ -782,8 +783,8 @@ MARTA      JIMENEZ    LEAL       MUJER      IngRed     VZ         22         102
 ANTONIO    SOTO       SOTO       HOMBRE     AnMktDg    VZ         49         1013824
 HECTOR     MEDINA     JIMENEZ    HOMBRE     ConsFin    GT         30         1025156
 MARTA      DELGADO    ESPINOSA   MUJER      EspSeg     NT         41         1015434
-ANTONIO    HERRERA    VALENCIA   HOMBRE     EspSeg     QR         45         1005902
 ANTONIO    VALDES     ZAMORA     HOMBRE     PsOrg      QT         27         1015075
+ANTONIO    HERRERA    VALENCIA   HOMBRE     EspSeg     QR         45         1005902
 ARTURO     MOLINA     MERCADO    HOMBRE     DisGraf    HG         20         1020947
 ISRAEL     GONZALES   RUBIO      HOMBRE     EspSeg     TC         22         1004133
 OSCAR      CRUZ       FERNANDEZ  HOMBRE     Traduct    NE         28         1002307
@@ -1262,8 +1263,8 @@ ELENA      DIAZ       VARELA     MUJER      EspRRHH    SP         50         103
 ANTONIO    GUZMAN     AGUILAR    HOMBRE     GteProj    YN         38         1027841
 CARLOS     CONTRERAS  VALENCIA   HOMBRE     DisUX      TC         30         1023638
 FERNANDO   RIVERA     SUAREZ     HOMBRE     EspLog     MN         20         1008249
-PILAR      MORA       DIAZ       MUJER      Arquitect  CH         31         1022697
 SOFIA      ALVARADO   OCHOA      MUJER      AnMktDg    OC         20         1020537
+PILAR      MORA       DIAZ       MUJER      Arquitect  CH         31         1022697
 JORGE      MACIEL     PACHECO    HOMBRE     Traduct    TS         22         1000510
 OSCAR      MORA       FLORES     HOMBRE     AnlSist    PL         46         1005729
 ADRIANA    SUAREZ     ESTRELLA   MUJER      EspSeg     DG         38         1023544
@@ -1475,8 +1476,8 @@ RAQUEL     MORA       SOTO       MUJER      DevSoft    TC         35         100
 PEDRO      GARZA      MOLINA     HOMBRE     Traduct    NE         36         1006991
 JORGE      VALENCIA   DIAZ       HOMBRE     AnlDatos   YN         35         1000416
 JOSE       RIVERA     GOMEZ      HOMBRE     DevSoft    GT         36         1000084
-ANTONIA    CALZADA    CORDERO    MUJER      IngElec    OC         35         1007658
 JULIA      CASTILLO   ROLDAN     MUJER      ProfPrim   SP         38         1009750
+ANTONIA    CALZADA    CORDERO    MUJER      IngElec    OC         35         1007658
 JULIA      ARIAS      ZAMORA     MUJER      TrabSoc    HG         26         1011492
 MARIO      CASILLAS   CERVANTES  HOMBRE     GteProj    OC         50         1031636
 ROSA       ESPINOSA   CRUZ       MUJER      TrabSoc    MS         18         1011419
@@ -1805,15 +1806,15 @@ RICARDO    LEON       ESTRELLA   HOMBRE     ConsFin    NE         29         100
 PILAR      NUNEZ      SERRANO    MUJER      RepVInt    TS         49         1009353
 GABRIELA   CORDERO    LEAL       MUJER      GteProj    SL         32         1001786
 PILAR      ROJAS      ESCOBAR    MUJER      ChefEje    GR         27         1029467
-ERNESTO    ESPINOSA   ROLDAN     HOMBRE     ProfPrim   TL         22         1008738
 GABRIELA   URIBE      LEON       MUJER      EdCont     SR         31         1010038
+ERNESTO    ESPINOSA   ROLDAN     HOMBRE     ProfPrim   TL         22         1008738
 DANIEL     SILVA      LARA       HOMBRE     AnMktDg    QR         50         1001346
 ALEJANDRO  ESPINOSA   DURAN      HOMBRE     Traduct    CH         40         1008763
 JAVIER     BARRIOS    QUINTERO   HOMBRE     TrabSoc    JC         39         1012477
 RICARDO    MENDOZA    IGLESIAS   HOMBRE     Abogado    NT         23         1002392
 CONSUELO   RIOS       ARIAS      MUJER      ProfPrim   CH         23         1008183
-ANA        SERRANO    DELGADO    MUJER      AnlSist    MS         34         1000110
 JUAN       PAREDES    LARA       HOMBRE     IngCivil   MS         41         1007586
+ANA        SERRANO    DELGADO    MUJER      AnlSist    MS         34         1000110
 LUIS       CALZADA    IGLESIAS   HOMBRE     PsOrg      TL         30         1010121
 JAVIER     MORENO     GUZMAN     HOMBRE     IngElec    PL         34         1004845
 MERCEDES   SUAREZ     GOMEZ      MUJER      ChefEje    SR         47         1031095
@@ -2008,6 +2009,7 @@ DANIEL     HERRERA    QUINTERO   HOMBRE     Abogado    SR         36         101
 FRANCISCO  TOVAR      CORDERO    HOMBRE     EspSeg     ZS         45         1029452
 JOSE       CALZADA    OSORIO     HOMBRE     InvCien    JC         22         1007610
 NATALIA    ROJAS      MOLINA     MUJER      ConsFin    SP         20         1021763
+HORACIO    MEDINA     CORDERO    HOMBRE     TECNICO    CH         35         2001160
 ANTONIO    BARRIOS    SOSA       HOMBRE     EspRRHH    MS         45         1029872
 FRANCISCO  PAREDES    ROJAS      HOMBRE     IngCivil   NE         18         1021211
 OSCAR      MACIAS     ROLDAN     HOMBRE     ChefEje    MS         32         1032435
@@ -2028,6 +2030,7 @@ JULIA      VEGA       ESPINOSA   MUJER      DisGraf    CH         31         100
 LAURA      PARDO      AGUILAR    MUJER      EspRRHH    QR         34         1029167
 ISRAEL     DELGADO    CABRERA    HOMBRE     IngCivil   NL         18         1005328
 RAQUEL     ROJAS      VALENCIA   MUJER      Contado    CC         48         1021816
+ROBERTO    MENDEZ     PEREZ      HOMBRE     INGENIERO  DF         31         2014182
 ARMANDO    TORRES     CRUZ       HOMBRE     AnMktDg    NT         33         1019376
 ROBERTO    RAMIREZ    RIOS       HOMBRE     IngElec    TC         49         1022875
 RICARDO    VEGA       VARGAS     HOMBRE     EspSeg     GT         18         1029004
@@ -2218,6 +2221,7 @@ MARiA      HERRERA    MACIEL     MUJER      InvCien    SL         27         100
 MIGUEL     CHACON     CRUZ       HOMBRE     InvCien    VZ         35         1027241
 SONIA      ESPINOZA   ROJAS      MUJER      AsServ     CS         42         1029994
 ALBERTO    PAREDES    MACIEL     HOMBRE     ChefEje    DG         26         1021609
+MARIO      GOMEZ      RODRIGUEZ  HOMBRE     INTENDENTE CL         18         2005536
 LOURDES    SANDOVAL   GUERRERO   MUJER      GteProj    TL         32         1005999
 ADRIANA    ROLDAN     MACIAS     MUJER      MedGen     TC         30         1015105
 PILAR      PARDO      GONZALES   MUJER      EspSeg     DG         28         1020466
@@ -2285,11 +2289,12 @@ PILAR      BELTRAN    NUNEZ      MUJER      DevSoft    BS         44         101
 ROBERTO    ROJAS      ROMAN      HOMBRE     EspSeg     NT         19         1031635
 ISABEL     MERCADO    MIRANDA    MUJER      RepVInt    QT         28         1015029
 OSCAR      CABRERA    RIVERA     HOMBRE     TecSup     PL         20         1020306
+INES       NAVARRO    VARGAS     MUJER      INGENIERO  ZS         70         2002690
 FRANCISCO  JIMENEZ    PENA       HOMBRE     AnMktDg    SL         29         1028896
 MARiA      ESPINOZA   OSORIO     MUJER      TrabSoc    CH         21         1025439
 SALVADOR   BAUTISTA   PAREDES    HOMBRE     RepVInt    TS         36         1028107
-FERNANDO   ORTIZ      VARGAS     HOMBRE     EspERen    NT         47         1029856
 ISRAEL     HERNANDEZ  ESPINOZA   HOMBRE     AnMktDg    JC         18         1014010
+FERNANDO   ORTIZ      VARGAS     HOMBRE     EspERen    NT         47         1029856
 ROBERTO    MEDINA     PAREDES    HOMBRE     TecSup     BS         29         1018597
 LOURDES    ARIAS      PARDO      MUJER      TrabSoc    TC         26         1025524
 ROBERTO    GONZALES   MORA       HOMBRE     InvCien    MC         43         1029310
@@ -2381,6 +2386,7 @@ CONSUELO   CHACON     CALZADA    MUJER      EspSeg     JC         45         102
 PAULA      OCHOA      DELGADO    MUJER      AnlSist    NL         20         1017885
 SOFIA      DELGADO    ROMERO     MUJER      PsOrg      HG         41         1027475
 FRANCISCO  RIVERA     RIOS       HOMBRE     AnlSist    TC         47         1004847
+ALBERTO    GARCIA     RAMIREZ    HOMBRE     REPARTIDOR NE         29         2016833
 PEDRO      GONZALES   RAMOS      HOMBRE     IngRed     TS         42         1029205
 FERNANDO   CORDERO    GARZA      HOMBRE     Traduct    PL         37         1032476
 PEDRO      CERVANTES  ROMAN      HOMBRE     TecSup     CM         21         1025109
@@ -2623,8 +2629,8 @@ ANTONIO    ESPINOSA   PARDO      HOMBRE     ProfPrim   CL         30         101
 JULIA      NUNEZ      VALENCIA   MUJER      Enferm     GR         36         1008902
 RAQUEL     SOLANO     VILLANUEVA MUJER      AnlDatos   NE         39         1025160
 JULIA      RIVERA     CERVANTES  MUJER      EspRRHH    SP         20         1024995
-CLARA      ESPINOSA   SERRANO    MUJER      AsServ     PL         40         1023120
 SOFIA      HERRERA    MENDOZA    MUJER      GteProj    BS         30         1027535
+CLARA      ESPINOSA   SERRANO    MUJER      AsServ     PL         40         1023120
 ROSA       FLORES     CASTILLO   MUJER      EspRRHH    TL         23         1002106
 LUIS       ROMAN      OSORIO     HOMBRE     EspLog     GR         48         1025028
 ISRAEL     ORTIZ      OSORIO     HOMBRE     EspRRHH    GT         45         1005209
@@ -2697,8 +2703,8 @@ AURORA     VEGA       VARGAS     MUJER      AnlDatos   CL         29         102
 PATRICIA   BARRIOS    QUINTERO   MUJER      AsServ     SL         34         1015927
 ADRIANA    RIOS       GUERRERO   MUJER      Traduct    OC         23         1000176
 SONIA      VALENCIA   RIOS       MUJER      IngCivil   CS         37         1029151
-ADRIANA    LEAL       BARRIOS    MUJER      TecSup     OC         31         1024228
 GABRIELA   SOLIS      ARIAS      MUJER      AsServ     CS         25         1031203
+ADRIANA    LEAL       BARRIOS    MUJER      TecSup     OC         31         1024228
 MIGUEL     ESTRELLA   ESTRELLA   HOMBRE     DisUX      CL         39         1000867
 EMILIO     VARGAS     LEON       HOMBRE     PsOrg      GR         26         1031549
 JULIA      MENDOZA    MENENDEZ   MUJER      AnlVent    NE         37         1011842
@@ -2844,6 +2850,7 @@ MARiA      ARIAS      LARA       MUJER      Abogado    SP         37         102
 MANUEL     RAMOS      PARDO      HOMBRE     Abogado    MN         27         1032014
 RAQUEL     VARELA     MORENO     MUJER      DisGraf    DF         41         1024376
 RICARDO    URIBE      SUAREZ     HOMBRE     TrabSoc    ZS         44         1006819
+FEDERICO   ROJAS      HERRERA    HOMBRE     ADMINISTRADOR NE         44         2032272
 SUSANA     VILLANUEVA ORTIZ      MUJER      EspSeg     VZ         46         1006439
 AURORA     GUERRERO   MUNGUIA    MUJER      ProfPrim   SL         43         1017205
 PILAR      ALVARADO   MENDEZ     MUJER      Arquitect  QR         42         1020653
