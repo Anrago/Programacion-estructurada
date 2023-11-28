@@ -25,6 +25,7 @@ void swap(Tindex reg[], int i, int j);
 int partition(Tindex reg[], int low, int high);
 void insertionSort(Tindex reg[], int n);
 int searchBin(Tindex reg[], int inf, int sup, int mt);
+void printRegOr(Tindex reg);
 
 int main()
 {
@@ -68,14 +69,14 @@ void menu(int numReg)
         case 1:
             if (numReg < tam)
             {
-                reg[numReg]=agregar(reg, numReg);
+                reg[numReg] = agregar(reg, numReg);
                 index[numReg].id = reg[numReg].enrollement;
-                printf("%d", index[numReg].id );
+                printf("%d\n", index[numReg].id);
                 index[numReg].index = numReg;
 
                 numReg++;
                 band = 0;
-                if (band_order == 1)
+                if (band_order == 3)
                 {
                     band = rand() % 2 + 1;
                 }
@@ -91,43 +92,47 @@ void menu(int numReg)
             int pos;
             if (band == 0)
             {
+                printf("BUSQUEDA SECUENCIAL\n");
                 mt = valid("INGRESA MATRICULA A ELIMINAR: ", 300000, 399999);
                 pos = searchSec(index, numReg, mt);
+                if (pos = -1)
+                {
+                    printReg(reg[pos]);
+                }
             }
             else
             {
-            }
-            if (pos != -1)
-            {
-                printf("SE ENCONTRO EL REGISTRO\n");
-                system("pause");
-                eliminar(pos);
-            }
-            else
-            {
-                printf("NO SE ENCONTRO EL REGISTRO\n");
+                printf("BUSQUEDA BINARIA\n");
+                mt = valid("INGRESA MATRICULA A ELIMINAR: ", 300000, 399999);
+                pos = searchBin(index, 0, numReg, mt);
+                if (pos != -1)
+                {
+                    printRegOr(index[pos]);
+                }
             }
             break;
         case 3:
             if (band == 0)
             {
+                printf("BUSQUEDA SECUENCIAL\n");
                 mt = valid("INGRESA MATRICULA A BUSCAR: ", 300000, 399999);
                 pos = searchSec(index, numReg, mt);
+                if (pos = -1)
+                {
+                    printReg(reg[pos]);
+                }
             }
             else
             {
                 printf("BUSQUEDA BINARIA\n");
                 mt = valid("INGRESA MATRICULA A BUSCAR: ", 300000, 399999);
                 pos = searchBin(index, 0, numReg, mt);
+                if (pos != -1)
+                {
+                    printRegOr(index[pos]);
+                }
             }
-            if (pos != -1)
-            {
-                printReg(reg[pos]);
-            }
-            else
-            {
-                printf("NO SE ENCONTRO EL REGISTRO\n");
-            }
+
             break;
         case 4:
             if (band == 0)
@@ -135,7 +140,7 @@ void menu(int numReg)
                 if (band_order == 0)
                 {
                     quicksort(index, 0, numReg - 1);
-                    band_order = 1;
+                    band_order = 3;
                 }
                 if (band_order == 1)
                 {
@@ -232,7 +237,7 @@ TWrKr agregar(TWrKr reg[], int n)
     {
         temp.enrollement = rand() % 100000 + 300000;
     } while (verMt(reg, n, temp.enrollement));
-    sex = rand() % 1 + 2;
+    sex = rand() % 2 + 1;
     nombreAl(temp.name, sex);
     apAl(temp.LastName1);
     apAl(temp.LastName2);
@@ -253,8 +258,8 @@ TWrKr agregar(TWrKr reg[], int n)
     {
         temp.CellPhone = rand() % 1000000 + 1999999;
     } while (verMt(reg, n, temp.CellPhone));
-    return temp;
     agregarbin(temp);
+    return temp;
 }
 
 int searchSec(Tindex index[], int n, int mt)
@@ -281,6 +286,24 @@ void printReg(TWrKr reg)
     printf("SEXO: %s\n", reg.sex);
     printf("PUESTO: %s\n", reg.JobPstion);
     printf("ESTADO: %s\n", reg.state);
+}
+
+void printRegOr(Tindex reg)
+{
+    FILE *fa;
+    TWrKr temp;
+    fa = fopen("datos.dat", "rb");
+    fseek(fa, reg.index * sizeof(TWrKr), SEEK_SET);
+    fread(&temp, sizeof(TWrKr), 1, fa);
+    fclose(fa);
+    printf("NOMBRE: %s\n", temp.name);
+    printf("APELLIDO PATERNO: %s\n", temp.LastName1);
+    printf("APELLIDO MATERNO: %s\n", temp.LastName2);
+    printf("MATRICULA: %d\n", temp.enrollement);
+    printf("EDAD: %d\n", temp.age);
+    printf("SEXO: %s\n", temp.sex);
+    printf("PUESTO: %s\n", temp.JobPstion);
+    printf("ESTADO: %s\n", temp.state);
 }
 
 void eliminar(int n)
